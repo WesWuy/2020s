@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>2020s: The Game — Video Mode Prototype</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="art-system.css">
   <link rel="stylesheet" href="video.css">
 </head>
 <body>
   <header class="hero compact-hero video-hero">
-    <div class="badge">Prototype v0.13 — Video Game Feel Pass</div>
+    <div class="badge">Prototype v0.14 — Art Direction & Atmosphere Pass</div>
     <h1>2020s: The Game</h1>
-    <p class="tagline">Choose your timeline: survive the collapse in Dystopia Run or try to repair reality in Utopia Run.</p>
+    <p class="tagline">Satirical retro-futurist news broadcast meets comic-book apocalypse.</p>
     <div class="cta-row">
       <a href="index.html" class="button secondary">Back to Hub</a>
+      <a href="art-direction.html" class="button secondary">Art Direction</a>
       <a href="play.html" class="button secondary">Board Game Mode</a>
       <button id="resetVideoGameBtn" class="button secondary" type="button">Reset Video Run</button>
     </div>
@@ -69,6 +71,7 @@
       </section>
 
       <section id="eventScreen" class="event-screen">
+        <div id="eventArt" class="event-art-slot"></div>
         <p id="eventEyebrow" class="eyebrow">Incoming Event</p>
         <h2 id="eventTitle">Reality is buffering.</h2>
         <p id="eventText">Choose how to respond.</p>
@@ -85,6 +88,7 @@
   </main>
 
   <script src="game-data.js"></script>
+  <script src="art-system.js"></script>
   <script src="video-game.js"></script>
 </body>
 </html>
