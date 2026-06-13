@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2020s: The Game — Video Mode Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="video.css">
+</head>
+<body>
+  <header class="hero compact-hero video-hero">
+    <div class="badge">Prototype v0.12 — Video Game Mode Foundation</div>
+    <h1>2020s: The Game</h1>
+    <p class="tagline">Choose your timeline: survive the collapse in Dystopia Run or try to repair reality in Utopia Run.</p>
+    <div class="cta-row">
+      <a href="index.html" class="button secondary">Back to Hub</a>
+      <a href="play.html" class="button secondary">Board Game Mode</a>
+      <button id="resetVideoGameBtn" class="button secondary" type="button">Reset Video Run</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="videoSetup" class="video-panel">
+      <p class="eyebrow">Mode Select</p>
+      <h2>Pick the timeline you want to enter.</h2>
+      <div class="mode-grid">
+        <article class="mode-card dystopia-card">
+          <h3>Dystopia Run</h3>
+          <p>Survive the 2020s with your Sanity, Money, and Influence intact while the timeline gets louder.</p>
+          <button class="button" type="button" data-mode="dystopia">Start Dystopia Run</button>
+        </article>
+        <article class="mode-card utopia-card">
+          <h3>Utopia Run</h3>
+          <p>Repair the timeline by building trust, community, and stability while still surviving the decade.</p>
+          <button class="button" type="button" data-mode="utopia">Start Utopia Run</button>
+        </article>
+      </div>
+
+      <section class="video-panel inner-panel">
+        <p class="eyebrow">Choose Character</p>
+        <label for="videoCharacter"><strong>Character</strong></label>
+        <select id="videoCharacter"></select>
+        <p id="videoCharacterDescription" class="setup-hint">Choose your timeline survivor.</p>
+      </section>
+    </section>
+
+    <section id="videoGame" class="hidden">
+      <section class="video-hud">
+        <article><span>Mode</span><strong id="hudMode">—</strong></article>
+        <article><span>Year</span><strong id="hudYear">2020</strong></article>
+        <article><span>Sanity</span><strong id="hudSanity">—</strong></article>
+        <article><span>Money</span><strong id="hudMoney">—</strong></article>
+        <article><span>Influence</span><strong id="hudInfluence">—</strong></article>
+        <article><span>Timeline Health</span><strong id="hudTimeline">—</strong></article>
+      </section>
+
+      <section class="timeline-health-card">
+        <div class="timeline-health-topline">
+          <p class="eyebrow">Timeline Health</p>
+          <strong id="timelineHealthLabel">50%</strong>
+        </div>
+        <div class="timeline-health-meter"><span id="timelineHealthFill"></span></div>
+      </section>
+
+      <section id="eventScreen" class="event-screen">
+        <p id="eventEyebrow" class="eyebrow">Incoming Event</p>
+        <h2 id="eventTitle">Reality is buffering.</h2>
+        <p id="eventText">Choose how to respond.</p>
+        <div id="choiceGrid" class="choice-grid"></div>
+      </section>
+
+      <section id="videoEnding" class="video-ending hidden"></section>
+
+      <section class="video-panel">
+        <h2>Run Log</h2>
+        <textarea id="videoLog" readonly></textarea>
+      </section>
+    </section>
+  </main>
+
+  <script src="game-data.js"></script>
+  <script src="video-game.js"></script>
+</body>
+</html>
