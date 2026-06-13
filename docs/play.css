@@ -158,6 +158,15 @@ select, input {
   color: #f5edf7;
   cursor: pointer;
 }
+.button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  filter: grayscale(.4);
+}
+.pulse {
+  border-color: #f2c94c !important;
+  box-shadow: 0 0 0 2px rgba(242,201,76,.2);
+}
 .player-card.active-player { border-color: #f2c94c; }
 .player-card.winner { border-color: #7ee787; }
 .player-topline {
