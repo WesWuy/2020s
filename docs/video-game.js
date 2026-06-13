@@ -1,13 +1,16 @@
-// Prototype v0.12 Video Game Mode Foundation.
-// A lightweight browser game layer with Dystopia Run and Utopia Run.
+// Prototype v0.13 Video Game Feel Pass.
+// A lightweight browser game layer with Dystopia Run, Utopia Run, character identity, event feedback, and Timeline Health.
 
-const VIDEO_KEY = "twentiesVideoRunV012";
+const VIDEO_KEY = "twentiesVideoRunV013";
 
 const videoEls = {
   setup: document.getElementById("videoSetup"),
   game: document.getElementById("videoGame"),
   character: document.getElementById("videoCharacter"),
+  characterPreview: document.getElementById("videoCharacterPreview"),
   characterDescription: document.getElementById("videoCharacterDescription"),
+  activeCharacterCard: document.getElementById("activeCharacterCard"),
+  chapterCard: document.getElementById("chapterCard"),
   reset: document.getElementById("resetVideoGameBtn"),
   hudMode: document.getElementById("hudMode"),
   hudYear: document.getElementById("hudYear"),
@@ -26,9 +29,19 @@ const videoEls = {
   log: document.getElementById("videoLog")
 };
 
+const CHARACTER_FEEL = {
+  "Crypto Bro": { icon: "₿", status: "Still Early", vibe: "Bullish during collapse" },
+  "The Prepper": { icon: "🥫", status: "Prepared-ish", vibe: "Canned goods prophet" },
+  "The Influencer": { icon: "📱", status: "Main Character", vibe: "Turns crisis into content" },
+  "The Bureaucrat": { icon: "📋", status: "Process Owner", vibe: "Files paperwork at the abyss" },
+  "The Wellness Guru": { icon: "🧘", status: "Regulated", vibe: "Breathwork in a burning feed" },
+  "The Podcaster": { icon: "🎙", status: "Just Asking", vibe: "Three hours from the truth" }
+};
+
 const VIDEO_EVENTS = [
   {
     year: 2020,
+    category: "Collapse Tutorial",
     title: "The Timeline Locks the Door",
     text: "The decade begins with uncertainty, isolation, and way too many people becoming experts overnight.",
     choices: [
@@ -39,6 +52,7 @@ const VIDEO_EVENTS = [
   },
   {
     year: 2021,
+    category: "Algorithm Test",
     title: "The Algorithm Offers You Fame",
     text: "A viral post is waiting. It might help. It might consume you.",
     choices: [
@@ -49,6 +63,7 @@ const VIDEO_EVENTS = [
   },
   {
     year: 2022,
+    category: "Economic Pressure",
     title: "Inflation Enters the Chat",
     text: "Everything costs more, including being normal.",
     choices: [
@@ -59,6 +74,7 @@ const VIDEO_EVENTS = [
   },
   {
     year: 2023,
+    category: "Tech Fork",
     title: "AI Becomes Everyone's Intern",
     text: "The machine is helpful, weird, and somehow already in the meeting.",
     choices: [
@@ -69,6 +85,7 @@ const VIDEO_EVENTS = [
   },
   {
     year: 2024,
+    category: "Mini-Boss: Election Fever",
     title: "Election Fever Dream",
     text: "Every dinner table becomes a debate stage with worse lighting.",
     choices: [
@@ -79,6 +96,7 @@ const VIDEO_EVENTS = [
   },
   {
     year: 2025,
+    category: "Culture War Subscription",
     title: "The Culture War Goes Subscription-Based",
     text: "Even opinions now have premium tiers.",
     choices: [
@@ -89,6 +107,7 @@ const VIDEO_EVENTS = [
   },
   {
     year: 2026,
+    category: "Group Chat Governance",
     title: "The Group Chat Becomes a Government",
     text: "Decisions are made by screenshots, vibes, and the loudest notification.",
     choices: [
@@ -99,6 +118,7 @@ const VIDEO_EVENTS = [
   },
   {
     year: 2027,
+    category: "Reality Warning",
     title: "Reality Stability Warning",
     text: "The timeline flashes a warning and asks whether anyone has tried being sincere.",
     choices: [
@@ -109,6 +129,7 @@ const VIDEO_EVENTS = [
   },
   {
     year: 2028,
+    category: "Utopia Window",
     title: "The Utopia Window Opens",
     text: "For one turn, the timeline can be improved faster than it collapses.",
     choices: [
@@ -119,6 +140,7 @@ const VIDEO_EVENTS = [
   },
   {
     year: 2029,
+    category: "Final Mini-Boss",
     title: "The Final Doomscroll",
     text: "The decade tries one last time to eat your attention span.",
     choices: [
@@ -151,7 +173,27 @@ function saveVideoState() {
 function resetVideoRun() {
   localStorage.removeItem(VIDEO_KEY);
   videoState = null;
+  document.body.classList.remove("mode-dystopia", "mode-utopia");
   renderVideo();
+}
+
+function characterFeel(characterName) {
+  return CHARACTER_FEEL[characterName] || { icon: "⚡", status: "Survivor", vibe: "Improvising through the timeline" };
+}
+
+function characterCardMarkup(character) {
+  const feel = characterFeel(character.name);
+  return `
+    <div class="character-icon">${feel.icon}</div>
+    <div>
+      <p class="eyebrow">${feel.status}</p>
+      <h3>${character.name}</h3>
+      <p>${feel.vibe}</p>
+      <span>Sanity ${character.stats.sanity}</span>
+      <span>Money ${character.stats.money}</span>
+      <span>Influence ${character.stats.influence}</span>
+    </div>
+  `;
 }
 
 function setupCharacterOptions() {
@@ -161,7 +203,8 @@ function setupCharacterOptions() {
 
 function updateCharacterDescription() {
   const character = GAME.characters[Number(videoEls.character.value) || 0];
-  videoEls.characterDescription.textContent = `${character.name}: Sanity ${character.stats.sanity}, Money ${character.stats.money}, Influence ${character.stats.influence}. ${character.flavor}`;
+  videoEls.characterDescription.textContent = `${character.name}: ${character.flavor}`;
+  if (videoEls.characterPreview) videoEls.characterPreview.innerHTML = characterCardMarkup(character);
 }
 
 function startVideoRun(mode) {
@@ -192,8 +235,7 @@ function currentEvent() {
 
 function effectSummary(effects) {
   return Object.entries(effects).map(([key, value]) => `${key === "timeline" ? "Timeline" : key}: ${value > 0 ? "+" : ""}${value}`);
-}
-
+}\n
 function timelineStatus() {
   if (!videoState) return "Reality is buffering.";
   if (videoState.timeline >= 80) return "Utopia window open.";
@@ -268,6 +310,11 @@ function endVideoRun(success) {
   renderVideo();
 }
 
+function renderModeClass() {
+  document.body.classList.toggle("mode-dystopia", videoState?.mode === "dystopia");
+  document.body.classList.toggle("mode-utopia", videoState?.mode === "utopia");
+}
+
 function renderHud() {
   videoEls.hudMode.textContent = videoState.mode === "utopia" ? "Utopia" : "Dystopia";
   videoEls.hudYear.textContent = videoState.year;
@@ -277,6 +324,20 @@ function renderHud() {
   videoEls.hudTimeline.textContent = `${videoState.timeline}%`;
   videoEls.timelineLabel.textContent = `${videoState.timeline}% — ${timelineStatus()}`;
   videoEls.timelineFill.style.width = `${videoState.timeline}%`;
+}
+
+function renderTopline() {
+  const character = GAME.characters[videoState.characterIndex];
+  if (videoEls.activeCharacterCard) videoEls.activeCharacterCard.innerHTML = characterCardMarkup(character);
+  const event = currentEvent();
+  if (videoEls.chapterCard) {
+    videoEls.chapterCard.innerHTML = `
+      <p class="eyebrow">Current Chapter</p>
+      <h3>${event ? event.year : "2030"}</h3>
+      <p>${event ? event.category : "Final Timeline Report"}</p>
+      <span>${videoState.mode === "utopia" ? "Repair the timeline" : "Survive the timeline"}</span>
+    `;
+  }
 }
 
 function renderOutcome() {
@@ -311,7 +372,7 @@ function renderEvent() {
   videoEls.eventScreen.classList.remove("event-pulse");
   void videoEls.eventScreen.offsetWidth;
   videoEls.eventScreen.classList.add("event-pulse");
-  videoEls.eventEyebrow.textContent = `${event.year} — ${videoState.mode === "utopia" ? "Repair Opportunity" : "Survival Event"}`;
+  videoEls.eventEyebrow.textContent = `${event.year} — ${event.category}`;
   videoEls.eventTitle.textContent = event.title;
   videoEls.eventText.textContent = event.text;
   videoEls.choiceGrid.innerHTML = event.choices.map((choice, index) => {
@@ -357,13 +418,16 @@ function renderEnding() {
 
 function renderVideo() {
   if (!videoState) {
+    document.body.classList.remove("mode-dystopia", "mode-utopia");
     videoEls.setup.classList.remove("hidden");
     videoEls.game.classList.add("hidden");
     return;
   }
 
+  renderModeClass();
   videoEls.setup.classList.add("hidden");
   videoEls.game.classList.remove("hidden");
+  renderTopline();
   renderHud();
   renderEvent();
   renderEnding();
