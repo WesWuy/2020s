@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2020s Print Cards</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="print-page">
+  <main>
+    <section class="card">
+      <h1>2020s: The Board Game</h1>
+      <p><strong>Printable Prototype Card Decks</strong></p>
+      <p>Cut these out or copy them onto index cards for the first playtest.</p>
+    </section>
+
+    <section id="deckSections"></section>
+
+    <section class="card no-print-controls">
+      <button onclick="window.print()" class="button">Print Cards</button>
+      <a href="index.html" class="button secondary">Back to Prototype</a>
+    </section>
+  </main>
+
+  <script src="game-data.js"></script>
+  <script>
+    const deckSections = document.getElementById("deckSections");
+    Object.entries(GAME.decks).forEach(([deckName, cards]) => {
+      const section = document.createElement("section");
+      section.className = "card deck-section";
+      section.innerHTML = `<h2>${deckName} <span class="count">${cards.length} cards</span></h2><div class="deck-grid print-cards"></div>`;
+      const grid = section.querySelector(".deck-grid");
+      cards.forEach(card => {
+        const el = document.createElement("article");
+        el.className = "mini-card printable-card";
+        el.innerHTML = `<h3>${card.title}</h3><p>${card.text}</p><small>${deckName}</small>`;
+        grid.appendChild(el);
+      });
+      deckSections.appendChild(section);
+    });
+  </script>
+</body>
+</html>
