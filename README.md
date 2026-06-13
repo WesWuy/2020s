@@ -1,6 +1,6 @@
 # 2020s: The Board Game
 
-**Prototype v0.7 — Daily Chaos Mode**
+**Prototype v0.8 — Chaos Engine**
 
 A satirical survival board game where players race from **2020 to 2030** while trying not to lose their **Sanity**, **Money**, or **Influence**.
 
@@ -18,7 +18,11 @@ https://weswuy.github.io/2020s/
 https://weswuy.github.io/2020s/play.html
 ```
 
-The digital playtest now includes a visible 40-space board, player tokens, character setup, dice movement, card reveals, card history, stat tracking, Red Cycle / Blue Cycle switching, a turn log, win state, exportable playtest notes, breaking-news ticker, dramatic card reveal overlay, stat meters, character flavor text, improved ending screen, shareable survival certificate, copyable result text, challenge message, downloadable result image, achievement badges, card-idea submission link, and Daily Chaos Mode.
+The digital playtest now includes a visible 40-space board, player tokens, character setup, dice movement, card reveals, card history, stat tracking, Red Cycle / Blue Cycle switching, a turn log, win state, exportable playtest notes, breaking-news ticker, dramatic card reveal overlay, stat meters, character flavor text, improved ending screen, shareable survival certificate, copyable result text, challenge message, downloadable result image, achievement badges, card-idea submission link, Daily Chaos Mode, and the Chaos Engine.
+
+## Chaos Engine
+
+The Chaos Engine adds outrage and party-game energy through Reality Stability, Scandal Meter, Villain of the Week, Forbidden Phrase, unscheduled Breaking News interruptions, the Do Not Press button, Reality Collapse, Scandal Overload, and post-game player roasts.
 
 ## Daily Chaos Mode
 
@@ -33,7 +37,7 @@ Daily Chaos generates one deterministic challenge from the current date. Every p
 
 ## Playtest Goal
 
-Run one rough 30–45 minute game with 3–4 players. Do not judge final visuals yet. Judge whether the game is clear, funny, balanced, worth playing again, worth sharing after the final result, and worth coming back to tomorrow.
+Run one rough 30–45 minute game with 3–4 players. Do not judge final visuals yet. Judge whether the game is clear, funny, balanced, worth playing again, worth sharing after the final result, worth coming back to tomorrow, and outrageous enough to make people send screenshots.
 
 ## Version Roadmap
 
@@ -44,5 +48,6 @@ Run one rough 30–45 minute game with 3–4 players. Do not judge final visuals
 - **v0.5:** entertainment pass with ticker, reveal overlay, stat meters, and stronger ending screen.
 - **v0.6:** social loop build with shareable results, achievements, copy challenge, and downloadable certificate.
 - **v0.7:** daily chaos mode with fixed daily challenge, special rule, and daily result.
-- **v0.8:** better board feel with improved path, milestones, and token movement.
+- **v0.8:** chaos engine with meters, villain drama, forbidden phrases, breaking interruptions, forbidden button, and roast results.
+- **v0.9:** better board feel with improved path, milestones, and token movement.
 - **v1.0:** public preview build.
