@@ -25,6 +25,7 @@ const els = {
 
 const TOKEN_LABELS = ["A", "B", "C", "D", "E", "F"];
 let state = loadState() || createEmptyState();
+normalizeState();
 
 function createEmptyState() {
   return {
@@ -33,12 +34,20 @@ function createEmptyState() {
     currentPlayer: 0,
     turn: 1,
     lastRoll: null,
+    hasRolledThisTurn: false,
     lastSummary: "Set up players to begin.",
     activeCard: null,
     players: [],
     cardHistory: [],
     log: []
   };
+}
+
+function normalizeState() {
+  if (typeof state.hasRolledThisTurn !== "boolean") state.hasRolledThisTurn = false;
+  if (!Array.isArray(state.cardHistory)) state.cardHistory = [];
+  if (!Array.isArray(state.log)) state.log = [];
+  if (!state.lastSummary) state.lastSummary = "Ready.";
 }
 
 function saveState() {
@@ -142,6 +151,7 @@ function startGame() {
     currentPlayer: 0,
     turn: 1,
     lastRoll: null,
+    hasRolledThisTurn: false,
     lastSummary: "Game started. First player is up.",
     activeCard: null,
     players,
@@ -254,7 +264,7 @@ function handleCardDraw(deckName, player) {
   state.cardHistory.unshift(cardRecord);
   state.cardHistory = state.cardHistory.slice(0, 20);
   log(`${player.name} drew ${deckName}: ${card.title}. Effect: ${card.text}`);
-  setSummary(`${player.name} drew ${card.title}.`);
+  setSummary(`${player.name} drew ${card.title}. Resolve the card, then press End Turn.`);
   applyRecognizedCardEffect(deckName, card, player);
   render();
 }
@@ -305,12 +315,18 @@ function rollAndMove() {
     return render();
   }
 
+  if (state.hasRolledThisTurn) {
+    setSummary(`${player.name} has already rolled this turn. Resolve the space/card, then press End Turn.`);
+    log(`${player.name} tried to roll again, but each player only rolls once per turn.`);
+    return render();
+  }
+
   if (player.skipNextTurn) {
     player.skipNextTurn = false;
+    state.hasRolledThisTurn = true;
     log(`${player.name} skipped this turn due to Doomscroll Mode.`);
-    setSummary(`${player.name} skipped this turn due to Doomscroll Mode.`);
-    nextTurn();
-    return;
+    setSummary(`${player.name} skipped this turn due to Doomscroll Mode. Press End Turn.`);
+    return render();
   }
 
   if (player.shadowbanned) {
@@ -319,13 +335,14 @@ function rollAndMove() {
   }
 
   const roll = rollDie();
+  state.hasRolledThisTurn = true;
   state.lastRoll = roll;
   const oldPosition = player.position;
   player.position = Math.min(40, player.position + roll);
   const space = getSpace(player.position);
 
   log(`${player.name} rolled ${roll}, moved from Space ${oldPosition} to Space ${player.position}: ${space.name}.`);
-  setSummary(`${player.name} rolled ${roll} and moved to Space ${player.position}: ${space.name}.`);
+  setSummary(`${player.name} rolled ${roll} and moved to Space ${player.position}: ${space.name}. Resolve the space, then press End Turn.`);
   applySimpleSpace(space, player);
   saveState();
   render();
@@ -337,7 +354,8 @@ function nextTurn() {
   if (state.currentPlayer === 0) state.turn += 1;
   const player = getCurrentPlayer();
   state.lastRoll = null;
-  setSummary(`${player.name} is up next.`);
+  state.hasRolledThisTurn = false;
+  setSummary(`${player.name} is up next. Roll once, resolve the space, then end the turn.`);
   saveState();
   render();
 }
@@ -475,6 +493,7 @@ function render() {
 
   const player = getCurrentPlayer();
   const space = getSpace(player.position);
+  const winnerExists = state.players.some(p => p.winner);
   els.currentPlayerName.textContent = `${player.name} (${player.token})`;
   els.currentSpace.textContent = `Space ${player.position}: ${space.name} - ${space.type}`;
   els.turnSummary.textContent = state.lastSummary || "Ready.";
@@ -482,6 +501,9 @@ function render() {
   els.cycleBtn.textContent = state.cycle;
   els.cycleBtn.className = state.cycle === "Red Cycle" ? "cycle-btn red" : "cycle-btn blue";
   els.turnLog.value = state.log.join("\n");
+  els.rollBtn.disabled = Boolean(state.hasRolledThisTurn || player.winner || winnerExists);
+  els.rollBtn.textContent = state.hasRolledThisTurn ? "Roll Used This Turn" : "Roll & Move";
+  els.endTurnBtn.classList.toggle("pulse", Boolean(state.hasRolledThisTurn && !winnerExists));
 
   renderBoard();
   renderPlayers();
