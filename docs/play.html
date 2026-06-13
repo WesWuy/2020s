@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="play-guard.css">
   <link rel="stylesheet" href="play-polish.css">
   <link rel="stylesheet" href="play-share.css">
+  <link rel="stylesheet" href="play-daily.css">
 </head>
 <body>
   <div id="newsTicker" class="news-ticker">
@@ -17,9 +18,9 @@
   </div>
 
   <header class="hero compact-hero">
-    <div class="badge">Prototype v0.6 — Social Loop Build</div>
+    <div class="badge">Prototype v0.7 — Daily Chaos Mode</div>
     <h1>2020s: Digital Playtest</h1>
-    <p class="tagline">A hot-seat playable test with board spaces, tokens, card reveals, stat tracking, and exportable notes.</p>
+    <p class="tagline">A hot-seat playable test with board spaces, tokens, card reveals, stat tracking, daily challenge mode, and exportable notes.</p>
     <div class="cta-row">
       <a href="index.html" class="button secondary">Back to Prototype Hub</a>
       <button id="restartGameBtn" class="button secondary" type="button">Restart Game</button>
@@ -44,9 +45,21 @@
       <div class="cta-row left">
         <button id="startGameBtn" class="button" type="button">Start Game</button>
       </div>
+
+      <section id="dailyChaosCard" class="daily-chaos-card">
+        <p class="eyebrow">Daily Chaos</p>
+        <h3 id="dailyChaosTitle">Loading daily challenge...</h3>
+        <p id="dailyChaosMeta">One fixed daily setup. Everybody gets the same timeline.</p>
+        <p id="dailyChaosRule">Reality is buffering.</p>
+        <div class="cta-row left">
+          <button id="playDailyBtn" class="button" type="button">Play Daily Chaos</button>
+          <button id="copyDailyBtn" class="button secondary" type="button">Copy Daily Challenge</button>
+        </div>
+      </section>
     </section>
 
     <section id="gamePanel" class="hidden">
+      <section id="dailyModeBanner" class="daily-mode-banner hidden"></section>
       <section id="winnerPanel" class="winner-panel hidden"></section>
 
       <section class="card board-card">
@@ -140,5 +153,6 @@
   <script src="play-restart.js"></script>
   <script src="play-polish.js"></script>
   <script src="play-share.js"></script>
+  <script src="play-daily.js"></script>
 </body>
 </html>
