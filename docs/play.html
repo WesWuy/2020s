@@ -77,18 +77,18 @@
 
           <div id="activeCard" class="active-card hidden"></div>
 
-          <div class="manual-tools">
-            <h3>Manual Adjustments</h3>
-            <p>Use these when a card needs table judgment.</p>
+          <details class="manual-tools">
+            <summary>Game Master correction tools</summary>
+            <p>Use only to correct mistakes or resolve card effects that require table judgment. These are not normal player actions.</p>
             <div class="tool-grid">
-              <button data-stat="sanity" data-delta="1">+ Sanity</button>
-              <button data-stat="sanity" data-delta="-1">− Sanity</button>
-              <button data-stat="money" data-delta="1">+ Money</button>
-              <button data-stat="money" data-delta="-1">− Money</button>
-              <button data-stat="influence" data-delta="1">+ Influence</button>
-              <button data-stat="influence" data-delta="-1">− Influence</button>
+              <button class="gm-adjust" data-stat="sanity" data-delta="1">+ Sanity</button>
+              <button class="gm-adjust" data-stat="sanity" data-delta="-1">− Sanity</button>
+              <button class="gm-adjust" data-stat="money" data-delta="1">+ Money</button>
+              <button class="gm-adjust" data-stat="money" data-delta="-1">− Money</button>
+              <button class="gm-adjust" data-stat="influence" data-delta="1">+ Influence</button>
+              <button class="gm-adjust" data-stat="influence" data-delta="-1">− Influence</button>
             </div>
-          </div>
+          </details>
         </section>
 
         <section class="card">
