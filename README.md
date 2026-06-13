@@ -18,7 +18,7 @@ https://weswuy.github.io/2020s/
 https://weswuy.github.io/2020s/play.html
 ```
 
-The digital playtest now includes a visible 40-space board, player tokens, character setup, dice movement, card reveals, card history, stat tracking, Red Cycle / Blue Cycle switching, a turn log, win state, exportable playtest notes, breaking-news ticker, dramatic card reveal overlay, stat meters, character flavor text, improved ending screen, shareable survival certificate, copyable result text, challenge message, downloadable result image, achievement badges, card-idea submission link, Daily Chaos Mode, Chaos Engine, board icons, movement trails, landing moments, Copy This Moment, Final Timeline Broadcast, 110 prototype cards, table-action prompts, audience-vote cards, conspiracy-corkboard moments, and outrageous ending titles.
+The digital playtest now includes a visible 40-space board, player tokens, character setup, dice movement, card reveals, card history, stat tracking, Red Cycle / Blue Cycle switching, a turn log, win state, exportable playtest notes, breaking-news ticker, dramatic card reveal overlay, stat meters, character flavor text, improved ending screen, shareable survival certificate, copyable result text, challenge message, downloadable result image, achievement badges, card-idea submission link, Daily Chaos Mode, Chaos Engine, board icons, movement trails, landing moments, Final Timeline Broadcast, 110 prototype cards, table-action prompts, audience-vote cards, conspiracy-corkboard moments, and outrageous ending titles.
 
 ## Content Explosion Pack
 
@@ -26,7 +26,7 @@ The v0.10 content pack expands the decks from 65 to 110 prototype cards. It adds
 
 ## Board Feel & Spectacle Pass
 
-The Spectacle Pass makes the game feel more like a digital board game show through icon-coded board spaces, milestone spaces, animated movement trails, landing-moment overlays, a Copy This Moment button, and a stronger final broadcast panel.
+The Spectacle Pass makes the game feel more like a digital board game show through icon-coded board spaces, milestone spaces, animated movement trails, landing-moment overlays, and a stronger final broadcast panel.
 
 ## Chaos Engine
 
@@ -57,6 +57,6 @@ Run one rough 30–45 minute game with 3–4 players. Do not judge final visuals
 - **v0.6:** social loop build with shareable results, achievements, copy challenge, and downloadable certificate.
 - **v0.7:** daily chaos mode with fixed daily challenge, special rule, and daily result.
 - **v0.8:** chaos engine with meters, villain drama, forbidden phrases, breaking interruptions, forbidden button, and roast results.
-- **v0.9:** board feel and spectacle pass with icons, movement trails, landing moments, copyable moments, and final broadcast.
+- **v0.9:** board feel and spectacle pass with icons, movement trails, landing moments, and final broadcast.
 - **v0.10:** content explosion pack with 110 cards, outrageous prompts, audience votes, stronger finales, and upgraded ending titles.
 - **v1.0:** public preview build.
