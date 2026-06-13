@@ -87,6 +87,10 @@ handleCardDraw = function polishedHandleCardDraw(deckName, player) {
 const originalPolishRollAndMove = rollAndMove;
 rollAndMove = function polishedRollAndMove() {
   originalPolishRollAndMove();
+  animateRollFeedback();
+};
+
+function animateRollFeedback() {
   const player = getCurrentPlayer();
   if (state.lastRoll) {
     setTicker(`${player.name} rolled ${state.lastRoll}. Reality accepts the filing, reluctantly.`);
@@ -94,7 +98,13 @@ rollAndMove = function polishedRollAndMove() {
     void els.lastRoll.offsetWidth;
     els.lastRoll.classList.add("roll-flash");
   }
-};
+}
+
+// The original click listener was registered before this polish layer loaded, so this
+// secondary listener adds visual feedback without changing the rules engine.
+els.rollBtn?.addEventListener("click", () => {
+  setTimeout(animateRollFeedback, 0);
+});
 
 const originalPolishSetSummary = setSummary;
 setSummary = function polishedSetSummary(message) {
