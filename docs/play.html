@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="play-share.css">
   <link rel="stylesheet" href="play-daily.css">
   <link rel="stylesheet" href="play-chaos.css">
+  <link rel="stylesheet" href="play-spectacle.css">
 </head>
 <body>
   <div id="newsTicker" class="news-ticker">
@@ -19,9 +20,9 @@
   </div>
 
   <header class="hero compact-hero">
-    <div class="badge">Prototype v0.8 — Chaos Engine</div>
+    <div class="badge">Prototype v0.9 — Board Feel & Spectacle Pass</div>
     <h1>2020s: Digital Playtest</h1>
-    <p class="tagline">A hot-seat playable test with board spaces, daily chaos, scandal meters, forbidden phrases, villain drama, and shareable survival receipts.</p>
+    <p class="tagline">A chaotic digital board game show with spectacle moments, board icons, animated movement trails, daily chaos, scandal meters, and shareable survival receipts.</p>
     <div class="cta-row">
       <a href="index.html" class="button secondary">Back to Prototype Hub</a>
       <button id="restartGameBtn" class="button secondary" type="button">Restart Game</button>
@@ -87,7 +88,7 @@
       <section id="dailyModeBanner" class="daily-mode-banner hidden"></section>
       <section id="winnerPanel" class="winner-panel hidden"></section>
 
-      <section class="card board-card">
+      <section class="card board-card spectacle-board-card">
         <div class="board-header">
           <div>
             <p class="eyebrow">Board</p>
@@ -98,7 +99,16 @@
             <button id="cycleBtn" class="cycle-btn" type="button">Red Cycle</button>
           </div>
         </div>
-        <div id="boardTrack" class="digital-board"></div>
+        <div class="board-legend">
+          <span>🌍 Global Chaos</span>
+          <span>📱 Media Meltdown</span>
+          <span>👁 Hidden Hand</span>
+          <span>🗳 Political Flip</span>
+          <span>💸 Market Shock</span>
+          <span>🧠 Sanity</span>
+          <span>🏁 Final</span>
+        </div>
+        <div id="boardTrack" class="digital-board spectacle-board"></div>
       </section>
 
       <section class="game-layout">
@@ -121,6 +131,7 @@
             <button id="rollBtn" class="button" type="button">Roll & Move</button>
             <button id="endTurnBtn" class="button secondary" type="button">End Turn</button>
             <button id="exportBtn" class="button secondary" type="button">Export Notes</button>
+            <button id="copyMomentBtn" class="button secondary" type="button">Copy This Moment</button>
             <button id="doNotPressBtn" class="button danger-button" type="button">DO NOT PRESS</button>
           </div>
 
@@ -181,6 +192,18 @@
     </div>
   </div>
 
+  <div id="landingMomentOverlay" class="landing-moment-overlay hidden">
+    <div class="landing-moment-card">
+      <p id="landingMomentEyebrow" class="eyebrow">Timeline Event</p>
+      <h2 id="landingMomentTitle">Player landed on something.</h2>
+      <p id="landingMomentText">The timeline is pretending this was always the plan.</p>
+      <div class="cta-row left">
+        <button id="copyLandingMomentBtn" class="button secondary" type="button">Copy This Moment</button>
+        <button id="closeLandingMomentBtn" class="button" type="button">Continue</button>
+      </div>
+    </div>
+  </div>
+
   <script src="game-data.js"></script>
   <script src="play.js"></script>
   <script src="play-cycle.js"></script>
@@ -190,5 +213,6 @@
   <script src="play-share.js"></script>
   <script src="play-daily.js"></script>
   <script src="play-chaos.js"></script>
+  <script src="play-spectacle.js"></script>
 </body>
 </html>
