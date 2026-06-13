@@ -9,7 +9,7 @@
 </head>
 <body>
   <header class="hero compact-hero video-hero">
-    <div class="badge">Prototype v0.12 — Video Game Mode Foundation</div>
+    <div class="badge">Prototype v0.13 — Video Game Feel Pass</div>
     <h1>2020s: The Game</h1>
     <p class="tagline">Choose your timeline: survive the collapse in Dystopia Run or try to repair reality in Utopia Run.</p>
     <div class="cta-row">
@@ -36,15 +36,21 @@
         </article>
       </div>
 
-      <section class="video-panel inner-panel">
+      <section class="video-panel inner-panel character-select-panel">
         <p class="eyebrow">Choose Character</p>
         <label for="videoCharacter"><strong>Character</strong></label>
         <select id="videoCharacter"></select>
+        <div id="videoCharacterPreview" class="video-character-preview"></div>
         <p id="videoCharacterDescription" class="setup-hint">Choose your timeline survivor.</p>
       </section>
     </section>
 
     <section id="videoGame" class="hidden">
+      <section class="video-run-topline">
+        <article id="activeCharacterCard" class="active-character-card"></article>
+        <article id="chapterCard" class="chapter-card"></article>
+      </section>
+
       <section class="video-hud">
         <article><span>Mode</span><strong id="hudMode">—</strong></article>
         <article><span>Year</span><strong id="hudYear">2020</strong></article>
