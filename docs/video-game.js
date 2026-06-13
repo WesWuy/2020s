@@ -235,7 +235,8 @@ function currentEvent() {
 
 function effectSummary(effects) {
   return Object.entries(effects).map(([key, value]) => `${key === "timeline" ? "Timeline" : key}: ${value > 0 ? "+" : ""}${value}`);
-}\n
+}
+
 function timelineStatus() {
   if (!videoState) return "Reality is buffering.";
   if (videoState.timeline >= 80) return "Utopia window open.";
@@ -260,12 +261,7 @@ function applyChoice(choice) {
   videoState.money = clamp(videoState.money + (effects.money || 0), 0, 9);
   videoState.influence = clamp(videoState.influence + (effects.influence || 0), 0, 9);
   videoState.timeline = clamp(videoState.timeline + (effects.timeline || 0), 0, 100);
-  videoState.lastOutcome = {
-    year: event.year,
-    label: choice.label,
-    text: choice.text,
-    effects
-  };
+  videoState.lastOutcome = { year: event.year, label: choice.label, text: choice.text, effects };
   videoState.log.unshift(`${event.year}: ${choice.label}. ${effectSummary(effects).join(", ")}.`);
 
   if (videoState.sanity <= 0 || videoState.money <= 0 || videoState.influence <= 0 || videoState.timeline <= 0) {
