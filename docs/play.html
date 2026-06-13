@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="play-polish.css">
   <link rel="stylesheet" href="play-share.css">
   <link rel="stylesheet" href="play-daily.css">
+  <link rel="stylesheet" href="play-chaos.css">
 </head>
 <body>
   <div id="newsTicker" class="news-ticker">
@@ -18,9 +19,9 @@
   </div>
 
   <header class="hero compact-hero">
-    <div class="badge">Prototype v0.7 — Daily Chaos Mode</div>
+    <div class="badge">Prototype v0.8 — Chaos Engine</div>
     <h1>2020s: Digital Playtest</h1>
-    <p class="tagline">A hot-seat playable test with board spaces, tokens, card reveals, stat tracking, daily challenge mode, and exportable notes.</p>
+    <p class="tagline">A hot-seat playable test with board spaces, daily chaos, scandal meters, forbidden phrases, villain drama, and shareable survival receipts.</p>
     <div class="cta-row">
       <a href="index.html" class="button secondary">Back to Prototype Hub</a>
       <button id="restartGameBtn" class="button secondary" type="button">Restart Game</button>
@@ -59,6 +60,30 @@
     </section>
 
     <section id="gamePanel" class="hidden">
+      <section id="chaosDashboard" class="chaos-dashboard hidden">
+        <article class="chaos-meter-card">
+          <p class="eyebrow">Reality Stability</p>
+          <h2 id="realityValue">100%</h2>
+          <div class="chaos-meter"><span id="realityFill"></span></div>
+        </article>
+        <article class="chaos-meter-card">
+          <p class="eyebrow">Scandal Meter</p>
+          <h2 id="scandalValue">0%</h2>
+          <div class="chaos-meter scandal"><span id="scandalFill"></span></div>
+        </article>
+        <article class="chaos-meter-card villain-card">
+          <p class="eyebrow">Villain of the Week</p>
+          <h2 id="villainName">Pending</h2>
+          <p id="villainReason">Too early to blame anyone.</p>
+        </article>
+        <article class="chaos-meter-card forbidden-card">
+          <p class="eyebrow">Forbidden Phrase</p>
+          <h2 id="forbiddenPhrase">Loading...</h2>
+          <p>Anyone who says it loses 1 Sanity. Table enforces. Chaos encourages honesty.</p>
+          <button id="phrasePenaltyBtn" class="button secondary" type="button">Current Player Said It</button>
+        </article>
+      </section>
+
       <section id="dailyModeBanner" class="daily-mode-banner hidden"></section>
       <section id="winnerPanel" class="winner-panel hidden"></section>
 
@@ -96,6 +121,7 @@
             <button id="rollBtn" class="button" type="button">Roll & Move</button>
             <button id="endTurnBtn" class="button secondary" type="button">End Turn</button>
             <button id="exportBtn" class="button secondary" type="button">Export Notes</button>
+            <button id="doNotPressBtn" class="button danger-button" type="button">DO NOT PRESS</button>
           </div>
 
           <div id="activeCard" class="active-card hidden"></div>
@@ -146,6 +172,15 @@
     </div>
   </div>
 
+  <div id="breakingNewsOverlay" class="breaking-news-overlay hidden">
+    <div class="breaking-news-card">
+      <p class="eyebrow">Unscheduled Interruption</p>
+      <h2 id="breakingNewsTitle">Breaking News</h2>
+      <p id="breakingNewsText">Something deeply normal has happened.</p>
+      <button id="closeBreakingNewsBtn" class="button" type="button">Return to the Timeline</button>
+    </div>
+  </div>
+
   <script src="game-data.js"></script>
   <script src="play.js"></script>
   <script src="play-cycle.js"></script>
@@ -154,5 +189,6 @@
   <script src="play-polish.js"></script>
   <script src="play-share.js"></script>
   <script src="play-daily.js"></script>
+  <script src="play-chaos.js"></script>
 </body>
 </html>
