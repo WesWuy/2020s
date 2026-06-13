@@ -1,4 +1,4 @@
-// Guard rails for Prototype v0.4.
+// Guard rails for Prototype v0.5.
 // These keep Game Master correction tools from being mistaken for normal player actions.
 
 const originalAdjustStat = adjustStat;
@@ -11,14 +11,9 @@ adjustStat = function guardedAdjustStat(player, stat, delta, reason = "GM correc
     return;
   }
 
-  const ok = confirm(`Use Game Master correction?\n\n${player.name}: ${stat} ${delta > 0 ? "+" : ""}${delta}\n\nThese tools are for mistake correction or table-ruling card effects only.`);
-  if (!ok) {
-    setSummary("Game Master correction cancelled.");
-    render();
-    return;
-  }
-
-  log(`GM correction used for ${player.name}: ${stat} ${delta > 0 ? "+" : ""}${delta}.`);
+  const sign = delta > 0 ? "+" : "";
+  log(`GM correction used for ${player.name}: ${stat} ${sign}${delta}.`);
+  setSummary(`GM correction: ${player.name} ${stat} ${sign}${delta}.`);
   return originalAdjustStat(player, stat, delta, reason);
 };
 
