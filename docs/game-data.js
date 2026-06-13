@@ -70,7 +70,17 @@ const GAME = {
       { title: "Infrastructure Week Again", text: "Move forward 1 space. Bureaucrat gains 1 Money." },
       { title: "Everything Requires an App", text: "Lose 1 Sanity. If you have Influence 4+, ignore this and gain 1 Money." },
       { title: "The Economy Is Fine, Apparently", text: "Players with 3+ Money gain 1 Influence. Everyone else loses 1 Sanity." },
-      { title: "Global Vibe Shift", text: "Flip the board cycle, then every player gains either 1 Sanity or 1 Influence." }
+      { title: "Global Vibe Shift", text: "Flip the board cycle, then every player gains either 1 Sanity or 1 Influence." },
+      { title: "Conference Cancelled, Hotel Kept Deposit", text: "Lose 1 Money. Gain 1 Influence if you complain with theatrical dignity." },
+      { title: "Weather App Gaslights Everyone", text: "All players guess whether it rains tomorrow. Wrong guesses lose 1 Sanity." },
+      { title: "The Supply Chain Becomes a Personality", text: "Lose 1 Money. If you narrate your frustration like a documentary trailer, gain 1 Influence." },
+      { title: "Everything Has Surge Pricing", text: "Lose 1 Money. If you have 5+ Influence, pass the cost to the next player instead." },
+      { title: "Airline Meltdown Bingo", text: "Move back 2 spaces unless you spend 1 Money. Podcaster gains 1 Influence for recording a hot take." },
+      { title: "Microplastic Breakfast", text: "Lose 1 Sanity. Wellness Guru may gain 1 Influence by naming a detox ritual." },
+      { title: "Drone Swarm Over the Suburbs", text: "All players lose 1 Sanity. The first player to say 'probably nothing' gains 1 Influence." },
+      { title: "Emergency Coffee Shortage", text: "All players lose 1 Sanity unless they can name their favorite coffee order in under five seconds." },
+      { title: "Subscription Economy Claims Your Fridge", text: "Lose 1 Money. If you refuse the update, lose 1 Influence instead." },
+      { title: "The Experts Updated the Experts", text: "Every player swaps their most confident opinion with the player on their left. Table judgment required." }
     ],
     "Media Meltdown": [
       { title: "Ratio’d Into Oblivion", text: "Lose 2 Influence." },
@@ -87,7 +97,17 @@ const GAME = {
       { title: "Trend Hijack", text: "Steal 1 Influence from the player with the most Influence." },
       { title: "Everyone Has a Podcast Now", text: "Podcaster gains 1 Influence. Everyone else loses 1 Sanity." },
       { title: "Headline Whiplash", text: "Draw a Global Chaos card and resolve it immediately." },
-      { title: "Comment Section Civil War", text: "All players lose 1 Sanity. The player with lowest Influence gains 2 Influence." }
+      { title: "Comment Section Civil War", text: "All players lose 1 Sanity. The player with lowest Influence gains 2 Influence." },
+      { title: "You Have Been Fact-Checked", text: "Table action: read your last statement in a serious news-anchor voice. If the table laughs, gain 1 Influence. If nobody laughs, lose 1 Sanity." },
+      { title: "Emergency Podcast Appearance", text: "Table action: you have 20 seconds to explain why everything is connected. If you hesitate, lose 1 Influence." },
+      { title: "Touch Grass Mandate", text: "Table action: stand up, take one deep breath, and say 'the algorithm does not own me.' Gain 1 Sanity." },
+      { title: "Blue Check Civil War", text: "Players with 4+ Influence lose 1 Sanity. Lowest Influence player gains 1 Influence for staying quiet." },
+      { title: "Influencer Apology Tour", text: "Lose 1 Influence, then gain 2 Influence if you can apologize without admitting anything specific." },
+      { title: "The Algorithm Wants Tears", text: "Gain 2 Influence if you tell a dramatic personal story. Lose 1 Sanity either way." },
+      { title: "Comment Section Jury Duty", text: "Audience vote: the table votes whether you are right, wrong, or exhausting. Right gains 1 Influence. Exhausting loses 1 Sanity." },
+      { title: "You Became a Meme Template", text: "Gain 3 Influence. Lose 1 Sanity every time another player quotes you this round." },
+      { title: "Screenshot Without Context", text: "Lose 2 Influence unless another player defends you with a completely unreasonable explanation." },
+      { title: "Audience Vote: Who Is Lying?", text: "The table points at one player. That player loses 1 Influence and gains 1 Sanity because at least it is over." }
     ],
     "Hidden Hand": [
       { title: "The Algorithm Chooses You", text: "Gain 2 Influence. Lose 1 Sanity." },
@@ -104,7 +124,17 @@ const GAME = {
       { title: "Approved Message Packet", text: "Gain 2 Influence in Blue Cycle. Gain 2 Money in Red Cycle." },
       { title: "Backroom Calendar Invite", text: "Skip your next turn and gain 2 Money." },
       { title: "Invisible Moderation Hand", text: "Choose a player. They lose 1 Influence." },
-      { title: "The Narrative Has Moved On", text: "Every player discards one active negative effect." }
+      { title: "The Narrative Has Moved On", text: "Every player discards one active negative effect." },
+      { title: "Conspiracy Corkboard", text: "Table action: connect the last three drawn cards into one theory. If the table is impressed, gain 2 Influence. If not, lose 1 Sanity." },
+      { title: "The Sponsor Has Concerns", text: "Lose 1 Influence unless you change your public position immediately and pretend it was always nuanced." },
+      { title: "Secret Beta Access", text: "Gain 1 Money and 1 Influence. Lose 1 Sanity because the interface is impossible." },
+      { title: "Algorithmic Immunity", text: "Cancel your next Influence loss. If you already have 6+ Influence, gain 1 Money instead." },
+      { title: "Unmarked Spreadsheet", text: "Choose one player. They must reveal which stat scares them most. They lose 1 of that stat." },
+      { title: "Charity Gala Side Quest", text: "Spend 1 Money to gain 2 Influence. If you refuse, gain 1 Sanity for staying home." },
+      { title: "The Door Opens Inward", text: "Move forward 2 spaces. If this puts you ahead, lose 1 Sanity because now people are watching." },
+      { title: "Quietly Verified", text: "Gain 2 Influence. Nobody knows why, and that is the point." },
+      { title: "The Terms Were Always There", text: "Lose 1 Money unless you can read this card aloud in a lawyer voice without smiling." },
+      { title: "Red String Renaissance", text: "Gain 1 Influence for each Hidden Hand card in the history, max 3. Then lose 1 Sanity." }
     ],
     "Political Flip": [
       { title: "Election Night Glitch", text: "Flip the board cycle. Everyone loses 1 Sanity." },
@@ -116,14 +146,29 @@ const GAME = {
       { title: "Culture War Bonus Round", text: "All players may spend 1 Sanity to gain 2 Influence." },
       { title: "Regulation Roulette", text: "In Blue Cycle, all players lose 1 Money. In Red Cycle, all players lose 1 Sanity." },
       { title: "Narrative Realignment", text: "Set the board cycle to the opposite of its current state. Highest Influence player loses 1 Influence." },
-      { title: "Bipartisan Confusion", text: "Nobody knows what side they are on. Every player swaps Money and Influence values until their next turn." }
+      { title: "Bipartisan Confusion", text: "Nobody knows what side they are on. Every player swaps Money and Influence values until their next turn." },
+      { title: "Forbidden Phrase Hearing", text: "The current Forbidden Phrase is now illegal at the table until your next turn. Anyone who says it loses 1 Sanity." },
+      { title: "Town Hall Speedrun", text: "Each player gives a five-word campaign promise. Funniest promise gains 1 Influence. Most boring loses 1 Sanity." },
+      { title: "Two Minutes of Unity", text: "All players gain 1 Sanity, then immediately draw Media Meltdown because it could not last." },
+      { title: "Debate Moderator Meltdown", text: "All players roll. Highest roll gains 2 Influence. Lowest roll loses 1 Sanity." },
+      { title: "Policy Name Generator", text: "Invent a policy name using three random nouns. If the table would vote for it, gain 1 Influence." },
+      { title: "Vibes-Based Coalition", text: "Choose another player. You both gain 1 Influence, then both lose 1 Sanity if your stats do not match." },
+      { title: "Public Inquiry Spiral", text: "Draw Hidden Hand. If it helps you, lose 1 Influence because that looks suspicious." },
+      { title: "Emergency Rebrand", text: "Change your character’s public slogan. If the table approves, gain 1 Influence. If not, lose 1 Influence." },
+      { title: "Campaign Hat Economy", text: "Spend 1 Money to gain 2 Influence. Prepper may do this for free once." },
+      { title: "The Pollster Blinks", text: "Player in last place chooses the board cycle. Player in first place loses 1 Sanity." }
     ],
     "Final Reckoning": [
       { title: "You Were Right Too Early", text: "If you have 0 Influence, lose immediately unless you can trade 2 Money for 1 Influence." },
       { title: "You Survived, But at What Cost?", text: "If you have 0 Sanity, move back to Space 35 and recover 2 Sanity." },
       { title: "The Market Recovers Without You", text: "If you have 0 Money, every other player gains 1 Money. You move back 3 spaces." },
       { title: "History Gets Rewritten", text: "Flip the board cycle. Move to Space 38 and try again next turn." },
-      { title: "Receipts Found", text: "If you have at least 3 Influence, you win anyway." }
+      { title: "Receipts Found", text: "If you have at least 3 Influence, you win anyway." },
+      { title: "The Documentary Gets Made", text: "If you have 5+ Influence, you win with a suspiciously flattering edit. Otherwise lose 1 Sanity and try again." },
+      { title: "Everyone Was Weird", text: "All players gain 1 Sanity. If you still have at least 1 of every stat, you win." },
+      { title: "The Archive Has Receipts", text: "If you drew 3+ Media Meltdown cards this game, lose 1 Influence. If you survive, you win." },
+      { title: "The Group Chat Survived", text: "Choose one player to publicly defend you. If they agree, gain 1 Influence and win if all stats are above 0." },
+      { title: "The Timeline Demands a Monologue", text: "Make a 15-second closing statement. If the table applauds, win. If not, move back to Space 38 and gain 1 Sanity." }
     ]
   }
 };
