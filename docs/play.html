@@ -7,10 +7,16 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="play.css">
   <link rel="stylesheet" href="play-guard.css">
+  <link rel="stylesheet" href="play-polish.css">
 </head>
 <body>
+  <div id="newsTicker" class="news-ticker">
+    <span class="ticker-label">LIVE FEED</span>
+    <span id="tickerText">Markets confused. Experts concerned. Influencers thriving. Reality under review.</span>
+  </div>
+
   <header class="hero compact-hero">
-    <div class="badge">Prototype v0.4 — Digital Board Build</div>
+    <div class="badge">Prototype v0.5 — Entertainment Pass</div>
     <h1>2020s: Digital Playtest</h1>
     <p class="tagline">A hot-seat playable test with board spaces, tokens, card reveals, stat tracking, and exportable notes.</p>
     <div class="cta-row">
@@ -117,10 +123,20 @@
     </section>
   </main>
 
+  <div id="cardRevealOverlay" class="card-reveal-overlay hidden">
+    <div class="reveal-card">
+      <p id="revealDeck" class="eyebrow">Breaking</p>
+      <h2 id="revealTitle">Timeline Event</h2>
+      <p id="revealText">Reality is buffering.</p>
+      <button id="closeRevealBtn" class="button" type="button">Resolve Card</button>
+    </div>
+  </div>
+
   <script src="game-data.js"></script>
   <script src="play.js"></script>
   <script src="play-cycle.js"></script>
   <script src="play-guard.js"></script>
   <script src="play-restart.js"></script>
+  <script src="play-polish.js"></script>
 </body>
 </html>
