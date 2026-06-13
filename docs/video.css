@@ -4,6 +4,20 @@
     radial-gradient(circle at 88% 12%, rgba(126,231,135,.12), transparent 20rem),
     linear-gradient(180deg, #181b2a, #0f1017);
 }
+.mode-dystopia .video-hero,
+.mode-dystopia .event-screen {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255,92,122,.18), transparent 22rem),
+    radial-gradient(circle at 88% 20%, rgba(242,201,76,.12), transparent 20rem),
+    linear-gradient(180deg, #271720, #10131d);
+}
+.mode-utopia .video-hero,
+.mode-utopia .event-screen {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(126,231,135,.18), transparent 22rem),
+    radial-gradient(circle at 88% 20%, rgba(145,201,255,.14), transparent 20rem),
+    linear-gradient(180deg, #15231d, #10131d);
+}
 .video-panel,
 .event-screen,
 .video-ending,
@@ -19,23 +33,28 @@
 .inner-panel {
   margin-top: 18px;
 }
-.mode-grid {
+.mode-grid,
+.video-run-topline {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
   margin-top: 16px;
 }
-.mode-card {
+.mode-card,
+.active-character-card,
+.chapter-card {
   border: 1px solid rgba(255,255,255,.14);
   border-radius: 22px;
   padding: 22px;
   background: rgba(255,255,255,.045);
-  min-height: 230px;
+  min-height: 180px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.mode-card h3 {
+.mode-card h3,
+.active-character-card h3,
+.chapter-card h3 {
   font-size: clamp(28px, 5vw, 46px);
   line-height: .95;
   margin-bottom: 12px;
@@ -51,6 +70,44 @@
   background:
     radial-gradient(circle at top left, rgba(126,231,135,.15), transparent 18rem),
     rgba(255,255,255,.045);
+}
+.video-character-preview,
+.active-character-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid rgba(242,201,76,.32);
+  border-radius: 18px;
+  padding: 16px;
+  margin: 14px 0;
+  background: rgba(242,201,76,.07);
+}
+.character-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+}
+.video-character-preview span,
+.active-character-card span,
+.chapter-card span {
+  display: inline-flex;
+  margin: 4px 6px 0 0;
+  padding: 4px 7px;
+  border-radius: 999px;
+  border: 1px solid rgba(145,201,255,.28);
+  background: rgba(145,201,255,.08);
+  font-size: 11px;
+  font-weight: 900;
+  color: #d9efff;
+}
+.chapter-card {
+  border-color: rgba(145,201,255,.36);
 }
 .video-hud {
   display: grid;
@@ -103,10 +160,6 @@
   min-height: 420px;
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 10% 0%, rgba(242,201,76,.14), transparent 22rem),
-    radial-gradient(circle at 88% 20%, rgba(145,201,255,.13), transparent 20rem),
-    linear-gradient(180deg, #1a2130, #10131d);
 }
 .event-screen::after {
   content: "";
@@ -222,8 +275,12 @@
   min-height: 220px;
 }
 @media (max-width: 650px) {
-  .mode-card, .video-panel, .event-screen, .video-ending, .timeline-health-card {
+  .mode-card, .video-panel, .event-screen, .video-ending, .timeline-health-card, .active-character-card, .chapter-card {
     padding: 16px;
+  }
+  .video-character-preview,
+  .active-character-card {
+    grid-template-columns: 1fr;
   }
 }
 @media (prefers-reduced-motion: reduce) {
