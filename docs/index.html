@@ -3,25 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>2020s: The Board Game — Prototype v0.1</title>
+  <title>2020s: The Board Game — Prototype v0.2</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="hero">
-    <div class="badge">Prototype v0.1</div>
+    <div class="badge">Prototype v0.2 — Team Playtest Build</div>
     <h1>2020s: The Board Game</h1>
     <p class="tagline">Survive the decade without losing your mind, your money, or your grip on reality.</p>
     <div class="cta-row">
-      <a href="#rules" class="button">Read Rules</a>
+      <a href="#start" class="button">Start Here</a>
+      <a href="#print" class="button secondary">Print Kit</a>
       <a href="#cards" class="button secondary">View Cards</a>
       <a href="#playtest" class="button secondary">Playtest Checklist</a>
     </div>
   </header>
 
   <main>
-    <section class="warning">
-      <h2>Design Note</h2>
-      <p>This is a satirical, text-first prototype. The goal is to test the game loop before investing in polished art, Kickstarter assets, manufacturing files, or final lore.</p>
+    <section id="start" class="warning">
+      <h2>Start Here for Team Review</h2>
+      <p><strong>Playtest goal:</strong> run one rough 30–45 minute game with 3–4 players. Do not judge the art yet. Judge whether the turn loop is clear, funny, balanced, and worth playing again.</p>
+      <ol>
+        <li>Print the rules, board, characters, and card decks.</li>
+        <li>Pick a character and set Sanity, Money, and Influence.</li>
+        <li>Start in either Red Cycle or Blue Cycle.</li>
+        <li>Race from 2020 to 2030.</li>
+        <li>Submit feedback through GitHub Issues after the game.</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>Satire Disclaimer</h2>
+      <p>This game is a work of political and cultural satire. It is not intended as factual reporting, political instruction, or endorsement of any real-world theory, person, party, or organization.</p>
+    </section>
+
+    <section id="print" class="card">
+      <h2>Print-and-Play Kit</h2>
+      <p>Use these pages to run the first team playtest.</p>
+      <div class="cta-row left">
+        <a class="button" href="print-rules.html">Print Rules</a>
+        <a class="button" href="print-board.html">Print Board</a>
+        <a class="button" href="print-characters.html">Print Characters</a>
+        <a class="button" href="print-cards.html">Print Cards</a>
+      </div>
     </section>
 
     <section id="pitch" class="card">
@@ -65,14 +89,8 @@
       <h2>Board Cycle</h2>
       <p>The board is always in either <strong>Red Cycle</strong> or <strong>Blue Cycle</strong>. Political Flip cards can change the cycle. Some cards behave differently depending on the active cycle.</p>
       <div class="cycle-grid">
-        <div>
-          <h3>Red Cycle</h3>
-          <p>Populism, deregulation, market mania, culture war, anti-institutional energy.</p>
-        </div>
-        <div>
-          <h3>Blue Cycle</h3>
-          <p>Institutional control, safety policy, climate urgency, censorship accusations, bureaucracy.</p>
-        </div>
+        <div><h3>Red Cycle</h3><p>Populism, deregulation, market mania, culture war, anti-institutional energy.</p></div>
+        <div><h3>Blue Cycle</h3><p>Institutional control, safety policy, climate urgency, censorship accusations, bureaucracy.</p></div>
       </div>
     </section>
 
@@ -92,6 +110,17 @@
       <div id="deckSections"></div>
     </section>
 
+    <section id="versions" class="card">
+      <h2>Version Roadmap</h2>
+      <ul>
+        <li><strong>v0.1:</strong> text-first concept and rules spine.</li>
+        <li><strong>v0.2:</strong> team playtest build with print pages and feedback templates.</li>
+        <li><strong>v0.3:</strong> first revision after team playtest.</li>
+        <li><strong>v0.4:</strong> visual prototype with rough board and card art.</li>
+        <li><strong>v1.0:</strong> Kickstarter-facing preview build.</li>
+      </ul>
+    </section>
+
     <section id="playtest" class="card">
       <h2>First Playtest Scorecard</h2>
       <ul class="checklist">
@@ -108,7 +137,7 @@
   </main>
 
   <footer>
-    <p>2020s: The Board Game — Prototype v0.1. Built for private playtesting and team review.</p>
+    <p>2020s: The Board Game — Prototype v0.2. Built for team playtesting and review.</p>
   </footer>
 
   <script src="game-data.js"></script>
@@ -117,13 +146,7 @@
     GAME.characters.forEach(c => {
       const el = document.createElement("article");
       el.className = "mini-card";
-      el.innerHTML = `
-        <h3>${c.name}</h3>
-        <p class="stats">Sanity ${c.stats.sanity} · Money ${c.stats.money} · Influence ${c.stats.influence}</p>
-        <p><strong>Ability:</strong> ${c.ability}</p>
-        <p><strong>Weakness:</strong> ${c.weakness}</p>
-        <p class="flavor">“${c.flavor}”</p>
-      `;
+      el.innerHTML = `<h3>${c.name}</h3><p class="stats">Sanity ${c.stats.sanity} · Money ${c.stats.money} · Influence ${c.stats.influence}</p><p><strong>Ability:</strong> ${c.ability}</p><p><strong>Weakness:</strong> ${c.weakness}</p><p class="flavor">“${c.flavor}”</p>`;
       characterGrid.appendChild(el);
     });
 
