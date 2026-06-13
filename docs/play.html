@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2020s Digital Playtest Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="play.css">
+</head>
+<body>
+  <header class="hero compact-hero">
+    <div class="badge">Prototype v0.3 — Digital Playtest Assistant</div>
+    <h1>Playtest Assistant</h1>
+    <p class="tagline">Roll, move, draw cards, track stats, and export notes for a hot-seat test game.</p>
+    <div class="cta-row">
+      <a href="index.html" class="button secondary">Back to Prototype Hub</a>
+      <button id="resetGameBtn" class="button secondary" type="button">Reset Saved Game</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="setupPanel" class="card">
+      <h2>Setup</h2>
+      <p>Choose 2–6 players. This is a hot-seat prototype: one screen, pass-and-play, or screen share.</p>
+      <label for="playerCount"><strong>Number of players</strong></label>
+      <select id="playerCount">
+        <option value="2">2</option>
+        <option value="3" selected>3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <div id="playerSetup" class="setup-grid"></div>
+      <div class="cta-row left">
+        <button id="startGameBtn" class="button" type="button">Start Game</button>
+      </div>
+    </section>
+
+    <section id="gamePanel" class="game-layout hidden">
+      <section class="card control-panel">
+        <div class="status-row">
+          <div>
+            <p class="eyebrow">Current Player</p>
+            <h2 id="currentPlayerName">—</h2>
+          </div>
+          <div>
+            <p class="eyebrow">Board Cycle</p>
+            <button id="cycleBtn" class="cycle-btn" type="button">Red Cycle</button>
+          </div>
+        </div>
+
+        <div class="big-roll" id="lastRoll">—</div>
+        <p id="currentSpace">Space —</p>
+
+        <div class="cta-row left">
+          <button id="rollBtn" class="button" type="button">Roll & Move</button>
+          <button id="endTurnBtn" class="button secondary" type="button">End Turn</button>
+          <button id="exportBtn" class="button secondary" type="button">Export Notes</button>
+        </div>
+
+        <div id="activeCard" class="active-card hidden"></div>
+
+        <div class="manual-tools">
+          <h3>Manual Adjustments</h3>
+          <p>Use these when a card needs table judgment.</p>
+          <div class="tool-grid">
+            <button data-stat="sanity" data-delta="1">+ Sanity</button>
+            <button data-stat="sanity" data-delta="-1">− Sanity</button>
+            <button data-stat="money" data-delta="1">+ Money</button>
+            <button data-stat="money" data-delta="-1">− Money</button>
+            <button data-stat="influence" data-delta="1">+ Influence</button>
+            <button data-stat="influence" data-delta="-1">− Influence</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Players</h2>
+        <div id="playersGrid" class="players-grid"></div>
+      </section>
+
+      <section class="card full-width">
+        <h2>Turn Log</h2>
+        <textarea id="turnLog" readonly></textarea>
+      </section>
+    </section>
+
+    <section class="card">
+      <h2>Important Playtest Note</h2>
+      <p>This assistant does not replace human judgment. Some card effects intentionally require the table to decide who is affected, whether a joke landed, or how a special situation resolves. That is useful feedback, not a bug.</p>
+    </section>
+  </main>
+
+  <script src="game-data.js"></script>
+  <script src="play.js"></script>
+</body>
+</html>
