@@ -17,6 +17,7 @@ const videoEls = {
   hudTimeline: document.getElementById("hudTimeline"),
   timelineLabel: document.getElementById("timelineHealthLabel"),
   timelineFill: document.getElementById("timelineHealthFill"),
+  eventScreen: document.getElementById("eventScreen"),
   eventEyebrow: document.getElementById("eventEyebrow"),
   eventTitle: document.getElementById("eventTitle"),
   eventText: document.getElementById("eventText"),
@@ -178,7 +179,8 @@ function startVideoRun(mode) {
     timeline: mode === "utopia" ? 55 : 45,
     log: [`Started ${mode === "utopia" ? "Utopia Run" : "Dystopia Run"} as ${character.name}.`],
     ended: false,
-    endingTitle: null
+    endingTitle: null,
+    lastOutcome: null
   };
   saveVideoState();
   renderVideo();
@@ -192,14 +194,36 @@ function effectSummary(effects) {
   return Object.entries(effects).map(([key, value]) => `${key === "timeline" ? "Timeline" : key}: ${value > 0 ? "+" : ""}${value}`);
 }
 
+function timelineStatus() {
+  if (!videoState) return "Reality is buffering.";
+  if (videoState.timeline >= 80) return "Utopia window open.";
+  if (videoState.timeline >= 60) return "Timeline improving.";
+  if (videoState.timeline >= 40) return "Reality unstable but playable.";
+  if (videoState.timeline >= 20) return "Timeline emergency.";
+  return "Reality collapse imminent.";
+}
+
+function applyModeTilt(effects) {
+  const tilted = { ...effects };
+  if (videoState.mode === "utopia" && tilted.timeline > 0) tilted.timeline += 2;
+  if (videoState.mode === "dystopia" && tilted.timeline < 0) tilted.timeline -= 1;
+  return tilted;
+}
+
 function applyChoice(choice) {
   if (!videoState || videoState.ended) return;
   const event = currentEvent();
-  const effects = choice.effects || {};
+  const effects = applyModeTilt(choice.effects || {});
   videoState.sanity = clamp(videoState.sanity + (effects.sanity || 0), 0, 9);
   videoState.money = clamp(videoState.money + (effects.money || 0), 0, 9);
   videoState.influence = clamp(videoState.influence + (effects.influence || 0), 0, 9);
   videoState.timeline = clamp(videoState.timeline + (effects.timeline || 0), 0, 100);
+  videoState.lastOutcome = {
+    year: event.year,
+    label: choice.label,
+    text: choice.text,
+    effects
+  };
   videoState.log.unshift(`${event.year}: ${choice.label}. ${effectSummary(effects).join(", ")}.`);
 
   if (videoState.sanity <= 0 || videoState.money <= 0 || videoState.influence <= 0 || videoState.timeline <= 0) {
@@ -251,8 +275,30 @@ function renderHud() {
   videoEls.hudMoney.textContent = videoState.money;
   videoEls.hudInfluence.textContent = videoState.influence;
   videoEls.hudTimeline.textContent = `${videoState.timeline}%`;
-  videoEls.timelineLabel.textContent = `${videoState.timeline}%`;
+  videoEls.timelineLabel.textContent = `${videoState.timeline}% — ${timelineStatus()}`;
   videoEls.timelineFill.style.width = `${videoState.timeline}%`;
+}
+
+function renderOutcome() {
+  let outcome = document.getElementById("eventOutcome");
+  if (!outcome) {
+    outcome = document.createElement("div");
+    outcome.id = "eventOutcome";
+    outcome.className = "event-outcome hidden";
+    videoEls.eventScreen.insertBefore(outcome, videoEls.choiceGrid);
+  }
+
+  if (!videoState.lastOutcome || videoState.ended) {
+    outcome.classList.add("hidden");
+    outcome.innerHTML = "";
+    return;
+  }
+
+  outcome.classList.remove("hidden");
+  outcome.innerHTML = `
+    <strong>Previous choice:</strong> ${videoState.lastOutcome.label}<br>
+    <span>${effectSummary(videoState.lastOutcome.effects).join(" · ")}</span>
+  `;
 }
 
 function renderEvent() {
@@ -262,19 +308,26 @@ function renderEvent() {
     return;
   }
   videoEls.eventScreen.classList.remove("hidden");
+  videoEls.eventScreen.classList.remove("event-pulse");
+  void videoEls.eventScreen.offsetWidth;
+  videoEls.eventScreen.classList.add("event-pulse");
   videoEls.eventEyebrow.textContent = `${event.year} — ${videoState.mode === "utopia" ? "Repair Opportunity" : "Survival Event"}`;
   videoEls.eventTitle.textContent = event.title;
   videoEls.eventText.textContent = event.text;
-  videoEls.choiceGrid.innerHTML = event.choices.map((choice, index) => `
-    <button class="choice-card" type="button" data-choice="${index}">
-      <strong>${choice.label}</strong>
-      <span>${choice.text}</span>
-      <span class="choice-effects">${effectSummary(choice.effects).map(effect => `<span>${effect}</span>`).join("")}</span>
-    </button>
-  `).join("");
+  videoEls.choiceGrid.innerHTML = event.choices.map((choice, index) => {
+    const effects = applyModeTilt(choice.effects || {});
+    return `
+      <button class="choice-card" type="button" data-choice="${index}">
+        <strong>${choice.label}</strong>
+        <span>${choice.text}</span>
+        <span class="choice-effects">${effectSummary(effects).map(effect => `<span>${effect}</span>`).join("")}</span>
+      </button>
+    `;
+  }).join("");
   videoEls.choiceGrid.querySelectorAll(".choice-card").forEach(button => {
     button.addEventListener("click", () => applyChoice(event.choices[Number(button.dataset.choice)]));
   });
+  renderOutcome();
 }
 
 function renderEnding() {
