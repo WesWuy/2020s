@@ -5,6 +5,11 @@
   --utopia-green: #7ee787;
   --ink: #f7f0ff;
 }
+.event-art-slot {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 22px;
+}
 .art-frame {
   position: relative;
   min-height: 260px;
