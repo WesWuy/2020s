@@ -1,19 +1,15 @@
 // Prototype v0.9 Board Feel & Spectacle Pass.
-// Adds board icons, movement trails, landing moments, Copy This Moment, and a final broadcast panel.
+// Adds board icons, movement trails, landing moments, and a final broadcast panel.
 
 const SPECTACLE = {
   landingOverlay: document.getElementById("landingMomentOverlay"),
   landingEyebrow: document.getElementById("landingMomentEyebrow"),
   landingTitle: document.getElementById("landingMomentTitle"),
   landingText: document.getElementById("landingMomentText"),
-  closeLandingBtn: document.getElementById("closeLandingMomentBtn"),
-  copyLandingBtn: document.getElementById("copyLandingMomentBtn"),
-  copyMomentBtn: document.getElementById("copyMomentBtn")
+  closeLandingBtn: document.getElementById("closeLandingMomentBtn")
 };
 
 let pendingMovement = null;
-let latestMomentText = "The timeline is quiet. Suspiciously quiet.";
-let latestLandingText = latestMomentText;
 
 function boardIcon(space) {
   const type = space.type || "";
@@ -109,9 +105,6 @@ function showLandingMoment(move) {
   const player = state.players.find(p => p.id === move.playerId);
   if (!player || player.position === move.from) return;
   const space = getSpace(player.position);
-  const roll = state.lastRoll || player.position - move.from;
-  latestLandingText = `${player.name} rolled ${roll}, moved from Space ${move.from} to Space ${player.position}, and landed on ${space.name}. Effect: ${effectText(space)}.`;
-  latestMomentText = `${latestLandingText}\n\n2020s: The Board Game\nhttps://weswuy.github.io/2020s/play.html`;
 
   if (!SPECTACLE.landingOverlay) return;
   SPECTACLE.landingEyebrow.textContent = `${boardIcon(space)} Timeline Landing`;
@@ -122,20 +115,6 @@ function showLandingMoment(move) {
 
 function closeLandingMoment() {
   SPECTACLE.landingOverlay?.classList.add("hidden");
-}
-
-function copyMoment(text = latestMomentText) {
-  const copy = text || latestMomentText;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(copy).then(() => {
-      if (typeof showToast === "function") showToast("Moment copied.");
-    }).catch(() => prompt("Copy this moment:", copy));
-  } else {
-    prompt("Copy this moment:", copy);
-  }
-  SPECTACLE.copyMomentBtn?.classList.remove("moment-copied-pulse");
-  void SPECTACLE.copyMomentBtn?.offsetWidth;
-  SPECTACLE.copyMomentBtn?.classList.add("moment-copied-pulse");
 }
 
 function finalBroadcastText(winner, chaos) {
@@ -161,26 +140,14 @@ function renderFinalBroadcast() {
       <div><span>Reality Collapses</span><strong>${chaos?.realityCollapses || 0}</strong></div>
       <div><span>Button Presses</span><strong>${chaos?.doNotPresses || 0}</strong></div>
     </div>
-    <div class="share-actions">
-      <button id="copyBroadcastBtn" class="button secondary" type="button">Copy Final Broadcast</button>
-    </div>
   `;
   els.winnerPanel.appendChild(broadcast);
-  document.getElementById("copyBroadcastBtn")?.addEventListener("click", () => copyMoment(`${finalBroadcastText(winner, chaos)}\n\nhttps://weswuy.github.io/2020s/play.html`));
 }
 
 const originalSpectacleRenderBoard = renderBoard;
 renderBoard = function spectacleRenderBoard() {
   originalSpectacleRenderBoard();
   renderSpectacleBoard();
-};
-
-const originalSpectacleHandleCardDraw = handleCardDraw;
-handleCardDraw = function spectacleHandleCardDraw(deckName, player) {
-  originalSpectacleHandleCardDraw(deckName, player);
-  if (state.activeCard) {
-    latestMomentText = `${state.activeCard.player} drew ${state.activeCard.deckName}: ${state.activeCard.title}. Effect: ${state.activeCard.text}\n\n2020s: The Board Game\nhttps://weswuy.github.io/2020s/play.html`;
-  }
 };
 
 const originalSpectacleRender = render;
@@ -204,7 +171,5 @@ SPECTACLE.closeLandingBtn?.addEventListener("click", closeLandingMoment);
 SPECTACLE.landingOverlay?.addEventListener("click", event => {
   if (event.target === SPECTACLE.landingOverlay) closeLandingMoment();
 });
-SPECTACLE.copyLandingBtn?.addEventListener("click", () => copyMoment(latestMomentText));
-SPECTACLE.copyMomentBtn?.addEventListener("click", () => copyMoment(latestMomentText));
 
 render();
