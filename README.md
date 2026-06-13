@@ -1,6 +1,6 @@
 # 2020s: The Board Game
 
-**Prototype v0.5 — Entertainment Pass**
+**Prototype v0.6 — Social Loop Build**
 
 A satirical survival board game where players race from **2020 to 2030** while trying not to lose their **Sanity**, **Money**, or **Influence**.
 
@@ -18,7 +18,7 @@ https://weswuy.github.io/2020s/
 https://weswuy.github.io/2020s/play.html
 ```
 
-The digital playtest now includes a visible 40-space board, player tokens, character setup, dice movement, card reveals, card history, stat tracking, Red Cycle / Blue Cycle switching, a turn log, win state, exportable playtest notes, breaking-news ticker, dramatic card reveal overlay, stat meters, character flavor text, and improved ending screen.
+The digital playtest now includes a visible 40-space board, player tokens, character setup, dice movement, card reveals, card history, stat tracking, Red Cycle / Blue Cycle switching, a turn log, win state, exportable playtest notes, breaking-news ticker, dramatic card reveal overlay, stat meters, character flavor text, improved ending screen, shareable survival certificate, copyable result text, challenge message, downloadable result image, achievement badges, and a card-idea submission link.
 
 ## Printable Pages
 
@@ -29,7 +29,7 @@ The digital playtest now includes a visible 40-space board, player tokens, chara
 
 ## Playtest Goal
 
-Run one rough 30–45 minute game with 3–4 players. Do not judge final visuals yet. Judge whether the game is clear, funny, balanced, and worth playing again.
+Run one rough 30–45 minute game with 3–4 players. Do not judge final visuals yet. Judge whether the game is clear, funny, balanced, worth playing again, and worth sharing after the final result.
 
 ## Version Roadmap
 
@@ -38,5 +38,6 @@ Run one rough 30–45 minute game with 3–4 players. Do not judge final visuals
 - **v0.3:** hot-seat digital playtest assistant.
 - **v0.4:** digital board build with tokens, card history, and win state.
 - **v0.5:** entertainment pass with ticker, reveal overlay, stat meters, and stronger ending screen.
-- **v0.6:** first revision after team playtest.
+- **v0.6:** social loop build with shareable results, achievements, copy challenge, and downloadable certificate.
+- **v0.7:** daily chaos mode.
 - **v1.0:** public preview build.
