@@ -1,0 +1,104 @@
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: #302735;
+  color: #f5edf7;
+}
+.hidden { display: none !important; }
+.compact-hero { padding-top: 42px; padding-bottom: 34px; }
+.setup-grid, .players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+.setup-card, .player-card, .active-card {
+  background: #302735;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 16px;
+  padding: 16px;
+}
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.full-width { grid-column: 1 / -1; }
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+.eyebrow {
+  color: #c8b9ce;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.cycle-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.cycle-btn.red { background: #f2c94c; color: #17120b; }
+.cycle-btn.blue { background: #91c9ff; color: #071421; }
+.big-roll {
+  font-size: 88px;
+  font-weight: 900;
+  color: #f2c94c;
+  line-height: 1;
+  margin: 18px 0 8px;
+}
+.active-card {
+  margin-top: 18px;
+  border-color: #f2c94c;
+}
+.manual-tools {
+  margin-top: 18px;
+}
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.tool-grid button {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: transparent;
+  color: #f5edf7;
+  cursor: pointer;
+}
+.player-card.active-player {
+  border-color: #f2c94c;
+}
+.player-card.winner {
+  border-color: #7ee787;
+}
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding: 8px 0;
+}
+.stat-row strong { color: #f2c94c; }
+#turnLog {
+  width: 100%;
+  min-height: 320px;
+  border-radius: 14px;
+  padding: 14px;
+  background: #151217;
+  color: #f5edf7;
+  border: 1px solid rgba(255,255,255,.14);
+}
+@media (max-width: 850px) {
+  .game-layout { grid-template-columns: 1fr; }
+  .status-row { flex-direction: column; }
+  .tool-grid { grid-template-columns: repeat(2, 1fr); }
+}
