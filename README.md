@@ -1,6 +1,6 @@
 # 2020s: The Board Game
 
-**Prototype v0.4 — Digital Board Build**
+**Prototype v0.5 — Entertainment Pass**
 
 A satirical survival board game where players race from **2020 to 2030** while trying not to lose their **Sanity**, **Money**, or **Influence**.
 
@@ -18,7 +18,7 @@ https://weswuy.github.io/2020s/
 https://weswuy.github.io/2020s/play.html
 ```
 
-The digital playtest now includes a visible 40-space board, player tokens, character setup, dice movement, card reveals, card history, stat tracking, Red Cycle / Blue Cycle switching, a turn log, win state, and exportable playtest notes.
+The digital playtest now includes a visible 40-space board, player tokens, character setup, dice movement, card reveals, card history, stat tracking, Red Cycle / Blue Cycle switching, a turn log, win state, exportable playtest notes, breaking-news ticker, dramatic card reveal overlay, stat meters, character flavor text, and improved ending screen.
 
 ## Printable Pages
 
@@ -37,5 +37,6 @@ Run one rough 30–45 minute game with 3–4 players. Do not judge final visuals
 - **v0.2:** team playtest build with print pages and feedback templates.
 - **v0.3:** hot-seat digital playtest assistant.
 - **v0.4:** digital board build with tokens, card history, and win state.
-- **v0.5:** first revision after team playtest.
+- **v0.5:** entertainment pass with ticker, reveal overlay, stat meters, and stronger ending screen.
+- **v0.6:** first revision after team playtest.
 - **v1.0:** public preview build.
