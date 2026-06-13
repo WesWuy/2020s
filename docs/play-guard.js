@@ -11,6 +11,13 @@ adjustStat = function guardedAdjustStat(player, stat, delta, reason = "GM correc
     return;
   }
 
+  const ok = confirm(`Use Game Master correction?\n\n${player.name}: ${stat} ${delta > 0 ? "+" : ""}${delta}\n\nThese tools are for mistake correction or table-ruling card effects only.`);
+  if (!ok) {
+    setSummary("Game Master correction cancelled.");
+    render();
+    return;
+  }
+
   log(`GM correction used for ${player.name}: ${stat} ${delta > 0 ? "+" : ""}${delta}.`);
   return originalAdjustStat(player, stat, delta, reason);
 };
