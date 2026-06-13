@@ -9,9 +9,9 @@
 </head>
 <body>
   <header class="hero compact-hero">
-    <div class="badge">Prototype v0.3 — Digital Playtest Assistant</div>
-    <h1>Playtest Assistant</h1>
-    <p class="tagline">Roll, move, draw cards, track stats, and export notes for a hot-seat test game.</p>
+    <div class="badge">Prototype v0.4 — Digital Board Build</div>
+    <h1>2020s: Digital Playtest</h1>
+    <p class="tagline">A hot-seat playable test with board spaces, tokens, card reveals, stat tracking, and exportable notes.</p>
     <div class="cta-row">
       <a href="index.html" class="button secondary">Back to Prototype Hub</a>
       <button id="resetGameBtn" class="button secondary" type="button">Reset Saved Game</button>
@@ -21,7 +21,7 @@
   <main>
     <section id="setupPanel" class="card">
       <h2>Setup</h2>
-      <p>Choose 2–6 players. This is a hot-seat prototype: one screen, pass-and-play, or screen share.</p>
+      <p>Choose 2–6 players. This is still a hot-seat prototype: one screen, pass-and-play, or screen share.</p>
       <label for="playerCount"><strong>Number of players</strong></label>
       <select id="playerCount">
         <option value="2">2</option>
@@ -36,52 +36,75 @@
       </div>
     </section>
 
-    <section id="gamePanel" class="game-layout hidden">
-      <section class="card control-panel">
-        <div class="status-row">
+    <section id="gamePanel" class="hidden">
+      <section id="winnerPanel" class="winner-panel hidden"></section>
+
+      <section class="card board-card">
+        <div class="board-header">
           <div>
-            <p class="eyebrow">Current Player</p>
-            <h2 id="currentPlayerName">—</h2>
+            <p class="eyebrow">Board</p>
+            <h2>Timeline Track: 2020 → 2030</h2>
           </div>
           <div>
             <p class="eyebrow">Board Cycle</p>
             <button id="cycleBtn" class="cycle-btn" type="button">Red Cycle</button>
           </div>
         </div>
+        <div id="boardTrack" class="digital-board"></div>
+      </section>
 
-        <div class="big-roll" id="lastRoll">—</div>
-        <p id="currentSpace">Space —</p>
-
-        <div class="cta-row left">
-          <button id="rollBtn" class="button" type="button">Roll & Move</button>
-          <button id="endTurnBtn" class="button secondary" type="button">End Turn</button>
-          <button id="exportBtn" class="button secondary" type="button">Export Notes</button>
-        </div>
-
-        <div id="activeCard" class="active-card hidden"></div>
-
-        <div class="manual-tools">
-          <h3>Manual Adjustments</h3>
-          <p>Use these when a card needs table judgment.</p>
-          <div class="tool-grid">
-            <button data-stat="sanity" data-delta="1">+ Sanity</button>
-            <button data-stat="sanity" data-delta="-1">− Sanity</button>
-            <button data-stat="money" data-delta="1">+ Money</button>
-            <button data-stat="money" data-delta="-1">− Money</button>
-            <button data-stat="influence" data-delta="1">+ Influence</button>
-            <button data-stat="influence" data-delta="-1">− Influence</button>
+      <section class="game-layout">
+        <section class="card control-panel">
+          <div class="status-row">
+            <div>
+              <p class="eyebrow">Current Player</p>
+              <h2 id="currentPlayerName">—</h2>
+            </div>
+            <div>
+              <p class="eyebrow">Last Roll</p>
+              <div class="big-roll" id="lastRoll">—</div>
+            </div>
           </div>
-        </div>
-      </section>
 
-      <section class="card">
-        <h2>Players</h2>
-        <div id="playersGrid" class="players-grid"></div>
-      </section>
+          <p id="currentSpace" class="current-space">Space —</p>
+          <div id="turnSummary" class="turn-summary">Start the game to begin.</div>
 
-      <section class="card full-width">
-        <h2>Turn Log</h2>
-        <textarea id="turnLog" readonly></textarea>
+          <div class="cta-row left">
+            <button id="rollBtn" class="button" type="button">Roll & Move</button>
+            <button id="endTurnBtn" class="button secondary" type="button">End Turn</button>
+            <button id="exportBtn" class="button secondary" type="button">Export Notes</button>
+          </div>
+
+          <div id="activeCard" class="active-card hidden"></div>
+
+          <div class="manual-tools">
+            <h3>Manual Adjustments</h3>
+            <p>Use these when a card needs table judgment.</p>
+            <div class="tool-grid">
+              <button data-stat="sanity" data-delta="1">+ Sanity</button>
+              <button data-stat="sanity" data-delta="-1">− Sanity</button>
+              <button data-stat="money" data-delta="1">+ Money</button>
+              <button data-stat="money" data-delta="-1">− Money</button>
+              <button data-stat="influence" data-delta="1">+ Influence</button>
+              <button data-stat="influence" data-delta="-1">− Influence</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Players</h2>
+          <div id="playersGrid" class="players-grid"></div>
+        </section>
+
+        <section class="card">
+          <h2>Card History</h2>
+          <div id="cardHistory" class="card-history"></div>
+        </section>
+
+        <section class="card">
+          <h2>Turn Log</h2>
+          <textarea id="turnLog" readonly></textarea>
+        </section>
       </section>
     </section>
 
