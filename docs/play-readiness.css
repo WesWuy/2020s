@@ -1,0 +1,99 @@
+.readiness-panel,
+.readiness-status-panel,
+.feedback-panel {
+  border: 1px solid rgba(145,201,255,.36);
+  border-radius: 18px;
+  padding: 16px;
+  margin: 16px 0;
+  background:
+    radial-gradient(circle at top left, rgba(145,201,255,.13), transparent 16rem),
+    rgba(255,255,255,.045);
+}
+.readiness-panel h3,
+.feedback-panel h3 {
+  margin: 4px 0 8px;
+}
+.quickstart-panel {
+  border-color: rgba(242,201,76,.44);
+  background:
+    radial-gradient(circle at top left, rgba(242,201,76,.18), transparent 16rem),
+    rgba(255,255,255,.045);
+}
+.how-to-panel {
+  border-color: rgba(126,231,135,.36);
+}
+.chaos-settings-panel select,
+.readiness-panel select {
+  width: min(420px, 100%);
+  margin: 8px 0;
+}
+.quick-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 8px;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: quickRules;
+}
+.quick-rules li {
+  counter-increment: quickRules;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  padding: 10px;
+  background: rgba(255,255,255,.04);
+}
+.quick-rules li::before {
+  content: counter(quickRules) ". ";
+  color: #f2c94c;
+  font-weight: 1000;
+}
+.known-notes-panel ul {
+  margin-bottom: 0;
+}
+.readiness-status-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+.readiness-status-panel strong {
+  color: #91c9ff;
+}
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.card-tag {
+  border: 1px solid rgba(145,201,255,.35);
+  border-radius: 999px;
+  padding: 4px 8px;
+  background: rgba(145,201,255,.1);
+  color: #d9efff;
+  font-size: 11px;
+  font-weight: 900;
+}
+.feedback-panel {
+  border-color: rgba(242,201,76,.44);
+  background:
+    radial-gradient(circle at top left, rgba(242,201,76,.14), transparent 18rem),
+    rgba(255,255,255,.045);
+}
+.feedback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.feedback-actions a {
+  text-decoration: none;
+}
+@media (max-width: 650px) {
+  .feedback-actions a,
+  .readiness-panel .button {
+    width: 100%;
+    text-align: center;
+  }
+}
