@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2020s: The Board Game — Prototype v0.1</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="badge">Prototype v0.1</div>
+    <h1>2020s: The Board Game</h1>
+    <p class="tagline">Survive the decade without losing your mind, your money, or your grip on reality.</p>
+    <div class="cta-row">
+      <a href="#rules" class="button">Read Rules</a>
+      <a href="#cards" class="button secondary">View Cards</a>
+      <a href="#playtest" class="button secondary">Playtest Checklist</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="warning">
+      <h2>Design Note</h2>
+      <p>This is a satirical, text-first prototype. The goal is to test the game loop before investing in polished art, Kickstarter assets, manufacturing files, or final lore.</p>
+    </section>
+
+    <section id="pitch" class="card">
+      <h2>Core Pitch</h2>
+      <p><strong>2020s: The Board Game</strong> is a chaotic satirical race from 2020 to 2030. Players survive pandemics, market shocks, media meltdowns, political flips, billionaire schemes, tech panic, culture wars, and reality itself becoming negotiable.</p>
+      <p>First player to reach 2030 with at least <strong>1 Sanity</strong>, <strong>1 Money</strong>, and <strong>1 Influence</strong> wins.</p>
+    </section>
+
+    <section id="rules" class="grid two">
+      <article class="card">
+        <h2>Core Stats</h2>
+        <ul>
+          <li><strong>Sanity:</strong> emotional resilience and resistance to doomscrolling.</li>
+          <li><strong>Money:</strong> cash, assets, canned goods, and general economic survival.</li>
+          <li><strong>Influence:</strong> clout, institutional power, followers, or narrative control.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>Turn Order</h2>
+        <ol>
+          <li>Roll one die.</li>
+          <li>Move forward that many spaces.</li>
+          <li>Resolve the board space.</li>
+          <li>Draw a card if required.</li>
+          <li>Apply active effects.</li>
+          <li>Check if a stat hit zero.</li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>When a Stat Hits Zero</h2>
+      <div class="cycle-grid">
+        <div><h3>Sanity = 0</h3><p>You enter <strong>Doomscroll Mode</strong>. Skip your next turn unless another player gives you 1 Influence.</p></div>
+        <div><h3>Money = 0</h3><p>You are <strong>Broke</strong>. Move backward 2 spaces and gain 1 Sanity because expectations are now lower.</p></div>
+        <div><h3>Influence = 0</h3><p>You are <strong>Shadowbanned</strong>. You may not gain Influence until your next turn.</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Board Cycle</h2>
+      <p>The board is always in either <strong>Red Cycle</strong> or <strong>Blue Cycle</strong>. Political Flip cards can change the cycle. Some cards behave differently depending on the active cycle.</p>
+      <div class="cycle-grid">
+        <div>
+          <h3>Red Cycle</h3>
+          <p>Populism, deregulation, market mania, culture war, anti-institutional energy.</p>
+        </div>
+        <div>
+          <h3>Blue Cycle</h3>
+          <p>Institutional control, safety policy, climate urgency, censorship accusations, bureaucracy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="characters" class="card">
+      <h2>Characters</h2>
+      <div class="deck-grid" id="characterGrid"></div>
+    </section>
+
+    <section id="board" class="card">
+      <h2>40-Space Prototype Board</h2>
+      <div class="board-grid" id="boardGrid"></div>
+    </section>
+
+    <section id="cards" class="card">
+      <h2>Prototype Cards</h2>
+      <p>Use these as index cards for the first playtest. The four main decks total 60 cards. Final Reckoning cards are optional endgame pressure cards.</p>
+      <div id="deckSections"></div>
+    </section>
+
+    <section id="playtest" class="card">
+      <h2>First Playtest Scorecard</h2>
+      <ul class="checklist">
+        <li>Did people understand the rules within 5 minutes?</li>
+        <li>Did the table laugh at least 5 times?</li>
+        <li>Did all three stats matter?</li>
+        <li>Did anyone feel stuck or eliminated too early?</li>
+        <li>Did the political cycle mechanic change decisions?</li>
+        <li>Was the ending satisfying?</li>
+        <li>Did any card feel mean without being funny?</li>
+        <li>Did anyone immediately ask to play again?</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>2020s: The Board Game — Prototype v0.1. Built for private playtesting and team review.</p>
+  </footer>
+
+  <script src="game-data.js"></script>
+  <script>
+    const characterGrid = document.getElementById("characterGrid");
+    GAME.characters.forEach(c => {
+      const el = document.createElement("article");
+      el.className = "mini-card";
+      el.innerHTML = `
+        <h3>${c.name}</h3>
+        <p class="stats">Sanity ${c.stats.sanity} · Money ${c.stats.money} · Influence ${c.stats.influence}</p>
+        <p><strong>Ability:</strong> ${c.ability}</p>
+        <p><strong>Weakness:</strong> ${c.weakness}</p>
+        <p class="flavor">“${c.flavor}”</p>
+      `;
+      characterGrid.appendChild(el);
+    });
+
+    const boardGrid = document.getElementById("boardGrid");
+    GAME.board.forEach(space => {
+      const el = document.createElement("div");
+      el.className = "board-space";
+      el.innerHTML = `<span class="num">${space.n}</span><strong>${space.name}</strong><small>${space.type}</small>`;
+      boardGrid.appendChild(el);
+    });
+
+    const deckSections = document.getElementById("deckSections");
+    Object.entries(GAME.decks).forEach(([deckName, cards]) => {
+      const section = document.createElement("section");
+      section.className = "deck-section";
+      section.innerHTML = `<h3>${deckName} <span class="count">${cards.length} cards</span></h3><div class="deck-grid"></div>`;
+      const grid = section.querySelector(".deck-grid");
+      cards.forEach(card => {
+        const el = document.createElement("article");
+        el.className = "mini-card";
+        el.innerHTML = `<h4>${card.title}</h4><p>${card.text}</p>`;
+        grid.appendChild(el);
+      });
+      deckSections.appendChild(section);
+    });
+  </script>
+</body>
+</html>
