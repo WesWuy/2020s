@@ -117,6 +117,13 @@
   background-size: 100% 8px;
   opacity: .5;
 }
+.event-pulse {
+  animation: eventPulse .32s ease;
+}
+@keyframes eventPulse {
+  from { transform: translateY(8px); opacity: .8; }
+  to { transform: translateY(0); opacity: 1; }
+}
 .event-screen h2 {
   font-size: clamp(38px, 7vw, 76px);
   line-height: .92;
@@ -126,6 +133,18 @@
 .event-screen p:not(.eyebrow) {
   font-size: 19px;
   max-width: 840px;
+}
+.event-outcome {
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(242,201,76,.36);
+  border-radius: 16px;
+  padding: 12px;
+  margin: 18px 0 4px;
+  background: rgba(242,201,76,.08);
+}
+.event-outcome strong {
+  color: #f2c94c;
 }
 .choice-grid {
   display: grid;
@@ -206,4 +225,7 @@
   .mode-card, .video-panel, .event-screen, .video-ending, .timeline-health-card {
     padding: 16px;
   }
+}
+@media (prefers-reduced-motion: reduce) {
+  .event-pulse { animation: none !important; }
 }
