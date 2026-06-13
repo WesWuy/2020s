@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2020s Print Board</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="print-page">
+  <main>
+    <section class="card">
+      <h1>2020s: The Board Game</h1>
+      <p><strong>Printable 40-Space Prototype Board</strong></p>
+      <p>Use this as the track for the first paper playtest.</p>
+    </section>
+
+    <section class="card">
+      <h2>Board Track</h2>
+      <div class="board-grid print-board" id="boardGrid"></div>
+    </section>
+
+    <section class="card no-print-controls">
+      <button onclick="window.print()" class="button">Print Board</button>
+      <a href="index.html" class="button secondary">Back to Prototype</a>
+    </section>
+  </main>
+
+  <script src="game-data.js"></script>
+  <script>
+    const boardGrid = document.getElementById("boardGrid");
+    GAME.board.forEach(space => {
+      const el = document.createElement("div");
+      el.className = "board-space";
+      el.innerHTML = `<span class="num">${space.n}</span><strong>${space.name}</strong><small>${space.type}</small>`;
+      boardGrid.appendChild(el);
+    });
+  </script>
+</body>
+</html>
