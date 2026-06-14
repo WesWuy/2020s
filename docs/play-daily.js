@@ -1,4 +1,4 @@
-// Prototype v0.7 Daily Chaos Mode.
+// Prototype v0.17 Daily Chaos Mode.
 // Generates one deterministic daily challenge from the local date. No backend required.
 
 const DAILY = {
@@ -16,8 +16,8 @@ const DAILY_TEMPLATES = [
     name: "Influencer Apocalypse",
     character: "The Influencer",
     cycle: "Blue Cycle",
-    ruleId: "mediaDoubleFirst",
-    rule: "The first Media Meltdown draw triggers one bonus Media Meltdown draw.",
+    ruleId: "scandalDoubleFirst",
+    rule: "The first Scandal draw triggers one bonus Scandal draw.",
     goalId: "influence5",
     goal: "Survive with Influence 5+."
   },
@@ -26,13 +26,13 @@ const DAILY_TEMPLATES = [
     character: "The Prepper",
     cycle: "Red Cycle",
     ruleId: "marketChaos",
-    rule: "Market Shock spaces draw Global Chaos instead of acting normal.",
-    goalId: "sanity3",
-    goal: "Survive with Sanity 3+."
+    rule: "Market Crash spaces draw Headline instead of acting normal.",
+    goalId: "freedom4",
+    goal: "Survive with Freedom 4+."
   },
   {
     name: "Crypto Winter Reversal",
-    character: "Crypto Bro",
+    character: "The Crypto Bro",
     cycle: "Red Cycle",
     ruleId: "cryptoWinter",
     rule: "Money gains and losses from cards are doubled.",
@@ -40,31 +40,31 @@ const DAILY_TEMPLATES = [
     goal: "Survive with Money 4+."
   },
   {
-    name: "Bureaucratic Nightmare",
-    character: "The Bureaucrat",
+    name: "Remote Work Forever-ish",
+    character: "The Remote Worker",
     cycle: "Blue Cycle",
-    ruleId: "politicalTax",
-    rule: "Every Political Flip costs the current player 1 Sanity after resolving.",
-    goalId: "sanity4",
-    goal: "Survive with Sanity 4+."
-  },
-  {
-    name: "Podcaster Heat Check",
-    character: "The Podcaster",
-    cycle: "Red Cycle",
-    ruleId: "hiddenHurts",
-    rule: "Hidden Hand cards also cost the current player 1 Sanity.",
-    goalId: "threeCards",
-    goal: "Draw at least 3 cards and survive."
-  },
-  {
-    name: "Wellness Under Pressure",
-    character: "The Wellness Guru",
-    cycle: "Blue Cycle",
-    ruleId: "globalHurts",
-    rule: "Global Chaos cards hit the current player with 1 extra Sanity loss.",
+    ruleId: "headlinePressure",
+    rule: "Headline cards hit the current player with 1 extra Sanity loss.",
     goalId: "sanity5",
     goal: "Survive with Sanity 5+."
+  },
+  {
+    name: "Activist Pressure Cooker",
+    character: "The Activist",
+    cycle: "Blue Cycle",
+    ruleId: "controlTax",
+    rule: "Every Scandal costs the current player 1 Freedom after resolving.",
+    goalId: "influence5",
+    goal: "Survive with Influence 5+."
+  },
+  {
+    name: "Normie Final Exam",
+    character: "The Normie",
+    cycle: "Red Cycle",
+    ruleId: "conspiracyHurts",
+    rule: "Conspiracy cards also cost the current player 1 Sanity.",
+    goalId: "balanced",
+    goal: "Survive with all four stats at 3+."
   }
 ];
 
@@ -115,20 +115,7 @@ function startDailyChaos() {
 
   for (let i = 0; i < count; i++) {
     const characterIndex = i === 0 ? requiredIndex : (requiredIndex + i) % GAME.characters.length;
-    const character = GAME.characters[characterIndex];
-    players.push({
-      id: i,
-      token: TOKEN_LABELS[i] || String(i + 1),
-      name: i === 0 ? "Daily Challenger" : `Rival ${i + 1}`,
-      characterIndex,
-      position: 1,
-      sanity: character.stats.sanity,
-      money: character.stats.money,
-      influence: character.stats.influence,
-      skipNextTurn: false,
-      shadowbanned: false,
-      winner: false
-    });
+    players.push(createPlayerFromCharacter(i, i === 0 ? "Daily Challenger" : `Rival ${i + 1}`, characterIndex));
   }
 
   state = {
@@ -143,8 +130,17 @@ function startDailyChaos() {
     players,
     cardHistory: [],
     log: [],
+    meters: { panic: 0, control: 0, market: 0 },
+    meterCollapses: { panic: 0, control: 0, market: 0 },
+    playtest: { choicesPresented: 0, choicesResolved: 0, npcEvents: 0, cycleSwitches: 0 },
     dailyChallenge: challenge
   };
+
+  players.forEach(player => {
+    const character = GAME.characters[player.characterIndex];
+    const survivalCount = character.name === "The Prepper" ? 2 : 1;
+    for (let i = 0; i < survivalCount; i++) dealSurvivalCard(player, "daily opening hand");
+  });
 
   log(`Daily Chaos started: ${challenge.name} (${challenge.dateKey}). Required character: ${challenge.character}. Rule: ${challenge.rule}`);
   saveState();
@@ -200,11 +196,10 @@ function renderDailyBanner() {
 function evaluateDailyGoal(winner, challenge) {
   if (!winner || !challenge) return false;
   if (challenge.goalId === "influence5") return winner.influence >= 5;
-  if (challenge.goalId === "sanity3") return winner.sanity >= 3;
+  if (challenge.goalId === "freedom4") return winner.freedom >= 4;
   if (challenge.goalId === "money4") return winner.money >= 4;
-  if (challenge.goalId === "sanity4") return winner.sanity >= 4;
   if (challenge.goalId === "sanity5") return winner.sanity >= 5;
-  if (challenge.goalId === "threeCards") return (state.cardHistory || []).length >= 3;
+  if (challenge.goalId === "balanced") return STAT_KEYS.every(stat => winner[stat] >= 3);
   return true;
 }
 
@@ -231,7 +226,7 @@ function renderDailyResult() {
   els.winnerPanel.appendChild(result);
 
   document.getElementById("copyDailyResultBtn")?.addEventListener("click", () => {
-    const text = `${winner.name} completed Daily Chaos: ${challenge.name}\nResult: ${passed ? "Goal cleared" : "Survived but missed the goal"}\nRequired Character: ${challenge.character}\nGoal: ${challenge.goal}\n\nTry today's challenge:\nhttps://weswuy.github.io/2020s/play.html`;
+    const text = `${winner.name} completed Daily Chaos: ${challenge.name}\nResult: ${passed ? "Goal cleared" : "Survived but missed the goal"}\nRequired Character: ${challenge.character}\nGoal: ${challenge.goal}\nStats: Money ${winner.money}, Sanity ${winner.sanity}, Freedom ${winner.freedom}, Influence ${winner.influence}\n\nTry today's challenge:\nhttps://weswuy.github.io/2020s/play.html`;
     if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => showToast("Daily result copied."));
     else prompt("Copy this Daily Result:", text);
   });
@@ -243,27 +238,27 @@ handleCardDraw = function dailyHandleCardDraw(deckName, player) {
   const challenge = getActiveDaily();
   if (!challenge) return;
 
-  if (challenge.ruleId === "mediaDoubleFirst" && deckName === "Media Meltdown" && !challenge.ruleUsed) {
+  if (challenge.ruleId === "scandalDoubleFirst" && resolveDeckName(deckName) === "Scandal" && !challenge.ruleUsed) {
     challenge.ruleUsed = true;
-    log("Daily Chaos rule triggered: bonus Media Meltdown draw.");
-    setSummary("Daily Chaos triggered: bonus Media Meltdown draw.");
+    log("Daily Chaos rule triggered: bonus Scandal draw.");
+    setSummary("Daily Chaos triggered: bonus Scandal draw.");
     saveState();
-    originalDailyHandleCardDraw("Media Meltdown", player);
+    originalDailyHandleCardDraw("Scandal", player);
   }
 
-  if (challenge.ruleId === "politicalTax" && deckName === "Political Flip") {
-    quickAdjust(player, "sanity", -1, "Daily Chaos: Political Tax");
-    setSummary(`${player.name} paid the Daily Chaos Political Tax: -1 Sanity.`);
+  if (challenge.ruleId === "controlTax" && resolveDeckName(deckName) === "Scandal") {
+    quickAdjust(player, "freedom", -1, "Daily Chaos: Control Tax");
+    setSummary(`${player.name} paid the Daily Chaos Control Tax: -1 Freedom.`);
   }
 
-  if (challenge.ruleId === "hiddenHurts" && deckName === "Hidden Hand") {
-    quickAdjust(player, "sanity", -1, "Daily Chaos: Hidden Hand backlash");
-    setSummary(`${player.name} took Hidden Hand backlash: -1 Sanity.`);
+  if (challenge.ruleId === "conspiracyHurts" && resolveDeckName(deckName) === "Conspiracy") {
+    quickAdjust(player, "sanity", -1, "Daily Chaos: Conspiracy backlash");
+    setSummary(`${player.name} took Conspiracy backlash: -1 Sanity.`);
   }
 
-  if (challenge.ruleId === "globalHurts" && deckName === "Global Chaos") {
-    quickAdjust(player, "sanity", -1, "Daily Chaos: Global pressure");
-    setSummary(`${player.name} took extra Global Chaos pressure: -1 Sanity.`);
+  if (challenge.ruleId === "headlinePressure" && resolveDeckName(deckName) === "Headline") {
+    quickAdjust(player, "sanity", -1, "Daily Chaos: Headline pressure");
+    setSummary(`${player.name} took extra Headline pressure: -1 Sanity.`);
   }
 
   render();
@@ -283,10 +278,11 @@ quickAdjust = function dailyQuickAdjust(player, stat, delta, reason) {
 const originalDailyApplySimpleSpace = applySimpleSpace;
 applySimpleSpace = function dailyApplySimpleSpace(space, player) {
   const challenge = getActiveDaily();
-  if (challenge?.ruleId === "marketChaos" && space.name.includes("Market Shock")) {
-    log("Daily Chaos rule triggered: Market Shock became Global Chaos.");
-    setSummary("Daily Chaos: Market Shock became Global Chaos.");
-    return handleCardDraw("Global Chaos", player);
+  const type = space.space_type || space.type || "";
+  if (challenge?.ruleId === "marketChaos" && type === "Market Crash") {
+    log("Daily Chaos rule triggered: Market Crash became Headline.");
+    setSummary("Daily Chaos: Market Crash became Headline.");
+    return handleCardDraw("Headline", player);
   }
   return originalDailyApplySimpleSpace(space, player);
 };
