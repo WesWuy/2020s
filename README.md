@@ -1,6 +1,6 @@
 # 2020s: The Board Game
 
-**Prototype v0.16 — Playability Pass**
+**Prototype v0.17 — Browser Integration Pass**
 
 A satirical survival board game and browser game prototype where players race from **2020 to 2030** while trying not to lose their **Sanity**, **Money**, **Freedom**, or **Influence**.
 
@@ -34,38 +34,56 @@ The visual language is **satirical retro-futurist news broadcast meets comic-boo
 https://weswuy.github.io/2020s/play.html
 ```
 
-The board game digital playtest includes a visible board, player tokens, character setup, Quick Start Chaos, How to Play in 60 Seconds, Chaos Level tuning, card tags, end-screen feedback links, dice movement, card reveals, card history, stat tracking, Red Cycle / Blue Cycle switching, a turn log, win state, exportable playtest notes, breaking-news ticker, dramatic card reveal overlay, stat meters, character flavor text, improved ending screen, shareable survival certificate, downloadable result image, achievement badges, Daily Chaos Mode, Chaos Engine, board icons, movement trails, landing moments, Final Timeline Broadcast, prototype cards, table-action prompts, audience-vote cards, conspiracy-corkboard moments, and outrageous ending titles.
+The board game digital playtest now runs the **v0.17 browser integration pass**. The live play page keeps the existing comic-broadcast UI while wiring in the v0.16 tabletop prototype data: six archetypes, a 60-space 2020-to-2030 board path, 80 structured prototype cards, Freedom as a fourth player stat, choice-card prompts, Panic / Control / Market collapse meters, NPC Mode, Red Cycle / Blue Cycle board modifiers, Daily Chaos updates, and richer playtest exports.
 
-## v0.16 Playability Pass
+## v0.17 Browser Integration Pass
 
-v0.16 adds a tabletop-first gameplay layer for prototype testing.
+v0.17 turns the v0.16 tabletop layer into a browser-playable prototype.
 
-New files:
+Integrated browser files:
 
 ```text
-docs/playability-pass-v0.16.md
-rules/rules-v0.16.md
-rules/quickstart-v0.16.md
+docs/v017-data-loader.js
+docs/play.html
+docs/play.js
+docs/play-restart.js
+docs/play-daily.js
+docs/play-share.js
+docs/play-content.js
+```
+
+Source prototype data remains in:
+
+```text
 data/prototype/characters-v0.16.csv
 data/prototype/card-decks-v0.16.csv
 data/prototype/board-spaces-v0.16.csv
-playtest/playtest-feedback-v0.16.md
 ```
 
-### What v0.16 is for
+### What v0.17 adds
 
-The previous pass made the game look and feel more like a comic-broadcast chaos machine. This pass is about proving the game is actually playable.
+- Loads the v0.16 tabletop dataset into the browser through `docs/v017-data-loader.js`
+- Replaces the old 40-space browser board with the 60-space 2020-to-2030 board path
+- Replaces the old deck naming with Headline, Conspiracy, Survival, and Scandal decks
+- Adds Freedom as the fourth tracked player stat
+- Adds six v0.16 character archetypes
+- Adds opening Survival card hands, with The Prepper starting with two
+- Adds `choice_required` card prompts and choice-resolution logging
+- Adds Panic, Control, and Market meters that collapse at 6
+- Adds NPC Mode when a player hits zero in any stat
+- Adds Red Cycle / Blue Cycle board-space modifier handling
+- Adds richer end-game summary fields for playtesting
+- Updates Daily Chaos, sharing, endings, achievements, and restart handling for the four-stat rules
 
-The focus is:
+## Known v0.17 Constraints
 
-- Faster rules explanation
-- More meaningful player choices
-- Six asymmetric character archetypes
-- 80 structured prototype cards
-- A 60-space board path from 2020 to 2030
-- Stronger Panic / Control / Market chaos meter usage
-- Better Red Cycle / Blue Cycle tabletop handling
-- Clearer playtest feedback capture
+This is a browser integration pass, not a finished QA pass.
+
+- Complex choices are surfaced with buttons and logged, but many nuanced effects still rely on table judgment or GM correction tools.
+- Survival cards can be held and counted, but not every held-card use has a dedicated UI button yet.
+- The Normie reroll/redraw power is documented in the character data but still needs a dedicated browser control.
+- The browser loader compiles the v0.16 CSV data into `docs/v017-data-loader.js` for stable GitHub Pages loading rather than dynamically fetching root CSV files at runtime.
+- The existing spectacle/chaos modules are preserved, but they should be tested against the new four-stat state model.
 
 ## Core Tabletop Loop
 
@@ -92,13 +110,14 @@ The most important question:
 
 ## Recommended Next Claude Code Tasks
 
-1. Load `data/prototype/characters-v0.16.csv` into character selection.
-2. Load `data/prototype/card-decks-v0.16.csv` into the board game card engine.
-3. Load `data/prototype/board-spaces-v0.16.csv` into the board path data model.
-4. Add visible choice prompts for cards where `choice_required` is true.
-5. Add chaos meter collapse states at 6.
-6. Add character powers and weaknesses.
-7. Add v0.16 playtest feedback export.
+1. Run a v0.18 QA / hardening pass on the live browser game.
+2. Simulate a full 3-player game and fix any JavaScript/runtime issues.
+3. Add dedicated UI actions for held Survival cards.
+4. Add a dedicated Normie reroll/redraw control.
+5. Tune choice cards so more choices produce automatic mechanical outcomes.
+6. Add visible meter bars for Panic, Control, and Market using the existing comic-broadcast visual style.
+7. Run a balance audit on character powers and collapse penalties.
+8. Add a one-click GitHub Issue export for v0.17 playtest feedback.
 
 ## Version Roadmap
 
@@ -107,5 +126,6 @@ The most important question:
 - **v0.14:** art direction and atmosphere pass with broadcast/comic placeholder art slots and an art direction page.
 - **v0.15:** comic-broadcast UI pass — shared design system (`tokens.css`) with Anton/Inter/Space Mono type, unified broadcast palette, chunky comic buttons, live ticker + chromatic-aberration hero, global halftone/scanline atmosphere, favicon + social share image, print-kit cleanup, real hand-built SVG scene art for all six event categories plus character studio backdrops, and AI-generated character portraits plus a 16:9 broadcast hero panel wired across the hub and video mode.
 - **v0.16:** playability pass — tabletop-first rules, quickstart, six character archetypes, 80-card prototype deck, 60-space board path, stronger chaos meter structure, and focused playtest feedback template.
-- **v0.17:** browser integration pass for v0.16 data files.
+- **v0.17:** browser integration pass — v0.16 data loader, four-stat browser engine, 60-space board, 80-card deck, choice prompts, Panic / Control / Market collapses, NPC Mode, cycle modifiers, and updated share/daily/restart flows.
+- **v0.18:** browser QA, balance, and survival-card usability pass.
 - **v1.0:** public preview build.
