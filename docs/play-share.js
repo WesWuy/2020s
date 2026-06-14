@@ -1,4 +1,4 @@
-// Prototype v0.6 Social Loop Build.
+// Prototype v0.17 Social Loop Build.
 // Creates shareable survival certificates, copyable result text, downloadable image cards, and achievements.
 
 function getWinner() {
@@ -9,63 +9,74 @@ function getWinnerCharacter(winner) {
   return GAME.characters[winner.characterIndex];
 }
 
+function totalStats(player) {
+  return (player.sanity || 0) + (player.money || 0) + (player.freedom || 0) + (player.influence || 0);
+}
+
 function shareEndingTitle(player) {
-  const total = player.sanity + player.money + player.influence;
-  if (total >= 24) return "Verified Prophet of the Timeline";
+  const total = totalStats(player);
+  if (typeof getEndingTitle === "function") return getEndingTitle(player);
+  if (total >= 28) return "Verified Prophet of the Timeline";
+  if (player.freedom >= 8 && player.sanity >= 6) return "Awakened Timeline Escapist";
   if (player.influence >= 8) return "Algorithmic Overlord";
   if (player.money >= 8) return "Monetized the Collapse";
   if (player.sanity >= 8) return "Disturbingly Stable Survivor";
-  if (total <= 8) return "Barely Escaped the Decade";
+  if (total <= 10) return "Barely Escaped the Decade";
   return "Certified Timeline Survivor";
 }
 
 function calculateTimelineDamage(winner) {
-  const total = winner.sanity + winner.money + winner.influence;
+  const total = totalStats(winner);
   const cardLoad = state.cardHistory?.length || 0;
-  const cycleFlips = (state.log || []).filter(line => line.toLowerCase().includes("cycle flipped") || line.toLowerCase().includes("board flipped")).length;
-  return Math.min(99, 38 + total * 3 + cardLoad + cycleFlips * 4);
+  const cycleFlips = state.playtest?.cycleSwitches || (state.log || []).filter(line => line.toLowerCase().includes("cycle flipped") || line.toLowerCase().includes("board flipped")).length;
+  const collapses = Object.values(state.meterCollapses || {}).reduce((sum, value) => sum + (Number(value) || 0), 0);
+  return Math.min(99, 28 + total * 2 + cardLoad + cycleFlips * 4 + collapses * 8);
 }
 
 function narrativeStability(winner) {
-  const total = winner.sanity + winner.money + winner.influence;
-  if (total >= 24) return "Suspiciously Stable";
-  if (total >= 16) return "Fragile";
+  const total = totalStats(winner);
+  if (total >= 28) return "Suspiciously Stable";
+  if (total >= 18) return "Fragile";
   return "Critical";
 }
 
 function finalDiagnosis(winner) {
   const character = getWinnerCharacter(winner).name;
+  if (winner.freedom <= 2) return "Survived, but the timeline kept asking for one more permission slip.";
   if (winner.sanity <= 2) return "Alive, but the comment section lives rent-free in their head.";
   if (winner.money <= 2) return "Survived spiritually. Financially, the timeline took a bite.";
   if (winner.influence <= 2) return "Made it to 2030, but the algorithm refuses to verify their existence.";
-  if (character === "Crypto Bro") return "Still early, somehow. The spreadsheet says this is victory.";
+  if (character === "The Crypto Bro") return "Still early, somehow. The spreadsheet says this is victory.";
   if (character === "The Prepper") return "The pantry was right. The vibe was stressful, but the pantry was right.";
   if (character === "The Influencer") return "Monetized the collapse and called it a personal brand journey.";
-  if (character === "The Bureaucrat") return "Filed the decade in triplicate and survived pending review.";
-  if (character === "The Wellness Guru") return "Regulated their nervous system while history screamed in the background.";
-  if (character === "The Podcaster") return "Survived by asking questions for longer than civilization had answers.";
+  if (character === "The Remote Worker") return "Survived the decade one awkward mute-button incident at a time.";
+  if (character === "The Activist") return "Converted institutional pressure into a group chat with action items.";
+  if (character === "The Normie") return "Just wanted groceries and accidentally cleared the campaign.";
   return "Survived the decade with a suspicious amount of narrative protection.";
 }
 
 function getAchievements(winner) {
   const achievements = [];
   const character = getWinnerCharacter(winner).name;
-  const mediaDraws = (state.cardHistory || []).filter(c => c.deckName === "Media Meltdown").length;
-  const hiddenDraws = (state.cardHistory || []).filter(c => c.deckName === "Hidden Hand").length;
-  const cycleFlips = (state.log || []).filter(line => line.toLowerCase().includes("cycle flipped") || line.toLowerCase().includes("board flipped")).length;
+  const scandalDraws = (state.cardHistory || []).filter(c => c.deckName === "Scandal" || c.deckName === "Media Meltdown").length;
+  const conspiracyDraws = (state.cardHistory || []).filter(c => c.deckName === "Conspiracy" || c.deckName === "Hidden Hand").length;
+  const collapses = state.meterCollapses || {};
 
   if (winner.sanity <= 2) achievements.push("Doomscroll Champion");
   if (winner.money >= 8) achievements.push("Monetized Collapse");
+  if (winner.freedom >= 8) achievements.push("Permission Slip Dodger");
   if (winner.influence >= 8) achievements.push("Algorithmic Overlord");
   if (character === "The Prepper") achievements.push("Canned Goods Prophet");
-  if (character === "Crypto Bro" && winner.money <= 2) achievements.push("Still Early");
-  if (mediaDraws >= 3) achievements.push("Main Character Syndrome");
-  if (hiddenDraws >= 3) achievements.push("Lodge Adjacent");
-  if (cycleFlips >= 3) achievements.push("Narrative Survivor");
-  if (winner.sanity >= 8) achievements.push("Disturbingly Stable");
+  if (character === "The Normie") achievements.push("Normal Person Miracle");
+  if (character === "The Crypto Bro" && winner.money <= 2) achievements.push("Still Early");
+  if (scandalDraws >= 3) achievements.push("Main Character Syndrome");
+  if (conspiracyDraws >= 3) achievements.push("Lodge Adjacent");
+  if ((collapses.panic || 0) >= 1) achievements.push("Panic Proof-ish");
+  if ((collapses.control || 0) >= 1) achievements.push("Control Survivor");
+  if ((collapses.market || 0) >= 1) achievements.push("Black Swan Rodeo");
 
   if (achievements.length === 0) achievements.push("Certified Timeline Survivor");
-  return achievements.slice(0, 6);
+  return achievements.slice(0, 8);
 }
 
 function getShareData() {
@@ -88,11 +99,11 @@ function getShareData() {
 }
 
 function shareText(data) {
-  return `${data.winner.name} survived the 2020s as ${data.character.name}.\n\nEnding Title: ${data.title}\nSanity: ${data.winner.sanity}/9\nMoney: ${data.winner.money}/9\nInfluence: ${data.winner.influence}/9\nTimeline Damage: ${data.timelineDamage}%\nPublic Trust Remaining: ${data.publicTrust}%\nNarrative Stability: ${data.stability}\nAchievements: ${data.achievements.join(", ")}\n\nFinal Diagnosis: ${data.diagnosis}\n\nCan you survive the decade better?\n${data.url}`;
+  return `${data.winner.name} survived the 2020s as ${data.character.name}.\n\nEnding Title: ${data.title}\nMoney: ${data.winner.money}/9\nSanity: ${data.winner.sanity}/9\nFreedom: ${data.winner.freedom}/9\nInfluence: ${data.winner.influence}/9\nPanic Collapses: ${state.meterCollapses?.panic || 0}\nControl Collapses: ${state.meterCollapses?.control || 0}\nMarket Collapses: ${state.meterCollapses?.market || 0}\nTimeline Damage: ${data.timelineDamage}%\nPublic Trust Remaining: ${data.publicTrust}%\nNarrative Stability: ${data.stability}\nAchievements: ${data.achievements.join(", ")}\n\nFinal Diagnosis: ${data.diagnosis}\n\nCan you survive the decade better?\n${data.url}`;
 }
 
 function challengeText(data) {
-  return `I survived the 2020s as ${data.character.name} with ${data.timelineDamage}% Timeline Damage.\n\nCan you beat my ending?\n${data.url}`;
+  return `I survived the 2020s as ${data.character.name} with ${data.timelineDamage}% Timeline Damage.\n\nStats: Money ${data.winner.money}, Sanity ${data.winner.sanity}, Freedom ${data.winner.freedom}, Influence ${data.winner.influence}.\n\nCan you beat my ending?\n${data.url}`;
 }
 
 function renderShareCertificate() {
@@ -110,8 +121,9 @@ function renderShareCertificate() {
       <h2 class="certificate-title">${data.winner.name} survived the 2020s.</h2>
       <p class="certificate-subtitle">As ${data.character.name} — ${data.title}</p>
       <div class="share-stats">
-        <div><span>Sanity</span><strong>${data.winner.sanity}/9</strong></div>
         <div><span>Money</span><strong>${data.winner.money}/9</strong></div>
+        <div><span>Sanity</span><strong>${data.winner.sanity}/9</strong></div>
+        <div><span>Freedom</span><strong>${data.winner.freedom}/9</strong></div>
         <div><span>Influence</span><strong>${data.winner.influence}/9</strong></div>
         <div><span>Damage</span><strong>${data.timelineDamage}%</strong></div>
       </div>
@@ -201,10 +213,11 @@ function downloadResultImage(data) {
   ctx.fillText(`As ${data.character.name} — ${data.title}`, 70, 290);
 
   ctx.fillStyle = "#f5edf7";
-  ctx.font = "bold 34px Arial, sans-serif";
-  ctx.fillText(`Sanity ${data.winner.sanity}/9`, 70, 370);
-  ctx.fillText(`Money ${data.winner.money}/9`, 330, 370);
-  ctx.fillText(`Influence ${data.winner.influence}/9`, 570, 370);
+  ctx.font = "bold 30px Arial, sans-serif";
+  ctx.fillText(`Money ${data.winner.money}/9`, 70, 370);
+  ctx.fillText(`Sanity ${data.winner.sanity}/9`, 300, 370);
+  ctx.fillText(`Freedom ${data.winner.freedom}/9`, 530, 370);
+  ctx.fillText(`Influence ${data.winner.influence}/9`, 790, 370);
 
   ctx.fillStyle = "#f2c94c";
   ctx.font = "bold 44px Arial, sans-serif";
