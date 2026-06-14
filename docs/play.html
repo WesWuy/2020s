@@ -29,9 +29,9 @@
   </div>
 
   <header class="hero compact-hero">
-    <div class="badge">Prototype v0.11 — Public Playtest Readiness</div>
+    <div class="badge">Prototype v0.17 — Browser Integration Pass</div>
     <h1 class="ca">2020s: Digital Playtest</h1>
-    <p class="tagline">A chaotic digital board game show with quick-start play, tuning controls, outrageous cards, daily chaos, scandal meters, and shareable survival receipts.</p>
+    <p class="tagline">A chaotic digital board game show with v0.16 tabletop data, Freedom tracking, choice cards, collapse meters, quick-start play, outrageous cards, daily chaos, and shareable survival receipts.</p>
     <div class="cta-row">
       <a href="index.html" class="button secondary">Back to Prototype Hub</a>
       <button id="restartGameBtn" class="button secondary" type="button">Restart Game</button>
@@ -109,11 +109,12 @@
           </div>
         </div>
         <div class="board-legend">
-          <span>🌍 Global Chaos</span>
-          <span>📱 Media Meltdown</span>
-          <span>👁 Hidden Hand</span>
-          <span>🗳 Political Flip</span>
-          <span>💸 Market Shock</span>
+          <span>📰 Headline</span>
+          <span>🧩 Conspiracy</span>
+          <span>🛟 Survival</span>
+          <span>📣 Scandal</span>
+          <span>🗳 Cycle Flip</span>
+          <span>💸 Market</span>
           <span>🧠 Sanity</span>
           <span>🏁 Final</span>
         </div>
@@ -153,6 +154,8 @@
               <button class="gm-adjust" data-stat="sanity" data-delta="-1">− Sanity</button>
               <button class="gm-adjust" data-stat="money" data-delta="1">+ Money</button>
               <button class="gm-adjust" data-stat="money" data-delta="-1">− Money</button>
+              <button class="gm-adjust" data-stat="freedom" data-delta="1">+ Freedom</button>
+              <button class="gm-adjust" data-stat="freedom" data-delta="-1">− Freedom</button>
               <button class="gm-adjust" data-stat="influence" data-delta="1">+ Influence</button>
               <button class="gm-adjust" data-stat="influence" data-delta="-1">− Influence</button>
             </div>
@@ -212,6 +215,7 @@
   </div>
 
   <script src="game-data.js"></script>
+  <script src="v017-data-loader.js"></script>
   <script src="play.js"></script>
   <script src="play-cycle.js"></script>
   <script src="play-guard.js"></script>
