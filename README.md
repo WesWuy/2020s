@@ -1,6 +1,6 @@
 # 2020s: The Board Game
 
-**Prototype v0.18 — QA / Hardening Pass**
+**Prototype v0.19 — Unified Browser Engine / Smoke-Test Cleanup**
 
 A satirical survival board game and browser game prototype where players race from **2020 to 2030** while trying not to lose their **Sanity**, **Money**, **Freedom**, or **Influence**.
 
@@ -26,7 +26,7 @@ The video game mode includes **Dystopia Run** and **Utopia Run**, character iden
 https://weswuy.github.io/2020s/art-direction.html
 ```
 
-The visual language is **satirical retro-futurist news broadcast meets comic-book apocalypse**. The art system includes reusable character portrait slots, event art frames, lower-third broadcast styling, halftone texture, Dystopia / Utopia color direction, prompt guidance for generated artwork, AI-generated character portraits, and a 16:9 broadcast hero panel.
+The visual language is **satirical retro-futurist news broadcast meets comic-book apocalypse**.
 
 ## Board Game Digital Playtest
 
@@ -34,17 +34,34 @@ The visual language is **satirical retro-futurist news broadcast meets comic-boo
 https://weswuy.github.io/2020s/play.html
 ```
 
-The board game digital playtest now runs the **v0.18 QA / hardening pass**. The live play page keeps the existing comic-broadcast UI while wiring in the v0.16 tabletop prototype data and hardening the v0.17 browser integration: six archetypes, a 60-space 2020-to-2030 board path, 80 structured prototype cards, Freedom as a fourth player stat, choice-card prompts, Panic / Control / Market collapse meters, NPC Mode, Red Cycle / Blue Cycle board modifiers, Daily Chaos updates, held Survival card controls, Normie reroll/redraw windows, and richer QA exports.
-
-## v0.18 QA / Hardening Pass
-
-v0.18 stabilizes the v0.17 browser integration without replacing the visual identity.
-
-New hardening files:
+`play.html` now redirects to the v0.19 unified live page:
 
 ```text
-docs/v018-hardening.js
-docs/v018-qa-finalizer.js
+https://weswuy.github.io/2020s/play-v019.html
+```
+
+The v0.19 live play page uses a cleaner script stack:
+
+```text
+docs/game-data.js
+docs/v017-data-loader.js
+docs/play.js
+docs/v019-unified-engine.js
+docs/v019-controls.js
+```
+
+The old extension scripts from v0.4–v0.11 are no longer loaded by the live play page. They remain in the repository for reference, but their behavior has been migrated into the unified v0.19 layer.
+
+## v0.19 Unified Browser Engine
+
+v0.19 consolidates the browser playtest into one cleaner layer while preserving the comic-broadcast UI.
+
+New files:
+
+```text
+docs/v019-unified-engine.js
+docs/v019-controls.js
+docs/play-v019.html
 ```
 
 Still powered by the v0.16 source prototype data:
@@ -55,30 +72,42 @@ data/prototype/card-decks-v0.16.csv
 data/prototype/board-spaces-v0.16.csv
 ```
 
-### What v0.18 hardens
+### What v0.19 does
 
-- Loads `docs/v018-hardening.js` and `docs/v018-qa-finalizer.js` last so they can repair older extension-file monkey patches safely
-- Repairs the `statLabel()` naming collision caused by the older polish layer
-- Ensures every game state has four stats, meters, collapse counts, playtest counters, held cards, and power-use flags
-- Fixes Quick Start Chaos so it creates valid v0.18 players, Freedom stats, held cards, meters, and playtest fields
-- Restores all four stats in player cards after the older polish renderer dropped Freedom
-- Adds visible held Survival card UI with **Use / Resolve** buttons
-- Adds a proper Normie reroll window before a Normie space is resolved
-- Adds a proper Normie card redraw window before a Normie card effect is resolved
-- Blocks End Turn while a pending Normie space/card window is unresolved
-- Replaces the old export button handler with a v0.18 QA report including pending space/card state and powers used
-- Adds visible Panic / Control / Market meter bars using the existing stat-meter styling
-- Updates spectacle board icons/year labels for the v0.16 board-space model
+- Retires the old live extension stack from `play.html`
+- Adds `play-v019.html` as the clean live board-game page
+- Keeps `play.html` as a redirect for existing links
+- Uses the existing v0.17 core rules engine
+- Consolidates quick start, Daily Chaos, spectacle, share/export, smoke test diagnostics, held Survival cards, and Normie powers into `v019-unified-engine.js`
+- Adds header Restart and Flip Restart wiring in `v019-controls.js`
+- Keeps the four-stat model: Money, Sanity, Freedom, Influence
+- Keeps Panic / Control / Market collapse meters
+- Keeps NPC Mode when any stat reaches zero
+- Adds a browser-side smoke test available from the setup screen and console via `window.v019QA.runSmokeTest(true)`
 
-## Known v0.18 Constraints
+## v0.19 Smoke Test Coverage
 
-This is a hardening pass, not a complete automated rules engine.
+The built-in smoke test validates:
 
-- Some Survival cards still require table judgment after clicking **Use / Resolve**, especially reaction cards like cancel/prevent/ignore effects.
-- Complex choice cards are surfaced and logged, but not every branch has a fully automatic mechanical resolution yet.
-- Normie reroll/redraw is now stable because the effect window opens **before** space/card resolution, but it should still be playtested at the table.
-- The browser loader still compiles the v0.16 CSV data into `docs/v017-data-loader.js` for stable GitHub Pages loading rather than dynamically fetching root CSV files at runtime.
-- This pass was completed through code inspection and targeted hardening. A full browser-console playthrough should be the next QA step.
+- GAME object presence
+- 6 characters loaded
+- 60 board spaces loaded
+- 20 cards each in Headline, Conspiracy, Survival, and Scandal decks
+- Required DOM controls
+- Required overlays
+- Core function availability
+- Normie player shape
+- Prepper player shape
+
+## Known v0.19 Constraints
+
+This pass still does not replace real manual browser QA.
+
+- I could not open a true remote DevTools console from ChatGPT, so the smoke test was implemented into the page itself instead.
+- Complex card branches are still partly table-judgment based.
+- Survival reaction timing is usable, but not fully rules-automated.
+- `play-v019.html` is the clean v0.19 live page; `play.html` redirects there for compatibility.
+- The old v0.4–v0.11 scripts are retired from live loading but not deleted yet.
 
 ## Core Tabletop Loop
 
@@ -97,30 +126,27 @@ No player elimination.
 
 ## Playtest Goal
 
-Run a rough 20–45 minute test. For the board game, judge clarity, humor, balance, agency, and shareability. For the video game mode, judge whether the choice loop, visual identity, and Dystopia / Utopia split feel fun enough to become a real browser/mobile game.
-
-The most important question:
+Run a rough 20–45 minute test. The most important question:
 
 > Did players laugh, make decisions, and want one more round?
 
-## Recommended Next Claude Code Tasks
+## Recommended Next Tasks
 
-1. Run a browser-console v0.18 smoke test on the live GitHub Pages page.
-2. Simulate a full 3-player game through 2030 and log every runtime issue.
-3. Add automatic branch resolution for the most common choice-card patterns.
-4. Add better UI for reaction timing on Survival cards.
-5. Add meter-specific visual collapse animations.
-6. Audit all older extension files and either migrate or retire obsolete v0.4–v0.11 assumptions.
-7. Add a one-click GitHub Issue export for v0.18 playtest feedback.
+1. Open `play-v019.html` and run `window.v019QA.runSmokeTest(true)` in the browser console.
+2. Play a full 3-player game through 2030.
+3. Check Quick Start, Daily Chaos, held Survival card use, Normie reroll/redraw, collapse meters, NPC Mode, finish, copy result, and export notes.
+4. Convert the highest-frequency table-judgment choice cards into automatic branch buttons.
+5. Decide whether the old retired extension files should be archived or deleted.
 
 ## Version Roadmap
 
 - **v0.12:** video game mode foundation with Dystopia Run, Utopia Run, choice events, Timeline Health, and final timeline reports.
 - **v0.13:** video game feel pass with character identity, event categories, outcome feedback, and mode-specific visual styling.
 - **v0.14:** art direction and atmosphere pass with broadcast/comic placeholder art slots and an art direction page.
-- **v0.15:** comic-broadcast UI pass — shared design system (`tokens.css`) with Anton/Inter/Space Mono type, unified broadcast palette, chunky comic buttons, live ticker + chromatic-aberration hero, global halftone/scanline atmosphere, favicon + social share image, print-kit cleanup, real hand-built SVG scene art for all six event categories plus character studio backdrops, and AI-generated character portraits plus a 16:9 broadcast hero panel wired across the hub and video mode.
+- **v0.15:** comic-broadcast UI pass — shared design system, broadcast palette, comic buttons, ticker, halftone/scanline atmosphere, favicon/social image, print kit cleanup, SVG scene art, AI-generated character portraits, and a 16:9 broadcast hero panel.
 - **v0.16:** playability pass — tabletop-first rules, quickstart, six character archetypes, 80-card prototype deck, 60-space board path, stronger chaos meter structure, and focused playtest feedback template.
 - **v0.17:** browser integration pass — v0.16 data loader, four-stat browser engine, 60-space board, 80-card deck, choice prompts, Panic / Control / Market collapses, NPC Mode, cycle modifiers, and updated share/daily/restart flows.
-- **v0.18:** QA / hardening pass — last-loaded hardening/finalizer layers, four-stat renderer repair, Quick Start repair, held Survival card controls, Normie reroll/redraw windows, pending-resolution guard, meter bars, and v0.18 QA exports.
-- **v0.19:** browser-console playthrough, rules automation, and obsolete-extension cleanup.
+- **v0.18:** QA / hardening pass — hardening/finalizer layers, four-stat renderer repair, Quick Start repair, held Survival card controls, Normie reroll/redraw windows, pending-resolution guard, meter bars, and v0.18 QA exports.
+- **v0.19:** unified browser engine — old extension scripts retired from live page, unified engine loaded, smoke-test harness added, `play.html` redirects to `play-v019.html`.
+- **v0.20:** full manual browser playthrough, automatic choice-branch resolution, and final legacy file archive/delete decision.
 - **v1.0:** public preview build.
