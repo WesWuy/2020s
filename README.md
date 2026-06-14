@@ -1,6 +1,6 @@
 # 2020s: The Board Game
 
-**Prototype v0.17 — Browser Integration Pass**
+**Prototype v0.18 — QA / Hardening Pass**
 
 A satirical survival board game and browser game prototype where players race from **2020 to 2030** while trying not to lose their **Sanity**, **Money**, **Freedom**, or **Influence**.
 
@@ -34,25 +34,19 @@ The visual language is **satirical retro-futurist news broadcast meets comic-boo
 https://weswuy.github.io/2020s/play.html
 ```
 
-The board game digital playtest now runs the **v0.17 browser integration pass**. The live play page keeps the existing comic-broadcast UI while wiring in the v0.16 tabletop prototype data: six archetypes, a 60-space 2020-to-2030 board path, 80 structured prototype cards, Freedom as a fourth player stat, choice-card prompts, Panic / Control / Market collapse meters, NPC Mode, Red Cycle / Blue Cycle board modifiers, Daily Chaos updates, and richer playtest exports.
+The board game digital playtest now runs the **v0.18 QA / hardening pass**. The live play page keeps the existing comic-broadcast UI while wiring in the v0.16 tabletop prototype data and hardening the v0.17 browser integration: six archetypes, a 60-space 2020-to-2030 board path, 80 structured prototype cards, Freedom as a fourth player stat, choice-card prompts, Panic / Control / Market collapse meters, NPC Mode, Red Cycle / Blue Cycle board modifiers, Daily Chaos updates, held Survival card controls, Normie reroll/redraw windows, and richer QA exports.
 
-## v0.17 Browser Integration Pass
+## v0.18 QA / Hardening Pass
 
-v0.17 turns the v0.16 tabletop layer into a browser-playable prototype.
+v0.18 stabilizes the v0.17 browser integration without replacing the visual identity.
 
-Integrated browser files:
+New hardening file:
 
 ```text
-docs/v017-data-loader.js
-docs/play.html
-docs/play.js
-docs/play-restart.js
-docs/play-daily.js
-docs/play-share.js
-docs/play-content.js
+docs/v018-hardening.js
 ```
 
-Source prototype data remains in:
+Still powered by the v0.16 source prototype data:
 
 ```text
 data/prototype/characters-v0.16.csv
@@ -60,30 +54,28 @@ data/prototype/card-decks-v0.16.csv
 data/prototype/board-spaces-v0.16.csv
 ```
 
-### What v0.17 adds
+### What v0.18 hardens
 
-- Loads the v0.16 tabletop dataset into the browser through `docs/v017-data-loader.js`
-- Replaces the old 40-space browser board with the 60-space 2020-to-2030 board path
-- Replaces the old deck naming with Headline, Conspiracy, Survival, and Scandal decks
-- Adds Freedom as the fourth tracked player stat
-- Adds six v0.16 character archetypes
-- Adds opening Survival card hands, with The Prepper starting with two
-- Adds `choice_required` card prompts and choice-resolution logging
-- Adds Panic, Control, and Market meters that collapse at 6
-- Adds NPC Mode when a player hits zero in any stat
-- Adds Red Cycle / Blue Cycle board-space modifier handling
-- Adds richer end-game summary fields for playtesting
-- Updates Daily Chaos, sharing, endings, achievements, and restart handling for the four-stat rules
+- Loads `docs/v018-hardening.js` last so it can repair older extension-file monkey patches safely
+- Repairs the `statLabel()` naming collision caused by the older polish layer
+- Ensures every game state has four stats, meters, collapse counts, playtest counters, held cards, and power-use flags
+- Fixes Quick Start Chaos so it creates valid v0.18 players, Freedom stats, held cards, meters, and playtest fields
+- Restores all four stats in player cards after the older polish renderer dropped Freedom
+- Adds visible held Survival card UI with **Use / Resolve** buttons
+- Adds a proper Normie reroll window before a Normie space is resolved
+- Adds a proper Normie card redraw window before a Normie card effect is resolved
+- Replaces the old export button handler with a v0.18 QA report including pending space/card state and powers used
+- Adds visible Panic / Control / Market meter bars using the existing stat-meter styling
 
-## Known v0.17 Constraints
+## Known v0.18 Constraints
 
-This is a browser integration pass, not a finished QA pass.
+This is a hardening pass, not a complete automated rules engine.
 
-- Complex choices are surfaced with buttons and logged, but many nuanced effects still rely on table judgment or GM correction tools.
-- Survival cards can be held and counted, but not every held-card use has a dedicated UI button yet.
-- The Normie reroll/redraw power is documented in the character data but still needs a dedicated browser control.
-- The browser loader compiles the v0.16 CSV data into `docs/v017-data-loader.js` for stable GitHub Pages loading rather than dynamically fetching root CSV files at runtime.
-- The existing spectacle/chaos modules are preserved, but they should be tested against the new four-stat state model.
+- Some Survival cards still require table judgment after clicking **Use / Resolve**, especially reaction cards like cancel/prevent/ignore effects.
+- Complex choice cards are surfaced and logged, but not every branch has a fully automatic mechanical resolution yet.
+- Normie reroll/redraw is now stable because the effect window opens **before** space/card resolution, but it should still be playtested at the table.
+- The browser loader still compiles the v0.16 CSV data into `docs/v017-data-loader.js` for stable GitHub Pages loading rather than dynamically fetching root CSV files at runtime.
+- This pass was completed through code inspection and targeted hardening. A full browser-console playthrough should be the next QA step.
 
 ## Core Tabletop Loop
 
@@ -110,14 +102,13 @@ The most important question:
 
 ## Recommended Next Claude Code Tasks
 
-1. Run a v0.18 QA / hardening pass on the live browser game.
-2. Simulate a full 3-player game and fix any JavaScript/runtime issues.
-3. Add dedicated UI actions for held Survival cards.
-4. Add a dedicated Normie reroll/redraw control.
-5. Tune choice cards so more choices produce automatic mechanical outcomes.
-6. Add visible meter bars for Panic, Control, and Market using the existing comic-broadcast visual style.
-7. Run a balance audit on character powers and collapse penalties.
-8. Add a one-click GitHub Issue export for v0.17 playtest feedback.
+1. Run a browser-console v0.18 smoke test on the live GitHub Pages page.
+2. Simulate a full 3-player game through 2030 and log every runtime issue.
+3. Add automatic branch resolution for the most common choice-card patterns.
+4. Add better UI for reaction timing on Survival cards.
+5. Add meter-specific visual collapse animations.
+6. Audit all older extension files and either migrate or retire obsolete v0.4–v0.11 assumptions.
+7. Add a one-click GitHub Issue export for v0.18 playtest feedback.
 
 ## Version Roadmap
 
@@ -127,5 +118,6 @@ The most important question:
 - **v0.15:** comic-broadcast UI pass — shared design system (`tokens.css`) with Anton/Inter/Space Mono type, unified broadcast palette, chunky comic buttons, live ticker + chromatic-aberration hero, global halftone/scanline atmosphere, favicon + social share image, print-kit cleanup, real hand-built SVG scene art for all six event categories plus character studio backdrops, and AI-generated character portraits plus a 16:9 broadcast hero panel wired across the hub and video mode.
 - **v0.16:** playability pass — tabletop-first rules, quickstart, six character archetypes, 80-card prototype deck, 60-space board path, stronger chaos meter structure, and focused playtest feedback template.
 - **v0.17:** browser integration pass — v0.16 data loader, four-stat browser engine, 60-space board, 80-card deck, choice prompts, Panic / Control / Market collapses, NPC Mode, cycle modifiers, and updated share/daily/restart flows.
-- **v0.18:** browser QA, balance, and survival-card usability pass.
+- **v0.18:** QA / hardening pass — last-loaded hardening layer, four-stat renderer repair, Quick Start repair, held Survival card controls, Normie reroll/redraw windows, meter bars, and v0.18 QA exports.
+- **v0.19:** browser-console playthrough, rules automation, and obsolete-extension cleanup.
 - **v1.0:** public preview build.
