@@ -1,0 +1,7 @@
+id,name,starting_money,starting_sanity,starting_freedom,starting_influence,power,weakness,flavor
+CHAR001,The Prepper,5,5,6,2,"Start with 2 Survival cards instead of 1.","Lose 1 Influence whenever a Scandal card targets you directly.","You were early. Annoyingly early."
+CHAR002,The Influencer,4,4,5,6,"Once per game, turn any Influence loss into an equal Influence gain.","Lose 1 extra Sanity from Scandal cards.","Your ring light is emergency equipment."
+CHAR003,The Crypto Bro,6,4,4,4,"When you gain Money from a card, gain +1 extra Money.","When Market collapses, lose 1 extra Money.","You are either early or ruined. Often both."
+CHAR004,The Remote Worker,5,6,4,3,"Ignore the first Pandemic Panic penalty that hits you.","Tech Leap spaces force you to choose Influence over movement.","Your commute is twelve steps and an existential crisis."
+CHAR005,The Activist,4,4,5,5,"When Control rises, you may gain 1 Influence once per round.","When Panic collapses, lose 1 extra Sanity.","You cannot log off because the timeline needs you."
+CHAR006,The Normie,5,5,5,3,"Once per game, reroll the die or redraw a card.","No passive bonus.","You just wanted groceries and a normal decade."
