@@ -40,10 +40,11 @@ The board game digital playtest now runs the **v0.18 QA / hardening pass**. The 
 
 v0.18 stabilizes the v0.17 browser integration without replacing the visual identity.
 
-New hardening file:
+New hardening files:
 
 ```text
 docs/v018-hardening.js
+docs/v018-qa-finalizer.js
 ```
 
 Still powered by the v0.16 source prototype data:
@@ -56,7 +57,7 @@ data/prototype/board-spaces-v0.16.csv
 
 ### What v0.18 hardens
 
-- Loads `docs/v018-hardening.js` last so it can repair older extension-file monkey patches safely
+- Loads `docs/v018-hardening.js` and `docs/v018-qa-finalizer.js` last so they can repair older extension-file monkey patches safely
 - Repairs the `statLabel()` naming collision caused by the older polish layer
 - Ensures every game state has four stats, meters, collapse counts, playtest counters, held cards, and power-use flags
 - Fixes Quick Start Chaos so it creates valid v0.18 players, Freedom stats, held cards, meters, and playtest fields
@@ -64,8 +65,10 @@ data/prototype/board-spaces-v0.16.csv
 - Adds visible held Survival card UI with **Use / Resolve** buttons
 - Adds a proper Normie reroll window before a Normie space is resolved
 - Adds a proper Normie card redraw window before a Normie card effect is resolved
+- Blocks End Turn while a pending Normie space/card window is unresolved
 - Replaces the old export button handler with a v0.18 QA report including pending space/card state and powers used
 - Adds visible Panic / Control / Market meter bars using the existing stat-meter styling
+- Updates spectacle board icons/year labels for the v0.16 board-space model
 
 ## Known v0.18 Constraints
 
@@ -118,6 +121,6 @@ The most important question:
 - **v0.15:** comic-broadcast UI pass — shared design system (`tokens.css`) with Anton/Inter/Space Mono type, unified broadcast palette, chunky comic buttons, live ticker + chromatic-aberration hero, global halftone/scanline atmosphere, favicon + social share image, print-kit cleanup, real hand-built SVG scene art for all six event categories plus character studio backdrops, and AI-generated character portraits plus a 16:9 broadcast hero panel wired across the hub and video mode.
 - **v0.16:** playability pass — tabletop-first rules, quickstart, six character archetypes, 80-card prototype deck, 60-space board path, stronger chaos meter structure, and focused playtest feedback template.
 - **v0.17:** browser integration pass — v0.16 data loader, four-stat browser engine, 60-space board, 80-card deck, choice prompts, Panic / Control / Market collapses, NPC Mode, cycle modifiers, and updated share/daily/restart flows.
-- **v0.18:** QA / hardening pass — last-loaded hardening layer, four-stat renderer repair, Quick Start repair, held Survival card controls, Normie reroll/redraw windows, meter bars, and v0.18 QA exports.
+- **v0.18:** QA / hardening pass — last-loaded hardening/finalizer layers, four-stat renderer repair, Quick Start repair, held Survival card controls, Normie reroll/redraw windows, pending-resolution guard, meter bars, and v0.18 QA exports.
 - **v0.19:** browser-console playthrough, rules automation, and obsolete-extension cleanup.
 - **v1.0:** public preview build.
