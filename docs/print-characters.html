@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>2020s Print Characters</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="art-system.css">
 </head>
 <body class="print-page">
   <main>
@@ -25,12 +26,13 @@
   </main>
 
   <script src="game-data.js"></script>
+  <script src="art-system.js"></script>
   <script>
     const characterGrid = document.getElementById("characterGrid");
     GAME.characters.forEach(c => {
       const el = document.createElement("article");
       el.className = "mini-card printable-card";
-      el.innerHTML = `<h2>${c.name}</h2><p class="stats">Sanity ${c.stats.sanity} · Money ${c.stats.money} · Influence ${c.stats.influence}</p><p><strong>Ability:</strong> ${c.ability}</p><p><strong>Weakness:</strong> ${c.weakness}</p><p class="flavor">“${c.flavor}”</p>`;
+      el.innerHTML = `${portraitMarkup(c.name)}<h2>${c.name}</h2><p class="stats">Sanity ${c.stats.sanity} · Money ${c.stats.money} · Influence ${c.stats.influence}</p><p><strong>Ability:</strong> ${c.ability}</p><p><strong>Weakness:</strong> ${c.weakness}</p><p class="flavor">“${c.flavor}”</p>`;
       characterGrid.appendChild(el);
     });
   </script>

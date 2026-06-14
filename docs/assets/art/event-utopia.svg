@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="ut-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#153321"/><stop offset="1" stop-color="#0a0c13"/>
+    </linearGradient>
+    <radialGradient id="ut-sun" cx="50%" cy="78%" r="55%">
+      <stop offset="0" stop-color="#f2c94c" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#f2c94c" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="ut-ht" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#7ee787" opacity="0.09"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#ut-bg)"/>
+  <rect width="1600" height="900" fill="url(#ut-ht)"/>
+  <rect width="1600" height="900" fill="url(#ut-sun)"/>
+  <!-- sunrise rays -->
+  <g stroke="#7ee787" stroke-width="6" opacity="0.4" stroke-linecap="round">
+    <line x1="800" y1="700" x2="500" y2="250"/><line x1="800" y1="700" x2="700" y2="180"/>
+    <line x1="800" y1="700" x2="900" y2="180"/><line x1="800" y1="700" x2="1100" y2="250"/>
+    <line x1="800" y1="700" x2="300" y2="420"/><line x1="800" y1="700" x2="1300" y2="420"/>
+  </g>
+  <!-- connected community nodes -->
+  <g stroke="#91c9ff" stroke-width="4" opacity="0.6">
+    <line x1="300" y1="320" x2="520" y2="430"/><line x1="520" y1="430" x2="760" y2="360"/>
+    <line x1="760" y1="360" x2="1040" y2="440"/><line x1="1040" y1="440" x2="1300" y2="330"/>
+  </g>
+  <g fill="#91c9ff">
+    <circle cx="300" cy="320" r="18"/><circle cx="520" cy="430" r="18"/><circle cx="760" cy="360" r="22" fill="#7ee787"/>
+    <circle cx="1040" cy="440" r="18"/><circle cx="1300" cy="330" r="18"/>
+  </g>
+  <!-- sprout center -->
+  <g transform="translate(800 760)">
+    <path d="M0 0 V-150" stroke="#7ee787" stroke-width="14" stroke-linecap="round"/>
+    <path d="M0 -90 q-90 -10 -120 -90 q90 0 120 90z" fill="#7ee787"/>
+    <path d="M0 -120 q90 -10 120 -90 q-90 0 -120 90z" fill="#7ee787" opacity="0.85"/>
+    <circle cx="0" cy="6" r="20" fill="#f2c94c"/>
+  </g>
+</svg>

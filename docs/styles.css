@@ -1,91 +1,225 @@
+@import url("tokens.css");
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #151217;
-  color: #f5edf7;
   line-height: 1.55;
 }
+
+/* =========================================================================
+   HERO — landing front door as a live broadcast panel
+   ========================================================================= */
 .hero {
-  padding: 64px 20px 48px;
+  position: relative;
+  padding: 72px 20px 56px;
   text-align: center;
-  border-bottom: 1px solid rgba(255,255,255,.15);
+  overflow: hidden;
+  border-bottom: 2px solid var(--yellow);
+  background:
+    radial-gradient(circle at 14% 0%, rgba(145,201,255,.22), transparent 24rem),
+    radial-gradient(circle at 86% 8%, rgba(255,92,122,.16), transparent 22rem),
+    linear-gradient(180deg, var(--ink-700), var(--ink-900));
 }
+/* scanline sweep over the hero */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(transparent 0 48%, rgba(255,255,255,.05) 50%, transparent 52%);
+  background-size: 100% 7px;
+  opacity: .6;
+}
+.hero > * { position: relative; z-index: 1; }
+
 .badge {
-  display: inline-block;
-  border: 1px solid rgba(255,255,255,.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line-strong);
   border-radius: 999px;
-  padding: 6px 12px;
-  color: #f2c94c;
+  padding: 6px 14px;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  background: rgba(0,0,0,.3);
 }
+.badge::before {
+  content: "";
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 0 rgba(255,92,122,.6);
+  animation: livePulse 1.6s infinite;
+}
+@keyframes livePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,92,122,.6); }
+  70%  { box-shadow: 0 0 0 9px rgba(255,92,122,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,92,122,0); }
+}
+
 h1 {
-  font-size: clamp(42px, 8vw, 92px);
-  line-height: .95;
-  margin: 18px 0;
+  font-size: clamp(54px, 12vw, 132px);
+  line-height: .9;
+  margin: 20px 0 14px;
 }
-h2 { margin-top: 0; }
+/* compact hero for the in-game pages so play starts higher */
+.compact-hero { padding: 40px 20px 30px; }
+.compact-hero h1 { font-size: clamp(40px, 8vw, 84px); }
+h2 { margin-top: 0; font-size: clamp(26px, 4vw, 40px); }
+h3 { font-size: clamp(20px, 3vw, 26px); }
+
 .tagline {
-  max-width: 820px;
+  max-width: 760px;
   margin: 0 auto;
-  font-size: 24px;
-  color: #c8b9ce;
+  font-size: clamp(17px, 2.4vw, 22px);
+  font-weight: 600;
+  color: var(--muted);
 }
+
+/* scrolling breaking-news ticker under the hero headline */
+.ticker {
+  position: relative;
+  z-index: 1;
+  margin: 26px auto 0;
+  max-width: 980px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(0,0,0,.35);
+}
+.ticker-track {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 9px 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--blue);
+  animation: tickerScroll 26s linear infinite;
+}
+.ticker-track span { margin: 0 28px; }
+.ticker-track b { color: var(--yellow); }
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* =========================================================================
+   BUTTONS — chunky comic with hard offset shadow + tactile hover
+   ========================================================================= */
 .cta-row {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
+  gap: 14px;
+  margin-top: 30px;
 }
+.cta-row.left { justify-content: flex-start; }
+
 .button {
   display: inline-block;
   text-decoration: none;
-  color: #17120b;
-  background: #f2c94c;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-weight: 800;
+  color: var(--ink-900);
+  background: var(--yellow);
+  padding: 13px 20px;
+  border: 2px solid #000;
+  border-radius: var(--r-sm);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(0,0,0,.55);
+}
+.button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(0,0,0,.5);
 }
 .button.secondary {
-  color: #f5edf7;
+  color: var(--text);
   background: transparent;
-  border: 1px solid rgba(255,255,255,.18);
+  border-color: var(--line-strong);
+  box-shadow: none;
 }
+.button.secondary:hover {
+  border-color: var(--blue);
+  background: rgba(145,201,255,.1);
+  transform: translate(-2px, -2px);
+}
+.button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* =========================================================================
+   LAYOUT + CARDS
+   ========================================================================= */
 main {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 32px 0 80px;
+  padding: 36px 0 90px;
 }
 .warning, .card {
-  background: #231d26;
-  border: 1px solid rgba(255,255,255,.13);
-  border-radius: 18px;
-  padding: 20px;
-  margin: 16px 0;
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  margin: 18px 0;
+  box-shadow: var(--shadow-soft);
 }
-.warning { border-color: #f2c94c; }
+/* comic accent rule across the top of each card */
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 4px;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  background: linear-gradient(90deg, var(--red), var(--yellow), var(--blue));
+  opacity: .8;
+}
+.warning { border-color: var(--yellow); }
+
 .grid.two, .cycle-grid, .deck-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
 }
 .mini-card {
-  background: #302735;
-  border: 1px solid rgba(255,255,255,.13);
-  border-radius: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
   padding: 16px;
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform .14s ease, border-color .14s ease, box-shadow .14s ease;
+}
+.mini-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(242,201,76,.5);
+  box-shadow: var(--shadow-hard);
 }
 .stats, .count {
-  color: #f2c94c;
-  font-weight: 800;
+  color: var(--yellow);
+  font-weight: 700;
 }
 .count {
-  font-size: 14px;
+  font-size: 13px;
   margin-left: 6px;
+  letter-spacing: .04em;
 }
 .flavor {
-  color: #c8b9ce;
+  color: var(--muted);
   font-style: italic;
 }
+
+/* =========================================================================
+   BOARD
+   ========================================================================= */
 .board-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
@@ -93,33 +227,43 @@ main {
 }
 .board-space {
   min-height: 112px;
-  background: #302735;
-  border: 1px solid rgba(255,255,255,.13);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
   border-radius: 14px;
   padding: 12px;
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform .12s ease, border-color .12s ease;
+}
+.board-space:hover {
+  transform: translateY(-2px);
+  border-color: rgba(145,201,255,.5);
 }
 .board-space .num {
   display: inline-flex;
-  width: 28px;
-  height: 28px;
+  width: 28px; height: 28px;
   justify-content: center;
   align-items: center;
   border-radius: 999px;
-  background: rgba(242,201,76,.14);
-  color: #f2c94c;
+  background: rgba(242,201,76,.16);
+  color: var(--yellow);
   margin-right: 6px;
-  font-weight: 900;
+  font-family: var(--font-mono);
+  font-weight: 700;
 }
 .board-space small {
   display: block;
-  color: #c8b9ce;
+  color: var(--muted);
   margin-top: 6px;
 }
+
 .deck-section { margin-top: 24px; }
 .checklist li { margin: 8px 0; }
+
 footer {
-  border-top: 1px solid rgba(255,255,255,.15);
+  border-top: 2px solid var(--yellow);
   text-align: center;
-  color: #c8b9ce;
-  padding: 32px 16px;
+  color: var(--muted);
+  padding: 36px 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
 }

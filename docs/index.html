@@ -3,32 +3,81 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>2020s: The Game — Prototype v0.14</title>
+  <title>2020s: The Game — Prototype v0.15</title>
+  <link rel="icon" href="assets/art/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/art/apple-touch-icon.png">
+  <meta name="theme-color" content="#0a0c13">
+  <meta name="description" content="A satirical survive-the-decade game: retro-futurist news broadcast meets comic-book apocalypse.">
+  <meta property="og:title" content="2020s: The Game">
+  <meta property="og:description" content="Survive 2020–2030 without losing your mind, your money, or your grip on reality.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://weswuy.github.io/2020s/assets/art/og-cover.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="art-system.css">
 </head>
 <body>
   <header class="hero">
-    <div class="badge">Prototype v0.14 — Art Direction & Atmosphere Pass</div>
-    <h1>2020s: The Game</h1>
+    <div class="badge">Prototype v0.15 — Comic-Broadcast UI Pass</div>
+    <h1 class="ca">2020s: The Game</h1>
     <p class="tagline">Satirical retro-futurist news broadcast meets comic-book apocalypse.</p>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span><b>BREAKING:</b> Survive the decade without losing your mind, your money, or your grip on reality.</span>
+        <span><b>2024:</b> The algorithm has opinions about you now.</span>
+        <span><b>2027:</b> Markets up, sanity down, influence pending.</span>
+        <span><b>LIVE:</b> Dystopia Run and Utopia Run now broadcasting.</span>
+        <span><b>BREAKING:</b> Survive the decade without losing your mind, your money, or your grip on reality.</span>
+        <span><b>2024:</b> The algorithm has opinions about you now.</span>
+        <span><b>2027:</b> Markets up, sanity down, influence pending.</span>
+        <span><b>LIVE:</b> Dystopia Run and Utopia Run now broadcasting.</span>
+      </div>
+    </div>
     <div class="cta-row">
       <a href="video.html" class="button">Play Video Game Mode</a>
-      <a href="art-direction.html" class="button secondary">Art Direction</a>
       <a href="play.html" class="button secondary">Board Game Mode</a>
+      <a href="#how-to-play" class="button secondary">How to Play</a>
       <a href="#cards" class="button secondary">View Cards</a>
     </div>
   </header>
 
   <main>
     <section class="card">
-      <h2>First Hero Artwork</h2>
-      <p>The first real vector artwork is now in the project: a 16:9 broadcast/comic hero panel for the prototype.</p>
-      <img src="assets/art/hero-broadcast.svg" alt="2020s: The Game retro-futurist broadcast hero art" style="width:100%;border-radius:18px;border:1px solid rgba(255,255,255,.14);">
+      <h2>Hero Artwork</h2>
+      <p>A 16:9 AI-generated broadcast/comic hero panel. City skyline, all six character silhouettes, LIVE ticker, and the full satirical broadcast identity.</p>
+      <picture>
+        <source srcset="assets/art/hero-broadcast.png" type="image/png">
+        <img src="assets/art/hero-broadcast.svg" alt="2020s: The Game retro-futurist broadcast hero art" style="width:100%;border-radius:18px;border:1px solid rgba(255,255,255,.14);">
+      </picture>
+    </section>
+
+    <section id="how-to-play" class="card">
+      <h2>How to Play</h2>
+      <p>You are trying to make it from <strong>2020 to 2030</strong> without falling apart. Every survivor juggles three stats:</p>
+      <ul class="checklist">
+        <li><strong>Sanity</strong> — what is left of your peace of mind.</li>
+        <li><strong>Money</strong> — your buffer against the chaos.</li>
+        <li><strong>Influence</strong> — how loudly the timeline listens to you.</li>
+      </ul>
+      <p>Pick a way to play:</p>
+      <div class="deck-grid">
+        <article class="mini-card">
+          <h3>🎮 Video Game Mode</h3>
+          <p>Choose a <strong>Dystopia Run</strong> or <strong>Utopia Run</strong> and a character, then make one big choice each year. Keep your stats above zero and watch the <strong>Timeline Health</strong> meter — your ending is a shareable broadcast report.</p>
+          <a class="button" href="video.html">Play Video Game Mode</a>
+        </article>
+        <article class="mini-card">
+          <h3>🎲 Board Game Mode</h3>
+          <p>A digital assistant for the 40-space tabletop game: roll, move, and draw from roughly 110 satirical cards on your way to 2030. Print the kit below to play at a real table.</p>
+          <a class="button secondary" href="play.html">Open Board Game Mode</a>
+        </article>
+      </div>
+      <p class="flavor">Play solo or with friends. A full run takes about 10–20 minutes.</p>
     </section>
 
     <section id="video" class="card">
-      <h2>New in v0.14: Art Direction & Atmosphere Pass</h2>
-      <p>The prototype now has a consistent visual language: retro-futurist broadcast frames, comic-apocalypse halftone texture, lower-thirds, character portrait slots, event art slots, and Dystopia / Utopia atmosphere.</p>
+      <h2>New in v0.15: Comic-Broadcast UI Pass</h2>
+      <p>The prototype now runs on a shared comic-broadcast design system — and the placeholder art slots are filled in: AI-generated character portraits and a 16:9 broadcast hero panel join the hand-built SVG scene art, lower-thirds, halftone texture, and Dystopia / Utopia atmosphere.</p>
       <div class="cta-row left">
         <a class="button" href="video.html">Launch Video Game Mode</a>
         <a class="button secondary" href="art-direction.html">View Art Direction</a>
@@ -84,22 +133,24 @@
       <ul>
         <li><strong>v0.13:</strong> video game feel pass with character identity, event categories, outcome feedback, and mode-specific visual styling.</li>
         <li><strong>v0.14:</strong> art direction and atmosphere pass with broadcast/comic placeholder art slots, first hero artwork, and an art direction page.</li>
+        <li><strong>v0.15:</strong> comic-broadcast UI pass — shared design system, generated character portraits, and a broadcast hero panel replace the placeholder art across the hub and video mode.</li>
         <li><strong>v1.0:</strong> public preview build.</li>
       </ul>
     </section>
   </main>
 
   <footer>
-    <p>2020s: The Game — Prototype v0.14. Built for video-game and board-game playtesting.</p>
+    <p>2020s: The Game — Prototype v0.15. Built for video-game and board-game playtesting.</p>
   </footer>
 
   <script src="game-data.js"></script>
+  <script src="art-system.js"></script>
   <script>
     const characterGrid = document.getElementById("characterGrid");
     GAME.characters.forEach(c => {
       const el = document.createElement("article");
       el.className = "mini-card";
-      el.innerHTML = `<h3>${c.name}</h3><p class="stats">Sanity ${c.stats.sanity} · Money ${c.stats.money} · Influence ${c.stats.influence}</p><p><strong>Ability:</strong> ${c.ability}</p><p><strong>Weakness:</strong> ${c.weakness}</p><p class="flavor">“${c.flavor}”</p>`;
+      el.innerHTML = `${portraitMarkup(c.name)}<h3>${c.name}</h3><p class="stats">Sanity ${c.stats.sanity} · Money ${c.stats.money} · Influence ${c.stats.influence}</p><p><strong>Ability:</strong> ${c.ability}</p><p><strong>Weakness:</strong> ${c.weakness}</p><p class="flavor">“${c.flavor}”</p>`;
       characterGrid.appendChild(el);
     });
 

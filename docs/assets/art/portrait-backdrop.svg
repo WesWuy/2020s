@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="pb-spot" cx="50%" cy="32%" r="62%">
+      <stop offset="0" stop-color="#2a3147"/><stop offset="1" stop-color="#0a0c13"/>
+    </radialGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#pb-spot)"/>
+  <!-- broadcast grid floor -->
+  <g stroke="#91c9ff" stroke-width="1.4" opacity="0.28">
+    <line x1="0" y1="150" x2="200" y2="150"/>
+    <line x1="-20" y1="200" x2="60" y2="150"/><line x1="60" y1="200" x2="90" y2="150"/>
+    <line x1="200" y1="200" x2="140" y2="150"/><line x1="140" y1="200" x2="110" y2="150"/>
+    <line x1="100" y1="200" x2="100" y2="150"/>
+  </g>
+  <!-- halftone dots -->
+  <g fill="#f2c94c" opacity="0.16">
+    <circle cx="24" cy="28" r="2.5"/><circle cx="48" cy="28" r="2.5"/><circle cx="72" cy="28" r="2.5"/>
+    <circle cx="152" cy="34" r="2.5"/><circle cx="176" cy="34" r="2.5"/><circle cx="36" cy="52" r="2.5"/>
+    <circle cx="168" cy="58" r="2.5"/>
+  </g>
+  <!-- scanlines -->
+  <g fill="#ffffff" opacity="0.05">
+    <rect x="0" y="40" width="200" height="2"/><rect x="0" y="80" width="200" height="2"/>
+    <rect x="0" y="120" width="200" height="2"/>
+  </g>
+</svg>

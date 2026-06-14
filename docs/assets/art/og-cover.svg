@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Arial Black, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#161a27"/>
+      <stop offset="1" stop-color="#0a0c13"/>
+    </linearGradient>
+    <radialGradient id="glowR" cx="14%" cy="0%" r="60%">
+      <stop offset="0" stop-color="#ff5c7a" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ff5c7a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="88%" cy="10%" r="55%">
+      <stop offset="0" stop-color="#91c9ff" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#91c9ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="halftone" width="9" height="9" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#ffffff" opacity="0.06"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glowR)"/>
+  <rect width="1200" height="630" fill="url(#glowB)"/>
+  <rect width="1200" height="630" fill="url(#halftone)"/>
+
+  <!-- top broadcast bar -->
+  <rect x="60" y="64" width="1080" height="46" rx="23" fill="#000000" opacity="0.45" stroke="#ffffff" stroke-opacity="0.18"/>
+  <circle cx="95" cy="87" r="9" fill="#ff5c7a"/>
+  <text x="120" y="94" fill="#f2c94c" font-size="22" letter-spacing="6" font-weight="bold">LIVE FEED // 2020s SIGNAL — SATIRICAL SURVIVAL BROADCAST</text>
+
+  <!-- title with chromatic aberration -->
+  <g>
+    <text x="60" y="320" font-size="170" font-weight="900" fill="#ff5c7a" opacity="0.55">2020s</text>
+    <text x="68" y="320" font-size="170" font-weight="900" fill="#91c9ff" opacity="0.55">2020s</text>
+    <text x="64" y="320" font-size="170" font-weight="900" fill="#f7f0ff">2020s</text>
+    <text x="66" y="430" font-size="92" font-weight="900" fill="#f2c94c" letter-spacing="2">THE GAME</text>
+  </g>
+
+  <!-- tagline -->
+  <text x="64" y="505" font-size="32" fill="#cdd8ea" font-family="Arial, sans-serif">Retro-futurist news broadcast meets comic-book apocalypse.</text>
+  <text x="64" y="552" font-size="26" fill="#9fb0c8" font-family="Arial, sans-serif">Survive 2020–2030 without losing your mind, your money, or your grip on reality.</text>
+
+  <!-- bottom palette stripe -->
+  <g>
+    <rect x="0" y="610" width="400" height="20" fill="#ff5c7a"/>
+    <rect x="400" y="610" width="400" height="20" fill="#f2c94c"/>
+    <rect x="800" y="610" width="400" height="20" fill="#7ee787"/>
+  </g>
+
+  <!-- scanlines overlay -->
+  <g opacity="0.10">
+    <rect x="0" y="0" width="1200" height="3" fill="#fff"/>
+    <rect x="0" y="120" width="1200" height="3" fill="#fff"/>
+    <rect x="0" y="240" width="1200" height="3" fill="#fff"/>
+    <rect x="0" y="360" width="1200" height="3" fill="#fff"/>
+    <rect x="0" y="480" width="1200" height="3" fill="#fff"/>
+  </g>
+</svg>

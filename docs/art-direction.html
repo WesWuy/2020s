@@ -4,12 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>2020s: Art Direction</title>
+  <link rel="icon" href="assets/art/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/art/apple-touch-icon.png">
+  <meta name="theme-color" content="#0a0c13">
+  <meta property="og:title" content="2020s: The Game — Art Direction">
+  <meta property="og:description" content="The visual language: satirical retro-futurist broadcast meets comic-book apocalypse.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://weswuy.github.io/2020s/assets/art/og-cover.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="art-system.css">
 </head>
 <body>
   <header class="hero compact-hero">
-    <div class="badge">Prototype v0.14 — Art Direction</div>
+    <div class="badge">Prototype v0.15 — Art Direction</div>
     <h1>Satirical Retro-Futurist News Broadcast Meets Comic-Book Apocalypse</h1>
     <p class="tagline">A reusable visual language for characters, events, final reports, cards, and future generated artwork.</p>
     <div class="cta-row">
@@ -22,7 +30,10 @@
     <section class="card">
       <h2>First Real Artwork</h2>
       <p>This is the first actual vector artwork panel in the project. It establishes the broadcast/comic look for future art.</p>
-      <img src="assets/art/hero-broadcast.svg" alt="2020s: The Game retro-futurist broadcast hero art" style="width:100%;border-radius:18px;border:1px solid rgba(255,255,255,.14);">
+      <picture>
+        <source srcset="assets/art/hero-broadcast.png" type="image/png">
+        <img src="assets/art/hero-broadcast.svg" alt="2020s: The Game retro-futurist broadcast hero art" style="width:100%;border-radius:18px;border:1px solid rgba(255,255,255,.14);">
+      </picture>
     </section>
 
     <section class="card">
@@ -40,7 +51,7 @@
 
     <section class="card">
       <h2>Event Art Frames</h2>
-      <p>These are placeholder art frames. Final generated artwork can replace these later while preserving the same frame language.</p>
+      <p>These are the live vector scene frames used in the video game. Each year renders its own broadcast scene behind the same frame language.</p>
       <div class="deck-grid">
         <div class="art-frame dystopia-art event-lockdown"><div class="art-frame-inner"><div><span class="art-icon">🚪</span><span class="art-kicker">LOCKDOWN BROADCAST</span><span class="art-title">Timeline Sealed</span><span class="art-subtitle">The first chapter of collective buffering.</span></div></div><div class="art-lower-third"><strong>2020 // Collapse Tutorial</strong><span>Dystopia broadcast placeholder.</span></div></div>
         <div class="art-frame dystopia-art event-algorithm"><div class="art-frame-inner"><div><span class="art-icon">📱</span><span class="art-kicker">ALGORITHM ALERT</span><span class="art-title">Fame Offered</span><span class="art-subtitle">The feed has selected a sacrifice.</span></div></div><div class="art-lower-third"><strong>2021 // Algorithm Test</strong><span>Social collapse placeholder.</span></div></div>
@@ -51,14 +62,14 @@
 
     <section class="card">
       <h2>Character Portrait Direction</h2>
-      <p>Each character needs a strong silhouette and a broadcast identity. The current portrait boxes are placeholders for final generated character art.</p>
+      <p>Each character has a strong silhouette and a broadcast identity, set against a live studio backdrop. Final illustrated portraits can drop into the same frames later.</p>
       <div class="deck-grid">
-        <article class="mini-card"><div class="portrait-frame"><span class="portrait-icon">₿</span></div><h3>Crypto Bro</h3><p>Neon finance cult energy. Too confident. Graph reflections. Bullish in a burning room.</p></article>
-        <article class="mini-card"><div class="portrait-frame"><span class="portrait-icon">🥫</span></div><h3>The Prepper</h3><p>Bunker prophet. Canned goods, radio, tactical calm, accidentally right about the wrong details.</p></article>
-        <article class="mini-card"><div class="portrait-frame"><span class="portrait-icon">📱</span></div><h3>The Influencer</h3><p>Ring light aura. Crisis content. Perfect expression, collapsing background.</p></article>
-        <article class="mini-card"><div class="portrait-frame"><span class="portrait-icon">📋</span></div><h3>The Bureaucrat</h3><p>Clipboard shield. Forms, stamps, fluorescent institutional lighting, apocalypse by committee.</p></article>
-        <article class="mini-card"><div class="portrait-frame"><span class="portrait-icon">🧘</span></div><h3>The Wellness Guru</h3><p>Soft glow, nervous-system calm, cosmic marketing, serenity surrounded by chaos.</p></article>
-        <article class="mini-card"><div class="portrait-frame"><span class="portrait-icon">🎙</span></div><h3>The Podcaster</h3><p>Studio bunker, boom mic, conspiracy corkboard background, intense monologue face.</p></article>
+        <article class="mini-card"><div class="portrait-frame"><img class="portrait-photo" src="assets/art/portrait-crypto-bro.png" alt="Crypto Bro portrait" onerror="this.remove()"><span class="portrait-icon">₿</span></div><h3>Crypto Bro</h3><p>Neon finance cult energy. Too confident. Graph reflections. Bullish in a burning room.</p></article>
+        <article class="mini-card"><div class="portrait-frame"><img class="portrait-photo" src="assets/art/portrait-prepper.png" alt="The Prepper portrait" onerror="this.remove()"><span class="portrait-icon">🥫</span></div><h3>The Prepper</h3><p>Bunker prophet. Canned goods, radio, tactical calm, accidentally right about the wrong details.</p></article>
+        <article class="mini-card"><div class="portrait-frame"><img class="portrait-photo" src="assets/art/portrait-influencer.png" alt="The Influencer portrait" onerror="this.remove()"><span class="portrait-icon">📱</span></div><h3>The Influencer</h3><p>Ring light aura. Crisis content. Perfect expression, collapsing background.</p></article>
+        <article class="mini-card"><div class="portrait-frame"><img class="portrait-photo" src="assets/art/portrait-bureaucrat.png" alt="The Bureaucrat portrait" onerror="this.remove()"><span class="portrait-icon">📋</span></div><h3>The Bureaucrat</h3><p>Clipboard shield. Forms, stamps, fluorescent institutional lighting, apocalypse by committee.</p></article>
+        <article class="mini-card"><div class="portrait-frame"><img class="portrait-photo" src="assets/art/portrait-wellness-guru.png" alt="The Wellness Guru portrait" onerror="this.remove()"><span class="portrait-icon">🧘</span></div><h3>The Wellness Guru</h3><p>Soft glow, nervous-system calm, cosmic marketing, serenity surrounded by chaos.</p></article>
+        <article class="mini-card"><div class="portrait-frame"><img class="portrait-photo" src="assets/art/portrait-podcaster.png" alt="The Podcaster portrait" onerror="this.remove()"><span class="portrait-icon">🎙</span></div><h3>The Podcaster</h3><p>Studio bunker, boom mic, conspiracy corkboard background, intense monologue face.</p></article>
       </div>
     </section>
 
@@ -66,6 +77,19 @@
       <h2>Reusable Prompt Formula</h2>
       <p>Use this formula when generating final art assets:</p>
       <pre><code>Satirical retro-futurist news broadcast meets comic-book apocalypse, bold halftone shading, dramatic lower-third graphics, neon broadcast lighting, cinematic composition, exaggerated but not grotesque character design, high contrast, readable silhouettes, dark humor, 16:9 game art panel.</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>Character Portrait Prompt Sheet</h2>
+      <p>Generate each portrait at <strong>1:1</strong> with the formula above prepended, then save it to <code>assets/art/portrait-&lt;slug&gt;.png</code>. The slots auto-display the file the moment it exists; until then they fall back to the emoji icon.</p>
+      <ul class="checklist">
+        <li><strong>portrait-crypto-bro.png</strong> — Crypto Bro: neon finance cult energy, too-confident smirk, candlestick graph reflections in mirrored sunglasses, hoodie and gold chain, bullish in a burning room.</li>
+        <li><strong>portrait-prepper.png</strong> — The Prepper: bunker prophet, canned goods and a hand radio, tactical calm, gas mask pushed up on the forehead, accidentally right about the wrong details.</li>
+        <li><strong>portrait-influencer.png</strong> — The Influencer: ring-light halo aura, crisis content, perfect rehearsed expression, phone on a tripod, a collapsing background behind the perfect framing.</li>
+        <li><strong>portrait-bureaucrat.png</strong> — The Bureaucrat: clipboard held like a shield, stacks of forms and rubber stamps, cold fluorescent institutional lighting, apocalypse by committee, dead-eyed composure.</li>
+        <li><strong>portrait-wellness-guru.png</strong> — The Wellness Guru: soft glow, serene nervous-system calm, cosmic self-help marketing aura, linen and crystals, perfect serenity surrounded by off-screen chaos.</li>
+        <li><strong>portrait-podcaster.png</strong> — The Podcaster: dim studio bunker, large boom microphone, headphones, a conspiracy corkboard with red string behind, intense three-hour-monologue face.</li>
+      </ul>
     </section>
   </main>
 </body>

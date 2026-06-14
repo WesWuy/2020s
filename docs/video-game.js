@@ -151,6 +151,136 @@ const VIDEO_EVENTS = [
   }
 ];
 
+// Alternate event per year. One variant is chosen at random per run (stored in
+// videoState.variantPicks) so a second playthrough plays differently. Each alt is
+// a full event object so downstream code can read year/category/title/text/choices.
+const VIDEO_EVENT_ALTS = [
+  {
+    year: 2020,
+    category: "Collapse Tutorial",
+    title: "The Great Indoor Migration",
+    text: "Everyone moves their entire life indoors and online at once. The servers strain. So do the relationships.",
+    choices: [
+      { label: "Hoard monitors and routers", text: "Your setup is glorious. Your savings are not.", effects: { sanity: -1, money: -2, influence: 1, timeline: -3 } },
+      { label: "Start a mutual-aid spreadsheet", text: "Boring heroics keep the timeline alive.", effects: { sanity: 1, money: 0, influence: 1, timeline: 8 } },
+      { label: "Go live eight hours a day", text: "Content rises. So does the eye twitch.", effects: { sanity: -2, money: 1, influence: 3, timeline: -5 } }
+    ]
+  },
+  {
+    year: 2021,
+    category: "Algorithm Test",
+    title: "The NFT Gold Rush",
+    text: "Someone offers you a jpeg of a rock for the price of a car. They insist this is the future.",
+    choices: [
+      { label: "Ape in with everything", text: "Number go up. Then number go sideways.", effects: { sanity: -1, money: 3, influence: 2, timeline: -8 } },
+      { label: "Explain blockchains to your relatives", text: "Slow, useful, deeply uncool.", effects: { sanity: 1, money: 0, influence: 1, timeline: 6 } },
+      { label: "Mint a collection of your own face", text: "Art? Grift? The line dissolves.", effects: { sanity: -1, money: 1, influence: 3, timeline: -4 } }
+    ]
+  },
+  {
+    year: 2022,
+    category: "Economic Pressure",
+    title: "The Great Resignation Beckons",
+    text: "Everyone is quitting their job to chase a dream, a side hustle, or simply the exit sign.",
+    choices: [
+      { label: "Quit dramatically on camera", text: "Freedom! Also, rent.", effects: { sanity: 1, money: -2, influence: 3, timeline: -4 } },
+      { label: "Organize with your coworkers", text: "Collective spine: rare and effective.", effects: { sanity: 1, money: 1, influence: 1, timeline: 8 } },
+      { label: "Become a productivity guru overnight", text: "You sell the hustle you just escaped.", effects: { sanity: -1, money: 2, influence: 2, timeline: -6 } }
+    ]
+  },
+  {
+    year: 2023,
+    category: "Tech Fork",
+    title: "Layoff Roulette",
+    text: "The same companies that hired everyone in 2021 now thank everyone for their service via mass email.",
+    choices: [
+      { label: "Pivot to 'AI consultant'", text: "You learned the word 'synergy' yesterday.", effects: { sanity: -1, money: 2, influence: 2, timeline: -5 } },
+      { label: "Build a co-op with the survivors", text: "Ownership beats anxiety.", effects: { sanity: 1, money: 0, influence: 1, timeline: 9 } },
+      { label: "Post a heartfelt thread about resilience", text: "Engagement loves a comeback arc.", effects: { sanity: -1, money: 0, influence: 3, timeline: -3 } }
+    ]
+  },
+  {
+    year: 2024,
+    category: "Mini-Boss: Election Fever",
+    title: "Deepfake Debate Night",
+    text: "Two candidates debate. Possibly. It is increasingly hard to tell which footage is real.",
+    choices: [
+      { label: "Share the spiciest clip instantly", text: "Real or not, it slaps.", effects: { sanity: -2, money: 0, influence: 3, timeline: -10 } },
+      { label: "Run a community fact-check night", text: "Unglamorous truth, served warm.", effects: { sanity: 1, money: 0, influence: 1, timeline: 9 } },
+      { label: "Sell 'I survived the debate' merch", text: "Capitalism finds a way, as always.", effects: { sanity: -1, money: 3, influence: 1, timeline: -6 } }
+    ]
+  },
+  {
+    year: 2025,
+    category: "Culture War Subscription",
+    title: "The Great Unsubscribe",
+    text: "People begin fleeing every platform at once, searching for somewhere quieter. There is nowhere quieter.",
+    choices: [
+      { label: "Start your own walled garden", text: "Now YOU are the algorithm.", effects: { sanity: -1, money: 1, influence: 2, timeline: -5 } },
+      { label: "Help people log off for real", text: "The radical act of going outside.", effects: { sanity: 2, money: -1, influence: 1, timeline: 8 } },
+      { label: "Monetize the migration with a newsletter", text: "Substack stack to the moon.", effects: { sanity: -1, money: 2, influence: 2, timeline: -4 } }
+    ]
+  },
+  {
+    year: 2026,
+    category: "Group Chat Governance",
+    title: "The Block Party Coup",
+    text: "Your neighborhood forms a hyperlocal government held together by a shared spreadsheet and one very intense HOA president.",
+    choices: [
+      { label: "Seize the spreadsheet", text: "Power corrupts, even at the bake sale.", effects: { sanity: -1, money: 0, influence: 3, timeline: -5 } },
+      { label: "Write a fair charter everyone signs", text: "Tiny democracy, real stakes.", effects: { sanity: 1, money: 0, influence: 1, timeline: 9 } },
+      { label: "Privatize the community garden", text: "Tomatoes, but make it a subscription.", effects: { sanity: -1, money: 3, influence: 1, timeline: -8 } }
+    ]
+  },
+  {
+    year: 2027,
+    category: "Reality Warning",
+    title: "Mandatory Touch Grass Initiative",
+    text: "Reality issues a soft recommendation that everyone go outside. Compliance is, predictably, mixed.",
+    choices: [
+      { label: "Livestream yourself touching grass", text: "The irony is lost on the algorithm.", effects: { sanity: -1, money: 1, influence: 2, timeline: -4 } },
+      { label: "Actually go outside and stay there", text: "Sincerely. No phone. Wild.", effects: { sanity: 2, money: 0, influence: 0, timeline: 9 } },
+      { label: "Sell premium artificial grass", text: "Indoor nature, now with a warranty.", effects: { sanity: -1, money: 3, influence: 1, timeline: -6 } }
+    ]
+  },
+  {
+    year: 2028,
+    category: "Utopia Window",
+    title: "The Great Reconciliation Summit",
+    text: "For one improbable moment, opposing camps agree to sit at the same table. Snacks are provided.",
+    choices: [
+      { label: "Broker a real compromise", text: "Boring, durable, beautiful.", effects: { sanity: 1, money: 0, influence: 2, timeline: 12 } },
+      { label: "Stage a viral hug for clout", text: "Performative peace, premium engagement.", effects: { sanity: -1, money: 1, influence: 3, timeline: -6 } },
+      { label: "Sell the naming rights to harmony", text: "Brought to you by a logo.", effects: { sanity: -1, money: 3, influence: 1, timeline: -8 } }
+    ]
+  },
+  {
+    year: 2029,
+    category: "Final Mini-Boss",
+    title: "The Last Algorithm Standing",
+    text: "One feed has consumed all the others. It knows you. It offers a comfortable, infinite scroll forever.",
+    choices: [
+      { label: "Accept the cozy infinite scroll", text: "Warm. Numb. Forever.", effects: { sanity: -3, money: 1, influence: 2, timeline: -9 } },
+      { label: "Pull the plug and teach others how", text: "The last brave, corny act.", effects: { sanity: 1, money: 0, influence: 2, timeline: 12 } },
+      { label: "Sell the off-switch as a product", text: "Freedom, now in tiers.", effects: { sanity: -1, money: 3, influence: 1, timeline: -5 } }
+    ]
+  }
+];
+
+function eventVariants(step) {
+  const base = VIDEO_EVENTS[step];
+  if (!base) return [];
+  const alt = VIDEO_EVENT_ALTS[step];
+  return alt ? [base, alt] : [base];
+}
+
+function eventForStep(step) {
+  const variants = eventVariants(step);
+  if (!variants.length) return null;
+  const pick = (videoState && videoState.variantPicks && videoState.variantPicks[step]) || 0;
+  return variants[pick] || variants[0];
+}
+
 let videoState = loadVideoState() || null;
 
 function clamp(value, min, max) {
@@ -210,11 +340,13 @@ function updateCharacterDescription() {
 function startVideoRun(mode) {
   const characterIndex = Number(videoEls.character.value) || 0;
   const character = GAME.characters[characterIndex];
+  const variantPicks = VIDEO_EVENTS.map((_, i) => Math.floor(Math.random() * eventVariants(i).length));
   videoState = {
     mode,
     characterIndex,
     characterName: character.name,
     step: 0,
+    variantPicks,
     year: VIDEO_EVENTS[0].year,
     sanity: character.stats.sanity + (mode === "utopia" ? 1 : 0),
     money: character.stats.money,
@@ -230,7 +362,7 @@ function startVideoRun(mode) {
 }
 
 function currentEvent() {
-  return VIDEO_EVENTS[videoState.step] || null;
+  return videoState ? eventForStep(videoState.step) : null;
 }
 
 function effectSummary(effects) {

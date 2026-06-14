@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="el-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#251a31"/><stop offset="1" stop-color="#0a0c13"/>
+    </linearGradient>
+    <pattern id="el-ht" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#ffffff" opacity="0.06"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#el-bg)"/>
+  <rect width="1600" height="900" fill="url(#el-ht)"/>
+  <!-- stars band top -->
+  <g fill="#f2c94c" opacity="0.6">
+    <path d="M120 90 l12 30 32 2 -25 21 9 32 -28-19 -28 19 9-32 -25-21 32-2z"/>
+    <path d="M1450 90 l12 30 32 2 -25 21 9 32 -28-19 -28 19 9-32 -25-21 32-2z"/>
+  </g>
+  <!-- left podium (red) -->
+  <g>
+    <rect x="250" y="430" width="150" height="280" fill="#161a27" stroke="#ff5c7a" stroke-width="5"/>
+    <rect x="235" y="410" width="180" height="40" fill="#ff5c7a"/>
+    <circle cx="325" cy="350" r="46" fill="#1d2235" stroke="#ff5c7a" stroke-width="5"/>
+  </g>
+  <!-- right podium (blue) -->
+  <g>
+    <rect x="1200" y="430" width="150" height="280" fill="#161a27" stroke="#91c9ff" stroke-width="5"/>
+    <rect x="1185" y="410" width="180" height="40" fill="#91c9ff"/>
+    <circle cx="1275" cy="350" r="46" fill="#1d2235" stroke="#91c9ff" stroke-width="5"/>
+  </g>
+  <!-- dueling speech bubbles -->
+  <g>
+    <rect x="470" y="250" width="230" height="120" rx="24" fill="#1d2235" stroke="#ff5c7a" stroke-width="4"/>
+    <path d="M520 370 l-10 60 l60 -60 z" fill="#1d2235"/>
+    <text x="585" y="328" text-anchor="middle" font-size="60" fill="#ff5c7a" font-family="Arial Black, Arial">!?</text>
+    <rect x="900" y="250" width="230" height="120" rx="24" fill="#1d2235" stroke="#91c9ff" stroke-width="4"/>
+    <path d="M1080 370 l10 60 l-60 -60 z" fill="#1d2235"/>
+    <text x="1015" y="328" text-anchor="middle" font-size="60" fill="#91c9ff" font-family="Arial Black, Arial">?!</text>
+  </g>
+  <!-- ballot box center bottom -->
+  <g transform="translate(800 720)">
+    <rect x="-110" y="-40" width="220" height="150" rx="10" fill="#161a27" stroke="#f2c94c" stroke-width="5"/>
+    <rect x="-50" y="-58" width="100" height="22" rx="6" fill="#0a0c13" stroke="#f2c94c" stroke-width="4"/>
+    <rect x="-26" y="-120" width="52" height="70" fill="#f7f0ff" transform="rotate(12 0 -90)"/>
+  </g>
+</svg>

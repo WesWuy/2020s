@@ -32,10 +32,24 @@ function artEvent(year) {
   return ART_SYSTEM.events[year] || { key: "event-ai", icon: "⚡", kicker: "TIMELINE EVENT", title: String(year || "2020s"), subtitle: "Reality is still rendering." };
 }
 
+// Stable file slug for a character's generated portrait, e.g.
+// "The Wellness Guru" -> "wellness-guru". Matches generate-2020s-portraits.mjs.
+function portraitSlug(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/^the\s+/, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 function portraitMarkup(characterName) {
   const art = artCharacter(characterName);
+  const slug = portraitSlug(art.title);
+  // The <img> covers the emoji once the generated portrait exists; if the file
+  // is missing it removes itself, leaving the emoji icon as the fallback.
   return `
-    <div class="portrait-frame" aria-label="${art.title} portrait placeholder">
+    <div class="portrait-frame" aria-label="${art.title} portrait">
+      <img class="portrait-photo" src="assets/art/portrait-${slug}.png" alt="${art.title} portrait" onerror="this.remove()">
       <span class="portrait-icon">${art.icon}</span>
     </div>
   `;
@@ -56,7 +70,7 @@ function eventArtMarkup(event, mode) {
       </div>
       <div class="art-lower-third">
         <strong>${event?.year || "2020s"} // ${event?.category || "Timeline Event"}</strong>
-        <span>${mode === "utopia" ? "Repair broadcast" : "Dystopia broadcast"} placeholder art slot</span>
+        <span>${mode === "utopia" ? "Repair broadcast" : "Dystopia broadcast"} // live scene</span>
       </div>
     </div>
   `;

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="al-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#291729"/><stop offset="1" stop-color="#0a0c13"/>
+    </linearGradient>
+    <pattern id="al-ht" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#ff5c7a" opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#al-bg)"/>
+  <rect width="1600" height="900" fill="url(#al-ht)"/>
+  <!-- giant phone with feed -->
+  <g>
+    <rect x="600" y="120" width="400" height="760" rx="48" fill="#10131d" stroke="#ff5c7a" stroke-width="6"/>
+    <rect x="636" y="190" width="328" height="120" rx="12" fill="#1d2235"/>
+    <rect x="636" y="330" width="328" height="120" rx="12" fill="#1d2235"/>
+    <rect x="636" y="470" width="328" height="120" rx="12" fill="#1d2235"/>
+    <g fill="#91c9ff" opacity="0.7">
+      <circle cx="676" cy="222" r="16"/><circle cx="676" cy="362" r="16"/><circle cx="676" cy="502" r="16"/>
+    </g>
+    <g fill="#2a3147">
+      <rect x="710" y="208" width="220" height="14" rx="7"/><rect x="710" y="236" width="160" height="12" rx="6"/>
+      <rect x="710" y="348" width="220" height="14" rx="7"/><rect x="710" y="376" width="140" height="12" rx="6"/>
+      <rect x="710" y="488" width="220" height="14" rx="7"/><rect x="710" y="516" width="180" height="12" rx="6"/>
+    </g>
+  </g>
+  <!-- rising hearts / engagement bubbles -->
+  <g>
+    <g fill="#ff5c7a" opacity="0.9">
+      <path d="M360 640c-40-46 26-92 40-44 14-48 80-2 40 44l-40 42z"/>
+      <path d="M1180 560c-30-34 20-70 30-34 10-36 60-2 30 34l-30 32z" opacity="0.75"/>
+    </g>
+    <g fill="#f2c94c">
+      <circle cx="300" cy="430" r="30"/><text x="300" y="442" text-anchor="middle" font-size="34" font-family="Arial">♥</text>
+      <circle cx="1280" cy="360" r="26"/><text x="1280" y="371" text-anchor="middle" font-size="30" font-family="Arial">↑</text>
+    </g>
+  </g>
+  <!-- watching eye -->
+  <g transform="translate(800 60)">
+    <ellipse cx="0" cy="0" rx="86" ry="46" fill="#10131d" stroke="#91c9ff" stroke-width="5"/>
+    <circle cx="0" cy="0" r="26" fill="#91c9ff"/><circle cx="0" cy="0" r="11" fill="#0a0c13"/>
+  </g>
+</svg>

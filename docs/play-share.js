@@ -128,8 +128,8 @@ function renderShareCertificate() {
 
   els.winnerPanel.appendChild(certificate);
 
-  document.getElementById("copyResultBtn")?.addEventListener("click", () => copyToClipboard(shareText(data), "Result copied. Paste it anywhere.");
-  document.getElementById("challengeFriendsBtn")?.addEventListener("click", () => copyToClipboard(challengeText(data), "Challenge copied. Send it to someone brave.");
+  document.getElementById("copyResultBtn")?.addEventListener("click", () => copyToClipboard(shareText(data), "Result copied. Paste it anywhere."));
+  document.getElementById("challengeFriendsBtn")?.addEventListener("click", () => copyToClipboard(challengeText(data), "Challenge copied. Send it to someone brave."));
   document.getElementById("downloadResultBtn")?.addEventListener("click", () => downloadResultImage(data));
 }
 

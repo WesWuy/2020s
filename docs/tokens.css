@@ -1,0 +1,115 @@
+/* =========================================================================
+   2020s: The Game — shared design system (v0.15 comic-broadcast pass)
+   Imported by styles.css, so every page inherits fonts, palette, and base type.
+   ========================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  /* --- unified broadcast palette (replaces the old purple landing world) --- */
+  --ink-900: #0a0c13;
+  --ink-800: #10131d;
+  --ink-700: #161a27;
+  --surface: #181c2b;
+  --surface-2: #20263a;
+  --line: rgba(255,255,255,.12);
+  --line-strong: rgba(255,255,255,.22);
+
+  --text: #f7f0ff;
+  --muted: #9fb0c8;
+
+  --blue: #91c9ff;   /* broadcast */
+  --yellow: #f2c94c; /* comic */
+  --red: #ff5c7a;    /* panic / dystopia */
+  --green: #7ee787;  /* utopia */
+
+  /* --- type --- */
+  --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  /* --- depth (comic = hard offset shadows) --- */
+  --shadow-hard: 6px 6px 0 rgba(0,0,0,.5);
+  --shadow-hard-sm: 3px 3px 0 rgba(0,0,0,.45);
+  --shadow-soft: 0 22px 70px rgba(0,0,0,.4);
+  --glow-yellow: 0 0 0 1px rgba(242,201,76,.5), 0 8px 30px rgba(242,201,76,.18);
+
+  /* --- radii --- */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+}
+
+/* --- base typography ----------------------------------------------------- */
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--ink-800);
+}
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 400;            /* Anton is single-weight */
+  letter-spacing: .01em;
+  text-transform: uppercase;
+}
+h1 { letter-spacing: .005em; }
+h4, h5 { font-family: var(--font-body); font-weight: 900; }
+
+/* Monospace broadcast labels: eyebrows, kickers, counts, ticker text */
+.eyebrow, .badge, .count, .art-kicker, .broadcast-snipe,
+.video-hud span, .choice-effects span {
+  font-family: var(--font-mono);
+}
+
+/* Chromatic-aberration headline treatment (comic print misregistration) */
+.ca {
+  text-shadow:
+    2px 0 0 rgba(255,92,122,.55),
+   -2px 0 0 rgba(145,201,255,.55),
+    4px 4px 0 rgba(0,0,0,.32);
+}
+
+/* --- global screen atmosphere: halftone + scanlines + vignette ----------- */
+@media screen {
+  body:not(.print-page)::before,
+  body:not(.print-page)::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  /* halftone dots + faint scanlines */
+  body:not(.print-page)::before {
+    background:
+      radial-gradient(rgba(255,255,255,.05) 0 1px, transparent 1.4px),
+      linear-gradient(transparent 0 50%, rgba(0,0,0,.06) 50%);
+    background-size: 4px 4px, 100% 3px;
+    opacity: .5;
+    mix-blend-mode: screen;
+  }
+  /* corner vignette for that CRT broadcast depth */
+  body:not(.print-page)::after {
+    background: radial-gradient(120% 120% at 50% 35%, transparent 55%, rgba(0,0,0,.45));
+  }
+}
+
+/* --- print kit: force clean paper, kill the dark broadcast theme ---------- */
+@media print {
+  body.print-page,
+  body.print-page .card,
+  body.print-page .mini-card,
+  body.print-page .board-space {
+    background: #fff !important;
+    color: #000 !important;
+    border-color: #000 !important;
+    box-shadow: none !important;
+  }
+  body.print-page::before,
+  body.print-page::after { display: none !important; }
+}
+
+/* Respect reduced-motion globally */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+}

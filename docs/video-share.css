@@ -1,0 +1,108 @@
+/* Prototype v0.16 Video Share Build. */
+/* Shareable Final Timeline Report certificate for video mode. Mirrors the board */
+/* mode survival certificate (play-share.css), kept self-contained so video.html */
+/* does not need any board stylesheets. */
+
+.share-certificate {
+  margin-top: 18px;
+  border: 1px solid rgba(242,201,76,.42);
+  border-radius: 22px;
+  padding: 18px;
+  background:
+    radial-gradient(circle at 12% 5%, rgba(242,201,76,.18), transparent 20rem),
+    radial-gradient(circle at 90% 10%, rgba(145,201,255,.14), transparent 18rem),
+    rgba(255,255,255,.045);
+}
+.share-certificate h3 {
+  margin-bottom: 8px;
+}
+.share-note {
+  color: #c8b9ce;
+  font-size: 13px;
+  margin-top: 10px;
+}
+.certificate-card {
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(5,5,8,.36);
+  margin: 14px 0;
+}
+.certificate-title {
+  font-size: clamp(26px, 4vw, 42px);
+  line-height: .96;
+  margin: 8px 0 12px;
+}
+.certificate-subtitle {
+  color: #c8b9ce;
+  font-size: 17px;
+}
+.share-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+.share-stats div {
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  padding: 11px;
+  background: rgba(255,255,255,.04);
+}
+.share-stats strong {
+  display: block;
+  color: #f2c94c;
+  font-size: 24px;
+}
+.final-diagnosis {
+  margin: 12px 0;
+  padding: 12px;
+  border-left: 4px solid #f2c94c;
+  background: rgba(242,201,76,.08);
+  border-radius: 12px;
+}
+.share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.share-actions button,
+.share-actions a {
+  text-decoration: none;
+}
+.toast-message {
+  position: fixed;
+  z-index: 200;
+  right: 18px;
+  bottom: 18px;
+  max-width: 320px;
+  border: 1px solid rgba(242,201,76,.42);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: #151217;
+  color: #f5edf7;
+  box-shadow: 0 18px 60px rgba(0,0,0,.38);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+.toast-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Utopia runs tint the certificate green to match the mode's broadcast palette. */
+body.mode-utopia .share-certificate {
+  border-color: rgba(126,231,135,.45);
+  background:
+    radial-gradient(circle at 12% 5%, rgba(126,231,135,.18), transparent 20rem),
+    radial-gradient(circle at 90% 10%, rgba(145,201,255,.14), transparent 18rem),
+    rgba(255,255,255,.045);
+}
+body.mode-utopia .share-stats strong { color: #7ee787; }
+body.mode-utopia .final-diagnosis { border-left-color: #7ee787; background: rgba(126,231,135,.08); }
+@media (max-width: 650px) {
+  .share-actions { flex-direction: column; }
+  .share-actions button,
+  .share-actions a { width: 100%; text-align: center; }
+}

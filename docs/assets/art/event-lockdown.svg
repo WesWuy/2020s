@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="lk-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b2236"/><stop offset="1" stop-color="#0a0c13"/>
+    </linearGradient>
+    <pattern id="lk-ht" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#91c9ff" opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#lk-sky)"/>
+  <rect width="1600" height="900" fill="url(#lk-ht)"/>
+  <!-- city skyline silhouette -->
+  <g fill="#10131d" opacity="0.95">
+    <rect x="60" y="430" width="150" height="470"/>
+    <rect x="230" y="330" width="120" height="570"/>
+    <rect x="370" y="500" width="130" height="400"/>
+    <rect x="1120" y="380" width="140" height="520"/>
+    <rect x="1280" y="470" width="120" height="430"/>
+    <rect x="1410" y="320" width="150" height="580"/>
+  </g>
+  <!-- lit/dark windows -->
+  <g fill="#91c9ff" opacity="0.5">
+    <rect x="255" y="370" width="22" height="28"/><rect x="300" y="370" width="22" height="28"/>
+    <rect x="255" y="430" width="22" height="28"/><rect x="1440" y="360" width="22" height="28"/>
+    <rect x="1490" y="420" width="22" height="28"/><rect x="1150" y="430" width="22" height="28"/>
+  </g>
+  <!-- giant closed shutter / sealed gate -->
+  <g>
+    <rect x="600" y="360" width="400" height="420" rx="14" fill="#161a27" stroke="#ff5c7a" stroke-width="6"/>
+    <g stroke="#2a3147" stroke-width="10">
+      <line x1="612" y1="410" x2="988" y2="410"/><line x1="612" y1="460" x2="988" y2="460"/>
+      <line x1="612" y1="510" x2="988" y2="510"/><line x1="612" y1="560" x2="988" y2="560"/>
+      <line x1="612" y1="610" x2="988" y2="610"/><line x1="612" y1="660" x2="988" y2="660"/>
+      <line x1="612" y1="710" x2="988" y2="710"/>
+    </g>
+  </g>
+  <!-- caution tape -->
+  <g transform="rotate(-9 800 700)">
+    <rect x="380" y="690" width="840" height="44" fill="#f2c94c"/>
+    <g fill="#0a0c13" font-family="Arial Black, Arial" font-size="26" font-weight="900">
+      <text x="430" y="722" letter-spacing="6">SEALED · SEALED · SEALED · SEALED · SEALED</text>
+    </g>
+  </g>
+</svg>

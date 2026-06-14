@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="mn-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b2514"/><stop offset="1" stop-color="#0a0c13"/>
+    </linearGradient>
+    <pattern id="mn-ht" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#f2c94c" opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#mn-bg)"/>
+  <rect width="1600" height="900" fill="url(#mn-ht)"/>
+  <!-- ascending bars -->
+  <g fill="#1d2235" stroke="#f2c94c" stroke-width="4">
+    <rect x="150" y="640" width="150" height="220"/>
+    <rect x="340" y="540" width="150" height="320"/>
+    <rect x="530" y="420" width="150" height="440"/>
+    <rect x="920" y="500" width="150" height="360"/>
+    <rect x="1110" y="360" width="150" height="500"/>
+    <rect x="1300" y="220" width="150" height="640"/>
+  </g>
+  <!-- big up arrow -->
+  <g stroke="#f2c94c" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M180 720 L520 480 L760 560 L1380 180"/>
+  </g>
+  <path d="M1300 150 L1420 150 L1420 270 Z" fill="#f2c94c"/>
+  <!-- coins -->
+  <g>
+    <circle cx="760" cy="720" r="70" fill="#161a27" stroke="#f2c94c" stroke-width="6"/>
+    <text x="760" y="748" text-anchor="middle" font-size="78" font-weight="900" fill="#f2c94c" font-family="Arial Black, Arial">$</text>
+    <circle cx="640" cy="780" r="46" fill="#161a27" stroke="#ff5c7a" stroke-width="5"/>
+    <text x="640" y="800" text-anchor="middle" font-size="50" font-weight="900" fill="#ff5c7a" font-family="Arial Black, Arial">$</text>
+  </g>
+</svg>

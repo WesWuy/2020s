@@ -4,6 +4,8 @@
   --panic-red: #ff5c7a;
   --utopia-green: #7ee787;
   --ink: #f7f0ff;
+  /* darkens the center/bottom of event art so headline + lower-third stay legible */
+  --art-scrim: radial-gradient(128% 100% at 50% 42%, rgba(8,10,18,.74), rgba(8,10,18,.34) 56%, rgba(8,10,18,.12));
 }
 .event-art-slot {
   position: relative;
@@ -135,12 +137,13 @@
     radial-gradient(circle at 80% 20%, rgba(145,201,255,.14), transparent 18rem),
     linear-gradient(135deg, #13291e, #111827);
 }
-.art-frame.event-lockdown { background-image: radial-gradient(circle at 25% 20%, rgba(145,201,255,.2), transparent 15rem), linear-gradient(135deg, #202839, #11131d); }
-.art-frame.event-algorithm { background-image: radial-gradient(circle at 25% 20%, rgba(255,92,122,.2), transparent 15rem), linear-gradient(135deg, #291729, #10131d); }
-.art-frame.event-money { background-image: radial-gradient(circle at 25% 20%, rgba(242,201,76,.18), transparent 15rem), linear-gradient(135deg, #2b2514, #10131d); }
-.art-frame.event-ai { background-image: radial-gradient(circle at 25% 20%, rgba(145,201,255,.22), transparent 15rem), linear-gradient(135deg, #16283a, #10131d); }
-.art-frame.event-election { background-image: radial-gradient(circle at 25% 20%, rgba(255,92,122,.22), transparent 15rem), radial-gradient(circle at 80% 15%, rgba(145,201,255,.16), transparent 14rem), linear-gradient(135deg, #251a31, #10131d); }
-.art-frame.event-utopia { background-image: radial-gradient(circle at 25% 20%, rgba(126,231,135,.24), transparent 15rem), linear-gradient(135deg, #153321, #10131d); }
+/* Real vector scene art (v0.15) layered under a legibility scrim. */
+.art-frame.event-lockdown  { background: var(--art-scrim), url("assets/art/event-lockdown.svg")  center/cover no-repeat, #0a0c13; }
+.art-frame.event-algorithm { background: var(--art-scrim), url("assets/art/event-algorithm.svg") center/cover no-repeat, #0a0c13; }
+.art-frame.event-money     { background: var(--art-scrim), url("assets/art/event-money.svg")     center/cover no-repeat, #0a0c13; }
+.art-frame.event-ai        { background: var(--art-scrim), url("assets/art/event-ai.svg")        center/cover no-repeat, #0a0c13; }
+.art-frame.event-election  { background: var(--art-scrim), url("assets/art/event-election.svg")  center/cover no-repeat, #0a0c13; }
+.art-frame.event-utopia    { background: var(--art-scrim), url("assets/art/event-utopia.svg")    center/cover no-repeat, #0a0c13; }
 .portrait-frame {
   position: relative;
   width: 96px;
@@ -152,6 +155,7 @@
   flex: 0 0 auto;
   background:
     radial-gradient(circle at 30% 20%, rgba(255,255,255,.12), transparent 3rem),
+    url("assets/art/portrait-backdrop.svg") center/cover no-repeat,
     rgba(0,0,0,.2);
   box-shadow: 8px 8px 0 rgba(0,0,0,.22);
   overflow: hidden;
@@ -163,6 +167,15 @@
   background: radial-gradient(circle, rgba(255,255,255,.08) 0 1px, transparent 1.4px);
   background-size: 9px 9px;
   opacity: .45;
+}
+.portrait-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 .portrait-icon {
   position: relative;
